@@ -1,0 +1,35 @@
+$background-color: #000000;
+$text-color: #ffffff;
+$emphasis-color: #00ff0a;
+$secondary-accent-color: #008005;
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+
+* {
+  background-color: $background-color;
+  font-family: Inter, sans-serif;
+  color: $text-color;
+  margin: 0;
+  padding: 0;
+}
+#profile_pic {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+.notification {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 10px;
+  border: 1px solid $emphasis-color;
+}
+#sidebar {
+  position: fixed;
+  height: 100%;
+}
+#new-notif {
+  position: fixed;
+  display: flex;
+  width: 20%;
+  justify-content: flex-end;
+}

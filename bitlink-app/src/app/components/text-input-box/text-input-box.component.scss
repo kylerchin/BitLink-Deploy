@@ -1,0 +1,20 @@
+$bg-color: #D9D9D9;
+.inputs {
+  position: relative;
+  font-family: sans-serif;
+  font-size: small;
+}
+
+.input-box {
+  padding: 30px 5px 5px 5px;
+  background-color: $bg-color;
+  border: 0;
+}
+
+.input-label {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  background-color: $bg-color;
+}
+

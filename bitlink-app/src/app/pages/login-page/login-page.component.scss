@@ -1,0 +1,54 @@
+$background-color: #000000;
+$text-color: #FFFFFF;
+$emphasis-color: #00FF0A;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+* {
+  background-color: $background-color;
+  font-family: Inter, sans-serif;
+}
+
+#login {
+  margin: auto;
+  width: 40%;
+}
+
+h1, p, button, #password {
+  color: $text-color;
+  text-decoration: none;
+}
+
+h1 {
+  font-size: 128pt;
+  margin: 0;
+  font-weight: normal;
+}
+
+.small {
+  font-size: 16pt;
+  margin: 0;
+  padding: 0;
+}
+
+span {
+  color: $emphasis-color;
+}
+
+#logo {
+  width: 162px;
+  height: 162px;
+}
+
+#input1 {
+  margin-bottom: 10px;
+}
+
+button {
+  width: 100%;
+  height: 70px;
+  border-radius: 25px;
+  border: none;
+  background-color: #008005;
+  font-size: 32pt;
+}

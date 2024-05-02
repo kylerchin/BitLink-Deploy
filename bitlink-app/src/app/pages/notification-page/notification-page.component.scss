@@ -1,0 +1,52 @@
+$background-color: #000000;
+$text-color: #ffffff;
+$emphasis-color: #00ff0a;
+$secondary-accent-color: #008005;
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+
+* {
+  background-color: $background-color;
+  font-family: Inter, sans-serif;
+  color: $text-color;
+  margin: 0;
+  padding: 0;
+}
+#notification-container {
+  display: flex;
+}
+
+#sidebar {
+  flex: 1;
+}
+#notif-side {
+  flex: 4;
+  margin-left: 25px;
+}
+
+#top {
+  display: grid;
+  grid-template-columns: 4fr 5fr;
+  font-size: 20px;
+}
+
+#home {
+  padding: 10px;
+}
+
+#notifications {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+#search-bar {
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+}
+#thirdline {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px;
+  font-size: 20px;
+}
