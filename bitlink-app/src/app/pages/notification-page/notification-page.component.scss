@@ -38,3 +38,15 @@ $secondary-accent-color: #008005;
   padding-top: 10px;
   padding-bottom: 10px;
 }
+
+#search-bar {
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+}
+#thirdline {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px;
+  font-size: 20px;
+}

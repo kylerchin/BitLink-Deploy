@@ -13,7 +13,7 @@ import { SidebarComponent } from '../../components/sidebar/sidebar.component';
 })
 export class NotificationPageComponent {
   username: string = 'Ferris the Crab';
-  usertag: string = 'RustyRustacean';
+  usertag: string = '@RustyRustacean';
   profile_pic: string = 'assets/ferris-on-pattern.jpg';
   action: string = 'has liked your post "My experience with R coders...';
   action2: string = 'has started following you';
