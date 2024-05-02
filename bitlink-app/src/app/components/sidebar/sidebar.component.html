@@ -1,0 +1,19 @@
+<div id="sidebar">
+  <img id="logo" ngSrc="assets/logo.png" height="324" width="324" alt="BitLink logo">
+  <div id="info">
+    <img id="profile-img" [ngSrc]="profileImagePath" height="324" width="324" alt="Profile Picture">
+    <div id="names">
+      <p>{{name}}</p>
+      <p>{{username}}</p>
+    </div>
+  </div>
+  <p class="nav"><img class="main-icon" ngSrc="assets/icons/home.png" alt="Home icon" height="106" width="102"><a href="/">Home</a></p>
+  <p class="nav"><img class="main-icon" ngSrc="assets/icons/messages.png" alt="Messages icon" height="84" width="84"><a href="/messages">Messages</a></p>
+  <p class="nav"><img class="main-icon" ngSrc="assets/icons/notifications.png" alt="Notifications icon" height="86" width="79"><a href="/notifications">Home</a></p>
+  <div id="bottom">
+
+    <a class="align-bot" href="/post"><button><img ngSrc="assets/icons/post.png" alt="Post icon" height="84" width="84">Post</button></a>
+    <a class="align-bot" href="/settings"><img class="main-icon" ngSrc="assets/icons/settings.png" height="110" width="102" alt="Settings icon"></a>
+  </div>
+</div>
+
