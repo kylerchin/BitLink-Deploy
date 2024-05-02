@@ -1,0 +1,16 @@
+<div id="notification-container">
+  <app-sidebar id="sidebar"></app-sidebar>
+  <div id="notif-side">
+    <div id="top">
+      <div id="home"><- Home</div>
+      <div id="notifications">Notifications</div>
+    </div>
+    <app-new-notification
+      [username]="username"
+      [usertag]="usertag"
+      [profile_pic]="profile_pic"
+      [action]="action"
+      id="new-notif"
+    ></app-new-notification>
+  </div>
+</div>
