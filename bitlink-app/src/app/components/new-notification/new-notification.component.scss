@@ -36,7 +36,7 @@ $secondary-accent-color: #008005;
 }
 .notification {
   display: grid;
-  grid-template-columns: auto 15rem 1fr auto auto;
+  grid-template-columns: auto 15rem 1fr auto auto auto;
   padding: 10px;
   border: 1px solid $emphasis-color;
 }
@@ -72,8 +72,24 @@ $secondary-accent-color: #008005;
   align-items: center;
   margin-right: 3rem;
 }
-
 #following button {
+  width: 8rem;
+  height: 2.5rem;
+  border: 2px solid $secondary-accent-color;
+  color: $secondary-accent-color;
+  background-color: $text-color;
+  padding: 10px;
+  padding-top: 8px;
+  border-radius: 25px;
+  font-size: 1rem;
+}
+
+#followback {
+  display: flex;
+  align-items: center;
+  margin-right: 3rem;
+}
+#followback button {
   width: 8rem;
   height: 2.5rem;
   border: none;

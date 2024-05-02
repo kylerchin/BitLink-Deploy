@@ -14,4 +14,5 @@ export class NewNotificationComponent {
   @Input() action: string = '';
   @Input() profile_pic: string = '';
   @Input() following: string = '';
+  @Input() followback: string = '';
 }
