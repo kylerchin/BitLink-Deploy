@@ -16,6 +16,18 @@ $secondary-accent-color: #008005;
   display: grid;
   grid-template-rows: 1fr 1fr;
 }
+.username {
+  line-height: 0.5;
+  padding-top: 0.8rem;
+  display: flex;
+  justify-items: start;
+}
+.usertag {
+  line-height: 0.5;
+  padding-top: 0.3rem;
+  display: flex;
+  justify-items: start;
+}
 #profile_pic {
   height: 50px;
   width: 50px;
