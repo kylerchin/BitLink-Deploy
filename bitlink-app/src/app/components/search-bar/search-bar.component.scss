@@ -1,0 +1,39 @@
+$background-color: #000000;
+$text-color: #ffffff;
+$emphasis-color: #00ff0a;
+$secondary-accent-color: #008005;
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+
+* {
+  background-color: $secondary-accent-color;
+  font-family: Inter, sans-serif;
+  color: $text-color;
+  margin: 0;
+  padding: 0;
+}
+
+.search {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  padding: 10px;
+  border-radius: 25px;
+}
+
+.input-label {
+  border: none;
+}
+.input-box {
+  border: none;
+  //   padding-top: 0.1rem;
+  justify-content: center;
+  align-items: center;
+  width: 50rem;
+  font-size: 1.2rem;
+  margin-left: 1rem;
+  display: flex;
+}
+
+.input-box:focus {
+  outline: none;
+}

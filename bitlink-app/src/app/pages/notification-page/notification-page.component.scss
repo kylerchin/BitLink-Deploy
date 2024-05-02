@@ -27,7 +27,7 @@ $secondary-accent-color: #008005;
 #top {
   display: grid;
   grid-template-columns: 4fr 5fr;
-  font-size: 20px;
+  font-size: 25px;
 }
 
 #home {
@@ -48,5 +48,19 @@ $secondary-accent-color: #008005;
   display: flex;
   justify-content: space-between;
   margin: 20px;
+  margin-top: 10px;
   font-size: 20px;
+}
+
+#clear {
+  background-color: $secondary-accent-color;
+  padding: 10px;
+  border-radius: 25px;
+  border: none;
+  font-size: 20px;
+}
+
+#new {
+  margin: 0;
+  margin-top: 15px;
 }
