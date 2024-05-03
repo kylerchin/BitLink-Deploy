@@ -1,9 +1,33 @@
-<img
-  ngSrc="assets/logo.png"
-  id="logo"
-  height="324"
-  width="324"
-  alt="BitLink logo"
-/>
-
-<p>post-page works!</p>
+<div id="post-container">
+  <app-sidebar id="sidebar"></app-sidebar>
+  <div id="post-side">
+    <app-search-bar id="search-bar"></app-search-bar>
+    <div id="secondline">
+      <div id="to-home"><- Home</div>
+    </div>
+    <div>
+      <app-post-component
+        [username]="username2"
+        [usertag]="usertag2"
+        [profile_picture]="profile_picture3"
+        [date]="date"
+        [message]="message"
+      ></app-post-component>
+    </div>
+    <app-reply [profile_picture]="profile_picture"></app-reply>
+    <div class="comment-section">
+      <app-comment
+        [profile_picture]="profile_picture2"
+        [username]="username"
+        [usertag]="usertag"
+        [comment]="comment"
+      ></app-comment>
+      <app-comment
+        [profile_picture]="profile_picture2"
+        [username]="username"
+        [usertag]="usertag"
+        [comment]="comment"
+      ></app-comment>
+    </div>
+  </div>
+</div>

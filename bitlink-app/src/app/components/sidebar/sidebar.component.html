@@ -47,8 +47,8 @@
     /><a href="/notifications">Notifications</a>
   </p>
   <div id="bottom">
-    <a class="align-bot" href="/post"
-      ><button class="whole-width">
+    <a class="align-bot"
+      ><button class="whole-width" (click)="openpopup()">
         <img
           ngSrc="assets/icons/post.png"
           alt="Post icon"
@@ -66,5 +66,9 @@
         width="102"
         alt="Settings icon"
     /></a>
+  </div>
+  <div *ngIf="show">
+    <app-create-post-popup [show]="show" (showChange)="popupclosed($event)">
+    </app-create-post-popup>
   </div>
 </div>

@@ -1,0 +1,32 @@
+$background-color: #000000;
+$text-color: #ffffff;
+$emphasis-color: #00ff0a;
+$secondary-accent-color: #008005;
+$grey-color: rgba(100, 100, 100);
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+
+* {
+  background-color: $background-color;
+  font-family: Inter, sans-serif;
+  color: $grey-color;
+  margin: 0;
+  padding: 0;
+}
+#bar {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  margin: 10px;
+}
+.format {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  font-size: 2rem;
+}
+.image {
+  height: 3rem;
+  width: 3rem;
+  margin-right: 7px;
+  color: $text-color;
+}

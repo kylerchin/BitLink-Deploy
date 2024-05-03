@@ -1,10 +1,10 @@
 import { Component, Input } from '@angular/core';
-import { NgOptimizedImage } from '@angular/common';
+import { NgOptimizedImage, CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-new-notification',
   standalone: true,
-  imports: [NgOptimizedImage],
+  imports: [NgOptimizedImage, CommonModule],
   templateUrl: './new-notification.component.html',
   styleUrl: './new-notification.component.scss',
 })
@@ -13,5 +13,6 @@ export class NewNotificationComponent {
   @Input() usertag: string = '';
   @Input() action: string = '';
   @Input() profile_pic: string = '';
-  @Input() action2: string = '';
+  @Input() following: string = '';
+  @Input() followback: string = '';
 }
