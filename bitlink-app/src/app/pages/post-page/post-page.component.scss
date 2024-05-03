@@ -9,9 +9,46 @@ $secondary-accent-color: #008005;
   background-color: $background-color;
   font-family: Inter, sans-serif;
   color: $text-color;
+  margin: 0;
+  padding: 0;
+}
+#post-container {
+  display: flex;
 }
 
-#logo {
-  width: 50px;
-  height: 50px;
+#sidebar {
+  flex: 1;
+}
+#post-side {
+  flex: 4;
+  margin-left: 25px;
+  margin-bottom: 2rem;
+}
+
+#search-bar {
+  padding-top: 10px;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  z-index: 3000;
+  margin-left: 10px;
+}
+
+#secondline {
+  padding-bottom: 30px;
+  border-bottom: 1px solid $emphasis-color;
+}
+
+#to-home {
+  margin: 10px;
+  font-size: 30px;
+  margin-top: 3rem;
+}
+
+.attachments {
+  margin: 1rem;
+  height: 4rem;
+  width: 4rem;
+  margin-right: 2rem;
 }

@@ -1,0 +1,22 @@
+<div class="comment">
+  <div class="commenter">
+    <img [src]="profile_picture" alt="profile" id="profile-icon" />
+    <div id="profile_info">
+      <div id="username">{{ username }}</div>
+      <div id="usertag">{{ usertag }}</div>
+    </div>
+  </div>
+  <div class="commenter">
+    <img [src]="profile_picture" alt="space" id="space" />
+    <div id="comment-text">
+      <p>{{ comment }}</p>
+    </div>
+  </div>
+  <app-like-comment-share-bar
+    class="likecommentshare"
+    [like]="like"
+    [repost]="repost"
+    [comment]="comment_number"
+    [save]="save"
+  ></app-like-comment-share-bar>
+</div>

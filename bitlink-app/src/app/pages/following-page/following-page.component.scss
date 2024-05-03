@@ -12,14 +12,16 @@ $secondary-accent-color: #008005;
   margin: 0;
   padding: 0;
 }
-#notification-container {
+
+#following-container {
   display: flex;
 }
 
 #sidebar {
   flex: 1;
 }
-#notif-side {
+
+#following-side {
   flex: 4;
   margin-left: 25px;
 }
@@ -34,7 +36,7 @@ $secondary-accent-color: #008005;
   padding: 10px;
 }
 
-#notifications {
+#followed {
   padding-top: 10px;
   padding-bottom: 10px;
 }

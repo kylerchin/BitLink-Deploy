@@ -12,7 +12,11 @@ $secondary-accent-color: #008005;
   margin: 0;
   padding: 0;
 }
-
+.background {
+  padding-left: 10rem;
+  padding-right: 10rem;
+  background-color: $background-color;
+}
 .search {
   display: grid;
   grid-template-columns: auto 1fr;
