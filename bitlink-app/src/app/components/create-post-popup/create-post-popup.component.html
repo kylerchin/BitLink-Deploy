@@ -1,0 +1,29 @@
+<div class="overlay" *ngIf="show">
+  <div class="content">
+    <div class="top">
+      <button (click)="closepopup()" id="close">
+        <img src="assets/icons8-cancel-100.png" id="cancel-icon" />
+      </button>
+      <div class="poster">
+        <img src="assets/profile_picture.png" alt="profile" id="profile-icon" />
+        <div id="profile_info">
+          <div id="username">Jonny Boy</div>
+          <div id="usertag">&#64; John BitLink</div>
+        </div>
+      </div>
+      <div id="public">
+        <img
+          src="assets/icons/icons8-global-100.png"
+          alt="public"
+          id="public-icon"
+        />
+        <div id="public-text">Public</div>
+      </div>
+    </div>
+    <div id="textbox">
+      <div id="title"></div>
+      <div id="body"></div>
+    </div>
+    <div>Post</div>
+  </div>
+</div>
