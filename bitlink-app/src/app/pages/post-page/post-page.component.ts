@@ -31,5 +31,5 @@ export class PostPageComponent {
   date: string = '9:19 AM Apr 13, 2024';
   message: string = 'Rust coders be like...';
   comment: string =
-    'I really like this post! I think it is very informative and helpful for people looking to learn R. However, I feel like people should look towards C++ instead. C++ is a much more practical language than R or Rust.';
+    'I really like this post! I think it is very informative and helpful for people looking to learn Rust. However, I feel like people should look towards C++ instead. C++ is a much more practical language than R or Rust.';
 }
