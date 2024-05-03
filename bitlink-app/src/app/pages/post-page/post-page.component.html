@@ -6,7 +6,13 @@
       <div id="to-home"><- Home</div>
     </div>
     <div>
-      <img src="assets/post-component.png" id="post-image" alt="Post" />
+      <app-post-component
+        [username]="username2"
+        [usertag]="usertag2"
+        [profile_picture]="profile_picture3"
+        [date]="date"
+        [message]="message"
+      ></app-post-component>
     </div>
     <app-reply [profile_picture]="profile_picture"></app-reply>
     <div class="comment-section">
