@@ -9,9 +9,34 @@ $secondary-accent-color: #008005;
   background-color: $background-color;
   font-family: Inter, sans-serif;
   color: $text-color;
+  margin: 0;
+  padding: 0;
+}
+#post-container {
+  display: flex;
 }
 
-#logo {
-  width: 50px;
-  height: 50px;
+#sidebar {
+  flex: 1;
+}
+#post-side {
+  flex: 4;
+  margin-left: 25px;
+}
+
+#search-bar {
+  margin-top: 10px;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+#secondline {
+  padding-bottom: 30px;
+  border-bottom: 1px solid $emphasis-color;
+}
+
+#to-home {
+  margin: 10px;
+  font-size: 30px;
 }
