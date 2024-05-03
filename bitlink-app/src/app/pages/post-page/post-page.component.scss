@@ -22,13 +22,16 @@ $secondary-accent-color: #008005;
 #post-side {
   flex: 4;
   margin-left: 25px;
+  margin-bottom: 2rem;
 }
 
 #search-bar {
-  margin-top: 10px;
+  padding-top: 10px;
   font-size: 20px;
   display: flex;
   justify-content: center;
+  position: fixed;
+  margin-left: 10px;
 }
 
 #secondline {
@@ -39,4 +42,5 @@ $secondary-accent-color: #008005;
 #to-home {
   margin: 10px;
   font-size: 30px;
+  margin-top: 3rem;
 }

@@ -20,4 +20,9 @@ import { CommentComponent } from '../../components/comment/comment.component';
 })
 export class PostPageComponent {
   profile_picture: string = 'assets/profile_picture.png';
+  profile_picture2: string = 'assets/remy.jpg';
+  username: string = 'C++ Chef';
+  usertag: string = '@ChefCPP';
+  comment: string =
+    'I really like this post! I think it is very informative and helpful for people looking to learn R. However, I feel like people should look towards C++ instead. C++ is a much more practical language than R or Rust.';
 }
