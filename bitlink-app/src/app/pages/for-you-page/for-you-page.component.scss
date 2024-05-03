@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+$font: Inter, sans-serif;
+$background-color: #000000;
+$alt-background-color: #D9D9D9;
+$text-color: #FFFFFF;
+$emphasis-color: #00FF0A;
+$secondary-accent-color: #008005;
+
+* {
+    background-color: $background-color;
+    font-family: Inter, sans-serif;
+    color: $text-color;
+}
+ 
+.top-right-container {
+    display: flex;
+    flex-direction: column; // Stack child elements vertically
+    align-items: center; // Center align the items horizontally
+}
+
+#search-bar {
+    font-size: 20px;
+    display: flex;
+    height: 49px;
+    width: 20%;
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: space-between; // Space out the buttons horizontally
+    width: 20%; // Ensure buttons take full width of container
+    padding-left: 20%;
+}
+
+#following-button, #for-you-button {
+    font-size: 20px;
+    color: white;
+    padding: 10px;
+    width: 48%; // Adjust width to leave space for margin
+    text-align: center; // Center text inside buttons
+    cursor: pointer;
+}
+
+.divider-line {
+    position: absolute; // Position the line relative to its container
+    bottom: 85%; // Place the line at the bottom of the container
+    left: 21%; // Align the line with the start of the container
+    width: 80%; // Ensure the line stretches across the container
+    padding-left: 20%;
+    height: 2px; // Adjust line thickness as needed
+    background-color: #00FF0A; // Set the color of the line
+    content: ""; // Ensure the line has content
+}
