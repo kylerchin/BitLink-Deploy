@@ -5,6 +5,7 @@ import { ProfilePageComponent } from './pages/profile-page/profile-page.componen
 import { NotificationPageComponent } from './pages/notification-page/notification-page.component';
 import { PostPageComponent } from './pages/post-page/post-page.component';
 import { TermsAndConditionsComponent } from './pages/terms-and-conditions/terms-and-conditions.component';
+import { ContactPageComponent } from './pages/contact-page/contact-page.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginPageComponent },
@@ -12,5 +13,6 @@ export const routes: Routes = [
   { path: 'profile', component: ProfilePageComponent },
   { path: 'notifications', component: NotificationPageComponent },
   { path: 'post', component: PostPageComponent },
-  { path: 'terms-and-conditions', component: TermsAndConditionsComponent }
+  { path: 'terms-and-conditions', component: TermsAndConditionsComponent },
+  { path: 'contact', component: ContactPageComponent }
 ];
