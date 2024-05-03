@@ -27,12 +27,13 @@ $secondary-accent-color: #008005;
 
 #search-bar {
   padding-top: 10px;
+  padding-right: none;
   font-size: 20px;
   display: flex;
-  justify-content: center;
+  align-items: center;
   position: fixed;
   z-index: 3000;
-  margin-left: 10px;
+  width: 100%;
 }
 
 #secondline {
