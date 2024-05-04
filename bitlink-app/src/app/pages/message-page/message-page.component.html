@@ -1,0 +1,86 @@
+<div id="message-page-container">
+  <app-sidebar id="sidebar"></app-sidebar>
+  <div id="message-side">
+    <div id="top">
+      <div id="home"><a href=""><- Home</a></div>
+      <div id="followed">Messages</div>
+    </div>
+    <app-search-bar id="search-bar"></app-search-bar>
+    <div id="thirdline">
+      <div id="new">Recent</div>
+    </div>
+    <div id="message-box">
+      <app-message-box
+        [username]="username10"
+        [usertag]="usertag10"
+        [profile_pic]="profile_pic10"
+      ></app-message-box>
+      <div id="input-box">
+        <app-text-input-box></app-text-input-box>
+      </div>
+    </div>
+    <div id="user-bar">
+      <app-message-user-bar
+        [username]="username"
+        [usertag]="usertag"
+        [profile_pic]="profile_pic"
+        [action]="action1"
+      ></app-message-user-bar>
+      <app-message-user-bar
+        [username]="username2"
+        [usertag]="usertag2"
+        [profile_pic]="profile_pic2"
+        [action]="action3"
+      ></app-message-user-bar>
+      <app-message-user-bar
+        [username]="username3"
+        [usertag]="usertag3"
+        [profile_pic]="profile_pic3"
+        [action]="action4"
+      ></app-message-user-bar>
+      <app-message-user-bar
+        [username]="username4"
+        [usertag]="usertag4"
+        [profile_pic]="profile_pic4"
+        [action]="action6"
+      ></app-message-user-bar>
+      <app-message-user-bar
+        [username]="username5"
+        [usertag]="usertag5"
+        [profile_pic]="profile_pic5"
+        [action]="action7"
+      ></app-message-user-bar>
+      <app-message-user-bar
+        [username]="username6"
+        [usertag]="usertag6"
+        [profile_pic]="profile_pic6"
+        [action]="action2"
+      ></app-message-user-bar>
+      <app-message-user-bar
+        [username]="username7"
+        [usertag]="usertag7"
+        [profile_pic]="profile_pic7"
+        [action]="action5"
+      ></app-message-user-bar>
+      <app-message-user-bar
+        [username]="username8"
+        [usertag]="usertag8"
+        [profile_pic]="profile_pic8"
+        [action]="action8"
+      ></app-message-user-bar>
+      <app-message-user-bar
+        [username]="username9"
+        [usertag]="usertag9"
+        [profile_pic]="profile_pic9"
+        [action]="action9"
+      ></app-message-user-bar>
+      <app-message-user-bar
+        [username]="username10"
+        [usertag]="usertag10"
+        [profile_pic]="profile_pic10"
+        [action]="action10"
+      ></app-message-user-bar>
+      <app-new-message></app-new-message>
+    </div>
+  </div>
+</div>

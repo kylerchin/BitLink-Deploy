@@ -21,7 +21,7 @@ $secondary-accent-color: #008005;
 }
 #post-side {
   flex: 4;
-  margin-left: 1rem;
+  margin-left: 25px;
   margin-bottom: 2rem;
 }
 
@@ -34,7 +34,6 @@ $secondary-accent-color: #008005;
   z-index: 3000;
   width: 100%;
 }
-
 #secondline {
   padding-bottom: 30px;
   border-bottom: 1px solid $emphasis-color;

@@ -7,13 +7,14 @@
     alt="BitLink logo"
   />
   <div id="info">
+    <a href="/profile">
     <img
       id="profile-img"
       [ngSrc]="profileImagePath"
       height="324"
       width="324"
       alt="Profile Picture"
-    />
+    /></a>
     <div id="names">
       <p>{{ name }}</p>
       <p>{{ username }}</p>
@@ -26,7 +27,7 @@
       alt="Home icon"
       height="106"
       width="102"
-    /><a href="/">Home</a>
+    /><a href="">Home</a>
   </p>
   <p class="nav">
     <img
@@ -36,6 +37,15 @@
       height="84"
       width="84"
     /><a href="/messages">Messages</a>
+  </p>
+  <p class="nav">
+    <img
+      class="list-icon"
+      ngSrc="assets/icons/list.png"
+      alt="Following icon"
+      height="84"
+      width="84"
+    /><a href="/following">Following</a>
   </p>
   <p class="nav">
     <img

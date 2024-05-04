@@ -3,7 +3,7 @@
   <div id="post-side">
     <app-search-bar id="search-bar"></app-search-bar>
     <div id="secondline">
-      <div id="to-home"><- Home</div>
+      <div id="to-home"><a href=""><- Home</a></div>
     </div>
     <div>
       <app-post-component
@@ -15,6 +15,10 @@
         [video] = "video"
         [timestamp] = "timestamp"
         [videoviews] = "videoviews"
+        [like] = "like"
+        [repost] = "repost"
+        [comment_number] = "comment_number"
+        [save] = "save"
       ></app-post-component>
     </div>
     <app-reply [profile_picture]="profile_picture"></app-reply>
@@ -31,7 +35,6 @@
         [usertag]="usertag"
         [comment]="comment"
       ></app-comment>
-      
     </div>
   </div>
 </div>

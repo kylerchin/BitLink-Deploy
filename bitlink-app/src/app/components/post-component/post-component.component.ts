@@ -9,10 +9,10 @@ import { CommonModule } from '@angular/common';
   styleUrl: './post-component.component.scss',
 })
 export class PostComponentComponent {
-  like: string = '2.4M';
-  repost: string = '795K';
-  comment_number: string = '132K';
-  save: string = '1.4M';
+  @Input() like: string = '';
+  @Input() repost: string = '';
+  @Input() comment_number: string = '';
+  @Input() save: string = '';
   @Input() profile_picture: string = '';
   @Input() username: string = '';
   @Input() usertag: string = '';
