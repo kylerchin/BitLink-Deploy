@@ -11,8 +11,27 @@
                     alt="Back button"
                     width="40"
                 >
-                <h1>Search Results for: </h1>
+                <h1>Search Results for: python</h1>
             </div>
+            <div>
+                <app-post-component class="post"
+                    [username]="username"
+                    [usertag]="usertag"
+                    [profile_picture]="profile_picture"
+                    [date]="date"
+                    [message]="message"
+                ></app-post-component>
+                <app-post-component class="post"
+                    [username]="username2"
+                    [usertag]="usertag2"
+                    [profile_picture]="profile_picture2"
+                    [date]="date2"
+                    [message]="message2"
+                    [video] = "video"
+                    [timestamp] = "timestamp"
+                    [videoviews] = "videoviews"
+                ></app-post-component>
+              </div>
         </div>
     </div>
 </div>
