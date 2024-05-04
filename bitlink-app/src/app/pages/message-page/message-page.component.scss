@@ -28,12 +28,15 @@ $secondary-accent-color: #008005;
   flex: 4;
   margin-left: 25px;
   width: 100vw;
+  height: 100%;
+  margin-bottom: 0;
 }
 
 #top {
   display: grid;
   grid-template-columns: 4fr 5fr;
   font-size: 25px;
+  padding-bottom: 10px;
 }
 
 #home {
@@ -65,6 +68,7 @@ $secondary-accent-color: #008005;
   margin: 0;
   margin-top: 15px;
   margin-left: 20px;
+  padding-bottom: 10px;
 }
 
 // #user-bar{
@@ -93,8 +97,8 @@ $secondary-accent-color: #008005;
   grid-template-columns: auto 1fr;
 }
 #user-bar {
-  padding-top: calc(1% + 3px);
-  padding-bottom: calc(1% + 3px);
+  padding-top: calc(2% + 3px);
+  padding-bottom: calc(2% + 3px);
   border: 1px solid $emphasis-color;
 }
 #message-box {
@@ -106,14 +110,22 @@ $secondary-accent-color: #008005;
   flex-direction: column;
   align-items: center;
 }
+
 .center-text-box {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-app-message-text-box {
-  padding-bottom: 3%;
+
+
+app-send-message {
   margin-top: auto;
+}
+
+app-message-text-box {
+  margin-top: auto;
+  padding-bottom: 2%;
   width: 50vw;
   justify-content: center;
 }

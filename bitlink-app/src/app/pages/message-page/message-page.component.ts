@@ -5,6 +5,8 @@ import { MessageUserBarComponent } from '../../components/message-user-bar/messa
 import { NewMessageComponent } from '../../components/new-message/new-message.component';
 import { MessageBoxComponent } from '../../components/message-box/message-box.component';
 import { MessageTextBoxComponent } from '../../components/message-text-box/message-text-box.component';
+import { TextMessageComponent } from '../../components/text-message/text-message.component';
+import { SendMessageComponent } from '../../components/send-message/send-message.component';
 
 
 @Component({
@@ -17,6 +19,8 @@ import { MessageTextBoxComponent } from '../../components/message-text-box/messa
     NewMessageComponent,
     MessageBoxComponent,
     MessageTextBoxComponent,
+    TextMessageComponent,
+    SendMessageComponent,
   ],
   templateUrl: './message-page.component.html',
   styleUrl: './message-page.component.scss',
@@ -63,4 +67,8 @@ export class MessagePageComponent {
   action8: string = 'seen 3 minutes ago';
   action9: string = 'seen 5 days ago';
   action10: string = 'seen now';
+  time: string = '12:02 PM';
+  message: string = 'Yo';
+  time2: string = '8:52 PM';
+  message2: string = 'What\'s up? Did you need something?';
 }
