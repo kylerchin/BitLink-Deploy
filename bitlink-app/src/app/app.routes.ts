@@ -6,6 +6,7 @@ import { NotificationPageComponent } from './pages/notification-page/notificatio
 import { PostPageComponent } from './pages/post-page/post-page.component';
 import { TermsAndConditionsComponent } from './pages/terms-and-conditions/terms-and-conditions.component';
 import { ContactPageComponent } from './pages/contact-page/contact-page.component';
+import { SearchPageComponent } from './pages/search-page/search-page.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginPageComponent },
@@ -14,5 +15,6 @@ export const routes: Routes = [
   { path: 'notifications', component: NotificationPageComponent },
   { path: 'post', component: PostPageComponent },
   { path: 'terms-and-conditions', component: TermsAndConditionsComponent },
-  { path: 'contact', component: ContactPageComponent }
+  { path: 'contact', component: ContactPageComponent },
+  { path: 'search', component: SearchPageComponent }
 ];
