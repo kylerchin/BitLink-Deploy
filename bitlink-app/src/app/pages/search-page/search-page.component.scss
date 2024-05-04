@@ -6,53 +6,57 @@ $secondary-accent-color: #008005;
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
 
 * {
-    background-color: $background-color;
-    font-family: Inter, sans-serif;
-    color: $text-color;
-    margin: 0;
-    padding: 0;
+  background-color: $background-color;
+  font-family: Inter, sans-serif;
+  color: $text-color;
+  margin: 0;
+  padding: 0;
 }
 
 h1 {
-    font-weight: normal;
+  font-weight: normal;
 }
 
 .tos-page-container {
-    display: flex;
+  display: flex;
 }
 
 .sidebar {
-    flex: 1;
+  flex: 1;
 }
 
 .page {
-    flex: 4;
-    margin-left: 1rem;
+  flex: 4;
+  margin-left: 1rem;
 }
 
 .search-bar {
-    padding-top: 10px;
-    display: flex;
-    align-items: center;
-    position: fixed;
-    z-index: 3000;
-    width: 100%;
+  padding-top: 10px;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  z-index: 3000;
+  width: 100%;
 }
 
 .resultbar {
-    display: flex;
-    gap: 1.4rem;
-    margin-left: 1rem;
-    border-bottom: 1px solid $emphasis-color;
-    padding-bottom: 1%;
+  display: flex;
+  gap: 1.4rem;
+  margin-left: 1rem;
+  border-bottom: 1px solid $emphasis-color;
+  padding-bottom: 1%;
 }
 
 .post {
-    border-bottom: 100px solid $emphasis-color;
-    margin-bottom: 100px;
+  border-bottom: 100px solid $emphasis-color;
+  margin-bottom: 100px;
 }
 
 .results {
-    margin: 1rem;
-    margin-top: 5rem;
+  margin: 1rem;
+  margin-top: 5rem;
+}
+
+.post-format {
+  border-bottom: 1px solid $emphasis-color;
 }

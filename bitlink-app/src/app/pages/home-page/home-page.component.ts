@@ -21,18 +21,18 @@ import { CommentComponent } from '../../components/comment/comment.component';
   ],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class HomePageComponent {
   profile_picture: string = 'assets/profile_picture.png';
   profile_picture2: string = 'assets/remy.jpg';
   profile_picture4: string = 'assets/bw-female.jpg';
-  like: string = '87K'
+  like: string = '87K';
   repost: string = '12K';
   comment_number: string = '8,402';
   save: string = '62K';
   like2: string = '523K';
-  repost2: string = '44K';
+  repost2: string = '44.2K';
   comment_number2: string = '121K';
   save2: string = '12K';
   like3: string = '7.2M';
@@ -49,10 +49,13 @@ export class HomePageComponent {
   date: string = '9:19 AM Apr 13, 2024';
   date2: string = '3:12 AM Apr 10, 2024';
   date4: string = '5:21 PM Apr 9, 2024';
-  message: string = 'I didn\'t know they were making murals of me??? I mean guess thats what happens when u are a C++ god.';
-  message2: string = 'COOKING UP SOME CODE RIGHT NOW, WE ABOUT TO TAKE OVER!!!!';
-  message4: string = 'Sending out boyfriend applications, have to be atleast 6ft, make over $100,000 after tax, takes care of me, good with children, and will buy me food :)';
+  message: string =
+    "I didn't know they were making murals of me??? I mean guess thats what happens when u are a C++ god.";
+  message2: string =
+    'COOKING UP SOME CODE RIGHT NOW, WE ABOUT TO TAKE OVER!!!!';
+  message4: string =
+    'Sending out boyfriend applications, have to be atleast 6ft, make over $100,000 after tax, takes care of me, good with children, and will buy me food :)';
   comment: string =
     'I really like this post! I think it is very informative and helpful for people looking to learn Rust. However, I feel like people should look towards C++ instead. C++ is a much more practical language than R or Rust.';
-  image: string = 'assets/jesus.jpg'; 
+  image: string = 'assets/jesus.jpg';
 }
