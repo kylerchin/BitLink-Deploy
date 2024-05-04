@@ -1,0 +1,62 @@
+$background-color: #000000;
+$text-color: #ffffff;
+$emphasis-color: #00ff0a;
+$secondary-accent-color: #008005;
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+
+* {
+  background-color: $background-color;
+  font-family: Inter, sans-serif;
+  color: $text-color;
+  margin: 0;
+  padding: 0;
+}
+
+#profile {
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+}
+
+.username {
+  line-height: 0.5;
+  padding-top: 0.3rem;
+  display: flex;
+  justify-items: start;
+}
+
+.usertag {
+  line-height: 0.5;
+  padding-top: 0.3rem;
+  display: flex;
+  justify-items: start;
+}
+
+.message {
+  line-height: 0.5;
+  padding-top: 0.3rem;
+  display: flex;
+  justify-items: start;
+  color: rgba(255, 255, 255, 0.5);
+}
+  
+
+#profile_pic {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+  object-fit: cover;
+}
+
+.message-user {
+  display: grid;
+  grid-template-columns: auto 15rem 1fr auto auto auto;
+  padding: 10px;
+  width: 20%;
+}
+
+#sidebar {
+  position: fixed;
+  height: 100%;
+}

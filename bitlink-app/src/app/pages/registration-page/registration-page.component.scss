@@ -1,0 +1,56 @@
+$background-color: #000000;
+$text-color: #FFFFFF;
+$emphasis-color: #00FF0A;
+$secondary-accent-color: #008005;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+* {
+  background-color: $background-color;
+  font-family: Inter, sans-serif;
+}
+
+#logo {
+  width: 162px;
+  height: 162px;
+}
+
+#page {
+  margin: auto;
+  width: 40%;
+}
+
+span {
+  color: $emphasis-color;
+}
+
+h1, p, button {
+  color: $text-color;
+  text-decoration: none;
+}
+
+h1 {
+  margin: auto;
+  text-align: center;
+  font-size: 52pt;
+  font-weight: normal;
+}
+
+.small {
+  margin-bottom: 5px;
+}
+
+.input-spacing {
+  margin-bottom: 20px;
+}
+
+button {
+  display: block;
+  margin: auto;
+  width: 80%;
+  height: 70px;
+  border-radius: 25px;
+  border: none;
+  background-color: #008005;
+  font-size: 32pt;
+}

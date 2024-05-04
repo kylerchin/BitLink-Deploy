@@ -1,0 +1,62 @@
+$background-color: #000000;
+$text-color: #ffffff;
+$emphasis-color: #00ff0a;
+$secondary-accent-color: #008005;
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+
+* {
+  background-color: $background-color;
+  font-family: Inter, sans-serif;
+  color: $text-color;
+  margin: 0;
+  padding: 0;
+}
+#profile-icon {
+  width: 4rem;
+  height: 4rem;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-left: 0.5rem;
+}
+#space {
+  width: 4rem;
+  height: 4rem;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-left: 0.5rem;
+  visibility: hidden;
+}
+.commenter {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  margin: 10px;
+}
+
+#profile_info {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  margin-left: 0.8rem;
+  font-size: 1.2rem;
+}
+#username {
+  line-height: 0.5;
+  padding-top: 1rem;
+  display: flex;
+  justify-items: start;
+}
+#usertag {
+  line-height: 0.5;
+  padding-top: 0.3rem;
+  display: flex;
+  justify-items: start;
+}
+
+#comment-text {
+  margin: 10px;
+  font-size: 1.2rem;
+}
+
+.comment {
+  border: 1px solid $emphasis-color;
+}

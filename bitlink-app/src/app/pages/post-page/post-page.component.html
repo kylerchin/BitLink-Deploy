@@ -1,0 +1,40 @@
+<div id="post-container">
+  <app-sidebar id="sidebar"></app-sidebar>
+  <div id="post-side">
+    <app-search-bar id="search-bar"></app-search-bar>
+    <div id="secondline">
+      <div id="to-home"><a href=""><- Home</a></div>
+    </div>
+    <div>
+      <app-post-component
+        [username]="username2"
+        [usertag]="usertag2"
+        [profile_picture]="profile_picture3"
+        [date]="date"
+        [message]="message"
+        [video] = "video"
+        [timestamp] = "timestamp"
+        [videoviews] = "videoviews"
+        [like] = "like"
+        [repost] = "repost"
+        [comment_number] = "comment_number"
+        [save] = "save"
+      ></app-post-component>
+    </div>
+    <app-reply [profile_picture]="profile_picture"></app-reply>
+    <div class="comment-section">
+      <app-comment
+        [profile_picture]="profile_picture2"
+        [username]="username"
+        [usertag]="usertag"
+        [comment]="comment"
+      ></app-comment>
+      <app-comment
+        [profile_picture]="profile_picture2"
+        [username]="username"
+        [usertag]="usertag"
+        [comment]="comment"
+      ></app-comment>
+    </div>
+  </div>
+</div>

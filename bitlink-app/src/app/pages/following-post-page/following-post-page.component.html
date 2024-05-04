@@ -1,0 +1,54 @@
+<div id="following-posts-container">
+  <app-sidebar id="sidebar"></app-sidebar>
+  <div id="top-right-container">
+    <app-search-bar id="search-bar"></app-search-bar>
+    <div id="buttons-container">
+      <app-following-button id="following-button"></app-following-button>
+      <app-for-you-button id="for-you-button"></app-for-you-button>
+    </div>
+    <div id="post-box">
+      <div class="post-format">
+        <app-post-component
+          [username]="username2"
+          [usertag]="usertag2"
+          [profile_picture]="profile_picture3"
+          [date]="date"
+          [message]="message"
+          [image]="image"
+          [like]="like"
+          [comment_number]="comment_number"
+          [repost]="repost"
+          [save]="save"
+        ></app-post-component>
+      </div>
+      <div class="post-format">
+        <app-post-component
+          [username]="username2"
+          [usertag]="usertag2"
+          [profile_picture]="profile_picture3"
+          [date]="date2"
+          [message]="message2"
+          [like]="like2"
+          [comment_number]="comment_number2"
+          [repost]="repost2"
+          [save]="save2"
+          [image]="image2"
+        ></app-post-component>
+      </div>
+      <div class="post-format">
+        <app-post-component
+          [username]="username2"
+          [usertag]="usertag2"
+          [profile_picture]="profile_picture3"
+          [date]="date4"
+          [message]="message4"
+          [like]="like3"
+          [comment_number]="comment_number3"
+          [repost]="repost3"
+          [save]="save3"
+          [image]="image3"
+        ></app-post-component>
+      </div>
+    </div>
+  </div>
+</div>

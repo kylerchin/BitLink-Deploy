@@ -1,0 +1,58 @@
+<div id="notification-container">
+  <app-sidebar id="sidebar"></app-sidebar>
+  <div id="notif-side">
+    <div id="top">
+      <div id="home"><a href=""><- Home</a></div>
+      <div id="notifications">Notifications</div>
+    </div>
+    <app-search-bar id="search-bar"></app-search-bar>
+    <div id="thirdline">
+      <div id="new">New</div>
+      <button id="clear">Clear Notifications</button>
+    </div>
+    <app-new-notification
+      [username]="username"
+      [usertag]="usertag"
+      [profile_pic]="profile_pic"
+      [action]="action1"
+      id="new-notif"
+    ></app-new-notification>
+    <app-new-notification
+      [username]="username"
+      [usertag]="usertag"
+      [profile_pic]="profile_pic"
+      [action]="action2"
+      [following]="following"
+      id="new-notif"
+    ></app-new-notification>
+    <app-new-notification
+      [username]="username2"
+      [usertag]="usertag2"
+      [profile_pic]="profile_pic2"
+      [action]="action2"
+      [followback]="followback"
+      id="new-notif"
+    ></app-new-notification>
+    <app-new-notification
+      [username]="username2"
+      [usertag]="usertag2"
+      [profile_pic]="profile_pic2"
+      [action]="action3"
+      id="new-notif"
+    ></app-new-notification>
+    <app-new-notification
+      [username]="username2"
+      [usertag]="usertag2"
+      [profile_pic]="profile_pic2"
+      [action]="action1"
+      id="new-notif"
+    ></app-new-notification>
+    <app-new-notification
+      [username]="username"
+      [usertag]="usertag"
+      [profile_pic]="profile_pic"
+      [action]="action3"
+      id="new-notif"
+    ></app-new-notification>
+  </div>
+</div>

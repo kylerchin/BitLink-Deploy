@@ -1,0 +1,26 @@
+<div class="notification">
+  <span
+    ><img [src]="profile_pic" alt="Profile Picture" id="profile_pic"
+  /></span>
+  <span id="profile"
+    ><div class="username">{{ username }}</div>
+    <div class="usertag">{{ usertag }}</div></span
+  >
+  <!-- <span>{{ usertag }}</span> -->
+  <span id="message">{{ action }}</span>
+  <span id="following" *ngIf="following"
+    ><button>{{ following }}</button></span
+  >
+  <span id="followback" *ngIf="followback"
+    ><button>{{ followback }}</button></span
+  >
+  <span id="cancel-button"
+    ><button>
+      <img
+        ngSrc="assets/icons8-cancel-100.png"
+        width="30"
+        height="30"
+        alt="cancel"
+      /></button
+  ></span>
+</div>

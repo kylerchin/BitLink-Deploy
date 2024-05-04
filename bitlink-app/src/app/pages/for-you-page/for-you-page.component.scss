@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+$font: Inter, sans-serif;
+$background-color: #000000;
+$alt-background-color: #D9D9D9;
+$text-color: #FFFFFF;
+$emphasis-color: #00FF0A;
+$secondary-accent-color: #008005;
+
+* {
+    background-color: $background-color;
+    font-family: Inter, sans-serif;
+    color: $text-color;
+    padding: 0;
+    margin:0;
+
+}
+ 
+
+#for-you-container {
+    display: flex;
+}
+
+#sidebar {
+    flex: 1;
+}
+
+#top-right-container {
+    // flex: 4;
+    // // margin-left: 25px;
+    // margin-bottom: 2rem;
+    // margin-left: 1rem;
+    flex: 4;
+    margin-left: 25px;
+    margin-bottom: 2rem;
+}
+
+#search-bar {
+    padding-top: 10px;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    z-index: 3000;
+    width: 100%;
+}
+
+#buttons-container {
+    margin-top: 3rem;
+    display: flex;
+    justify-content: center; // Space out the buttons horizontally
+    // width: 25%; // Ensure buttons take full width of container
+    // padding-left: 38%;
+    // padding-left: 30%;
+    // padding-right: 0;
+    border-bottom: 1px solid $emphasis-color;
+}
+
+#following-button, #for-you-button {
+    font-size: 20px;
+    color: white;
+    // padding: 10px;
+    padding-bottom: 1rem;
+    // width: 48%; // Adjust width to leave space for margin
+    // text-align: center; // Center text inside buttons
+    cursor: pointer;
+}
+#following-button {
+    margin-right: 4rem;
+    padding-right: 4rem;
+}
+
+// #divider-line {
+//     // width: 100vh; // Ensure the line stretches across the container
+//     // padding-left: 64vh;
+//     padding-right: 0;
+//     margin-right: 0;
+//     height: 1px; // Adjust line thickness as needed
+//     background-color: #00FF0A; // Set the color of the line
+// }
+
+
+.attachments {
+    margin: 1rem;
+    height: 4rem;
+    width: 4rem;
+    margin-right: 2rem;
+  }
+.post-box{
+    border-bottom: 1px solid $emphasis-color;
+
+}
+.post-format{
+    border-bottom: 1px solid $emphasis-color;
+}
