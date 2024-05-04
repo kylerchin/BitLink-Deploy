@@ -30,6 +30,10 @@ export class PostPageComponent {
   profile_picture3: string = 'assets/ferris-on-pattern.jpg';
   date: string = '9:19 AM Apr 13, 2024';
   message: string = 'Rust coders be like...';
+  timestamp: string = '0:35';
+  video: string = 'assets/maid-outfit.jpg'
+  videoviews: string = '13.2M';
+  image: string = 'assets/remy.jpg'
   comment: string =
     'I really like this post! I think it is very informative and helpful for people looking to learn Rust. However, I feel like people should look towards C++ instead. C++ is a much more practical language than R or Rust.';
 }
