@@ -27,6 +27,7 @@ $secondary-accent-color: #008005;
 #message-side {
   flex: 4;
   margin-left: 25px;
+  width: 100vw;
 }
 
 #top {
@@ -67,39 +68,39 @@ $secondary-accent-color: #008005;
 }
 
 #user-bar{
+  display: flex;
   position: relative;
-  min-height: 85%;
+  flex-direction: column; 
+  flex-grow: 1;
+  padding-top: calc(1% + 3px);
+  padding-bottom: calc(1% + 3px);
   width: 20%;
-  left: 1px;
-  border-right: 1px solid $emphasis-color;
+  border: 1px solid $emphasis-color;
 }
+
 
 #message-box {
-  display: grid;
-  min-height: 85%;
-  position: absolute;
-  padding-left: 32vh;
-  width: calc(64% - 9px);
-  border: 1px solid $emphasis-color;
-  justify-content: center; /* Horizontally center */
-  align-items: center; /* Vertically center */
-  bottom: 0px;
-}
-
-#input-box {
-  align-self: flex-end; /* Align to the end of the flex container */
-  padding-bottom: 8%;
-  margin-top: auto; /* Push to the bottom */
-}
-
-app-message-box {
-  align-self: flex-start;
-  padding-top: 2%;
-}
-
-app-text-input-box {
   display: flex;
+  position: absolute;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+  min-height: 85vh;
+  padding-left: 23%;
 }
-a {
-  text-decoration: none;
+
+#message-items-container {
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
 }
+
+app-message-text-box {
+  align-self: flex-end; 
+  padding-bottom: 3%;
+  margin-top: auto; 
+  width: 50vw;
+}
+
+

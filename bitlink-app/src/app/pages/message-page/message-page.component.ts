@@ -4,7 +4,7 @@ import { SearchBarComponent } from '../../components/search-bar/search-bar.compo
 import { MessageUserBarComponent } from '../../components/message-user-bar/message-user-bar.component'
 import { NewMessageComponent } from '../../components/new-message/new-message.component';
 import { MessageBoxComponent } from '../../components/message-box/message-box.component';
-import { TextInputBoxComponent } from '../../components/text-input-box/text-input-box.component';
+import { MessageTextBoxComponent } from '../../components/message-text-box/message-text-box.component';
 
 
 @Component({
@@ -16,7 +16,7 @@ import { TextInputBoxComponent } from '../../components/text-input-box/text-inpu
     MessageUserBarComponent,
     NewMessageComponent,
     MessageBoxComponent,
-    TextInputBoxComponent,
+    MessageTextBoxComponent,
   ],
   templateUrl: './message-page.component.html',
   styleUrl: './message-page.component.scss',
@@ -61,6 +61,6 @@ export class MessagePageComponent {
   action6: string = 'seen 5 minutes ago';
   action7: string = 'seen 9 minutes ago';
   action8: string = 'seen 3 minutes ago';
-  action9: string = 'seen 5 dats ago';
+  action9: string = 'seen 5 days ago';
   action10: string = 'seen now';
 }
