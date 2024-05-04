@@ -1,0 +1,51 @@
+<div class="tos-page-container">
+  <app-sidebar class="sidebar"></app-sidebar>
+  <div class="page">
+    <div class="search-bar">
+      <app-search-bar></app-search-bar>
+    </div>
+    <div class="results">
+      <div class="resultbar">
+        <img
+          src="assets/icons/icons8-back-arrow-50.png"
+          alt="Back button"
+          width="40"
+        />
+        <h1>Search Results for: python</h1>
+      </div>
+      <div>
+        <div class="post-format">
+          <app-post-component
+            class="post"
+            [username]="username"
+            [usertag]="usertag"
+            [profile_picture]="profile_picture"
+            [date]="date"
+            [message]="message"
+            [like]="like"
+            [repost]="repost"
+            [comment_number]="comment_number"
+            [save]="save"
+          ></app-post-component>
+        </div>
+        <div class="post-format">
+          <app-post-component
+            class="post"
+            [username]="username2"
+            [usertag]="usertag2"
+            [profile_picture]="profile_picture2"
+            [date]="date2"
+            [message]="message2"
+            [video]="video"
+            [timestamp]="timestamp"
+            [videoviews]="videoviews"
+            [like]="like2"
+            [repost]="repost2"
+            [comment_number]="comment_number2"
+            [save]="save2"
+          ></app-post-component>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
