@@ -12,8 +12,8 @@ export class CommentComponent {
   @Input() username: string = '';
   @Input() usertag: string = '';
   @Input() comment: string = '';
-  like: string = '1.3K';
-  repost: string = '673';
-  comment_number: string = '1.1K';
-  save: string = '315';
+  @Input() like: string = '';
+  @Input() repost: string = '';
+  @Input() comment_number: string = '';
+  @Input() save: string = '';
 }

@@ -23,5 +23,19 @@
     />
     {{ save }}
   </div>
-  <img src="assets/icons/icons8-share-100.png" alt="share" class="image" />
+  <div id="center">
+    <button id="share-button" (click)="openpopup()">
+      <img
+        src="assets/icons/icons8-share-100.png"
+        alt="share"
+        class="button-image"
+      />
+    </button>
+  </div>
+  <div *ngIf="show" id="parent">
+    <div id="relative-format">
+      <app-share-popup [show]="show" (showChange)="popupclosed($event)">
+      </app-share-popup>
+    </div>
+  </div>
 </div>

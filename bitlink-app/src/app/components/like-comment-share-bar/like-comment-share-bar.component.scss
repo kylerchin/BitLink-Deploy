@@ -31,3 +31,29 @@ $grey-color: rgba(100, 100, 100);
   margin-right: 7px;
   color: $text-color;
 }
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.button-image {
+  height: 3rem;
+  width: 3rem;
+  color: $text-color;
+  padding: 0;
+  margin-right: 7px;
+}
+#share-button {
+  padding: 0;
+  border: none;
+}
+#parent {
+  position: relative;
+}
+#relative-format {
+  position: absolute;
+  bottom: 50%;
+  left: 140%;
+  background-color: transparent;
+  // transform: translate(-50%, -50%);
+}
