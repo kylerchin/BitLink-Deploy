@@ -1,0 +1,38 @@
+$background-color: #000000;
+$text-color: #ffffff;
+$emphasis-color: #00ff0a;
+$secondary-accent-color: #008005;
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+
+* {
+    background-color: $background-color;
+    font-family: Inter, sans-serif;
+    color: $text-color;
+}
+
+h1 {
+    border-bottom: 1px solid $emphasis-color;
+}
+
+h2 {
+    padding-top: 1%;
+}
+
+h1, h2 {
+    font-weight: normal;
+    padding-bottom: 1%;
+    text-align: center;
+}
+
+.form {
+    width: 100%;
+}
+
+.inputs {
+    margin: auto;
+}
+
+.in {
+    margin-bottom: 20px;
+}

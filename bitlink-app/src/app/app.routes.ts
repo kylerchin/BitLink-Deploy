@@ -10,6 +10,9 @@ import { ForYouPageComponent } from './pages/for-you-page/for-you-page.component
 import { MessagePageComponent } from './pages/message-page/message-page.component';
 import { FollowingPageComponent } from './pages/following-page/following-page.component';
 
+import { TermsAndConditionsComponent } from './pages/terms-and-conditions/terms-and-conditions.component';
+import { ContactPageComponent } from './pages/contact-page/contact-page.component';
+import { SearchPageComponent } from './pages/search-page/search-page.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginPageComponent },
@@ -22,4 +25,7 @@ export const routes: Routes = [
   { path: 'for-you', component: ForYouPageComponent },
   { path: 'messages', component: MessagePageComponent },
   { path: 'following', component: FollowingPageComponent },
+  { path: 'terms-and-conditions', component: TermsAndConditionsComponent },
+  { path: 'contact', component: ContactPageComponent },
+  { path: 'search', component: SearchPageComponent },
 ];
