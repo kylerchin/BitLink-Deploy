@@ -32,4 +32,8 @@ export class PostPageComponent {
   message: string = 'Rust coders be like...';
   comment: string =
     'I really like this post! I think it is very informative and helpful for people looking to learn Rust. However, I feel like people should look towards C++ instead. C++ is a much more practical language than R or Rust.';
+  like: string = '2.4M';
+  repost: string = '795K';
+  comment_number: string = '132K';
+  save: string = '1.4M';
 }

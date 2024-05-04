@@ -77,3 +77,20 @@ $grey-color: rgba(100, 100, 100);
 #clip {
   height: 50vh;
 }
+
+.imagesection{
+  display: grid;
+  grid-template-columns: auto 1fr;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  width: 80%;
+}
+#image-format{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#post-component {
+  padding-left: 10px;
+}

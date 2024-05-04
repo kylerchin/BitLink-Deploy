@@ -13,10 +13,18 @@ $secondary-accent-color: #008005;
 }
  
 
-.top-right-container {
+#following-posts-container {
     display: flex;
-    flex-direction: column; // Stack child elements vertically
-    align-items: center; // Center align the items horizontally
+}
+
+#sidebar {
+    flex: 1;
+}
+
+#top-right-container {
+    flex: 4;
+    margin-left: 25px;
+    margin-bottom: 2rem;
 }
 
 #search-bar {
@@ -24,13 +32,14 @@ $secondary-accent-color: #008005;
     display: flex;
     height: 49px;
     width: 30%;
+    padding-left: 14rem;
 }
 
-.buttons-container {
+#buttons-container {
     display: flex;
     justify-content: space-between; // Space out the buttons horizontally
     width: 25%; // Ensure buttons take full width of container
-    padding-left: 28%;
+    padding-left: 38%;
 }
 
 #following-button, #for-you-button {
@@ -42,13 +51,22 @@ $secondary-accent-color: #008005;
     cursor: pointer;
 }
 
-.divider-line {
-    position: absolute; // Position the line relative to its container
-    bottom: 85%; // Place the line at the bottom of the container
-    left: 21%; // Align the line with the start of the container
-    width: 80%; // Ensure the line stretches across the container
-    padding-left: 20%;
-    height: 2px; // Adjust line thickness as needed
+#divider-line {
+    width: 100vh; // Ensure the line stretches across the container
+    padding-left: 64vh;
+    height: 1px; // Adjust line thickness as needed
     background-color: #00FF0A; // Set the color of the line
-    content: ""; // Ensure the line has content
 }
+
+#post-box{
+    display: grid;
+    border-right: #00FF0A;
+}
+
+.attachments {
+    margin: 1rem;
+    height: 4rem;
+    width: 4rem;
+    margin-right: 2rem;
+  }
+  

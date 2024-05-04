@@ -52,7 +52,7 @@ export class MessagePageComponent {
   profile_pic7: string = 'assets/yada.jpg';
   profile_pic8: string = 'assets/smile.jpg';
   profile_pic9: string = 'assets/female.jpg';
-  profile_pic10: string = 'assets/nahidwin.jpg'
+  profile_pic10: string = 'assets/nahidwin.jpg';
   action1: string = 'seen 2 hours ago';
   action2: string = 'seen 5 hours ago';
   action3: string = 'seen 9 hours ago';
