@@ -1,8 +1,8 @@
 import * as dotenv from "dotenv";
 // @ts-ignore
-import * as express from "express";
+import express from "express";
 // @ts-ignore
-import * as cors from "cors";
+import cors from "cors";
 import { connectToDatabase } from "./database";
 
 connectToDatabase()
