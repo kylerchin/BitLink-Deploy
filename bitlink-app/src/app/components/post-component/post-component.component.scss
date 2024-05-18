@@ -14,15 +14,17 @@ $grey-color: rgba(100, 100, 100);
   padding: 0;
 }
 #profile-icon {
-  width: 4rem;
-  height: 4rem;
+  width: 3rem;
+  height: 3rem;
   object-fit: cover;
   border-radius: 50%;
   margin-left: 0.5rem;
+  display: flex;
+  align-self: center;
 }
 #space {
-  width: 4rem;
-  height: 4rem;
+  width: 3rem;
+  height: 3rem;
   object-fit: cover;
   border-radius: 50%;
   margin-left: 0.5rem;
@@ -37,7 +39,7 @@ $grey-color: rgba(100, 100, 100);
   display: grid;
   grid-template-rows: 1fr 1fr;
   margin-left: 0.8rem;
-  font-size: 1.4rem;
+  font-size: 1rem;
 }
 #userline {
   line-height: 1;
@@ -59,7 +61,7 @@ $grey-color: rgba(100, 100, 100);
 }
 
 #message {
-  margin: 10px;
+  margin: 1%;
   font-size: 1.3rem;
 }
 
@@ -78,24 +80,32 @@ $grey-color: rgba(100, 100, 100);
   height: 50vh;
 }
 
-.imagesection{
+.imagesection {
   display: grid;
   grid-template-columns: auto 1fr;
   margin-bottom: 1rem;
   font-size: 1.2rem;
   width: 80%;
 }
-#image-format{
-  display:flex;
+#image-format {
+  display: flex;
   justify-content: center;
   align-items: center;
 }
 
 #post-component {
-  padding-left: 10px;
+  padding-left: 1%;
 }
 
-#image{
+#image {
+  width: 100%;
+  height: 100%;
   max-width: 100vh;
-  max-height: 100vh;
+  max-height: 50vh;
+  object-fit: contain;
+}
+
+#scale {
+  width: 100%;
+  font-size: 5%;
 }

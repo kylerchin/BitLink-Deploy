@@ -1,12 +1,51 @@
-<img ngSrc="assets/logo.png" id="logo" height="324" width="324" alt="BitLink logo">
-<div id="page">
-  <h1>Create a new account</h1>
-  <p class="small">Already have an account? <a href="/login"><span>Log in</span></a></p>
-  <div class="input-spacing"><app-text-input-box [textField]=email [width]="100" [height]="2"></app-text-input-box></div>
-  <div class="input-spacing"><app-text-input-box [textField]=email2 [width]="100" [height]="2"></app-text-input-box></div>
-  <div class="input-spacing"><app-text-input-box [textField]=username [width]="100" [height]="2"></app-text-input-box></div>
-  <div class="input-spacing"><app-text-input-box [textField]=password [width]="100" [height]="2"></app-text-input-box></div>
-  <div class="input-spacing"><app-text-input-box [textField]=password2 [width]="100" [height]="2"></app-text-input-box></div>
-  <div id="button"><button>Create Account</button></div>
+<div id="format-reg">
+  <img
+    ngSrc="assets/logo.png"
+    id="logo"
+    height="324"
+    width="324"
+    alt="BitLink logo"
+  />
+  <div id="page">
+    <h1>Create a new account</h1>
+    <p class="small">
+      Already have an account? <a href="/login"><span>Log in</span></a>
+    </p>
+    <div class="input-spacing">
+      <app-text-input-box
+        [textField]="email"
+        [width]="100"
+        [height]="2"
+      ></app-text-input-box>
+    </div>
+    <div class="input-spacing">
+      <app-text-input-box
+        [textField]="email2"
+        [width]="100"
+        [height]="2"
+      ></app-text-input-box>
+    </div>
+    <div class="input-spacing">
+      <app-text-input-box
+        [textField]="username"
+        [width]="100"
+        [height]="2"
+      ></app-text-input-box>
+    </div>
+    <div class="input-spacing">
+      <app-text-input-box
+        [textField]="password"
+        [width]="100"
+        [height]="2"
+      ></app-text-input-box>
+    </div>
+    <div class="input-spacing">
+      <app-text-input-box
+        [textField]="password2"
+        [width]="100"
+        [height]="2"
+      ></app-text-input-box>
+    </div>
+    <div id="button"><button>Create Account</button></div>
+  </div>
 </div>
-

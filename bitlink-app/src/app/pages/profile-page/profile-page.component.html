@@ -1,18 +1,34 @@
-<app-sidebar></app-sidebar>
-<div id="main">
-  <h1>{{name}}</h1>
-  <div id="form">
-    <div><label>Name: </label><input class="inputs" type="text"></div>
-    <div><label>Username: </label><input class="inputs" type="text"></div>
-    <div><label>Email: </label><input class="inputs" type="text"></div>
-    <p class="small">Email will not be publicly shared.
-    <div><label>New Password: </label><input class="inputs" type="text"></div>
-    <div><label>Confirm Password: </label><input class="inputs" type="text"></div>
-    <div id="pictures">
-      <div><img id="profile-img" src="assets/profile_picture.png" alt="Profile picture"></div>
-      <div><button class="avatar">Choose new image</button></div>
-      <div><button class="avatar">Delete profile picture</button></div>
+<div id="profile-page">
+  <div id="sidebar-format"><app-sidebar></app-sidebar></div>
+  <div id="main">
+    <h1>{{ name }}</h1>
+    <div id="form">
+      <div><label>Name: </label><input class="inputs" type="text" /></div>
+      <div><label>Username: </label><input class="inputs" type="text" /></div>
+      <div><label>Email: </label><input class="inputs" type="text" /></div>
+      <p class="small">Email will not be publicly shared.</p>
+      <div>
+        <label>New Password: </label><input class="inputs" type="text" />
+      </div>
+      <div>
+        <label>Confirm Password: </label><input class="inputs" type="text" />
+      </div>
+      <div id="pictures">
+        <div>
+          <img
+            id="profile-img"
+            src="assets/profile_picture.png"
+            alt="Profile picture"
+          />
+        </div>
+        <div><button class="avatar">Choose new image</button></div>
+        <div><button class="avatar">Delete profile picture</button></div>
+        <div id="footer">
+          <a href="/contact">Contact Us</a>
+          <a href="/terms-and-conditions">Terms and Conditions</a>
+          <a href="/login">Logout</a>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-

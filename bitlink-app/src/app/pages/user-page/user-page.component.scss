@@ -14,7 +14,7 @@ $secondary-accent-color: #008005;
   margin: 0;
 }
 
-#following-posts-container {
+#homepage-container {
   display: flex;
 }
 
@@ -54,10 +54,10 @@ $secondary-accent-color: #008005;
 
 #following-button,
 #for-you-button {
-  font-size: 20px;
+  font-size: 2rem;
   color: white;
   // padding: 10px;
-  padding-bottom: 1rem;
+  padding-bottom: 1%;
   // width: 48%; // Adjust width to leave space for margin
   // text-align: center; // Center text inside buttons
   cursor: pointer;
@@ -88,4 +88,45 @@ $secondary-accent-color: #008005;
 }
 .post-format {
   border-bottom: 1px solid $emphasis-color;
+}
+
+#profile-icon {
+  width: 10rem;
+  height: 10rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+#statistics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid $emphasis-color;
+  padding-bottom: 2vh;
+  padding-top: 1vh;
+}
+#postnumber {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 1vw;
+}
+
+#followercount {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 1vw;
+}
+
+#profile-format {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 3.5vh;
+}
+
+#format-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
 }

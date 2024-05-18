@@ -33,10 +33,10 @@ $secondary-accent-color: #008005;
 }
 
 #profile_pic {
-  height: 50px;
-  width: 50px;
+  height: 3.5rem;
+  width: 3.5rem;
   border-radius: 50%;
-  margin-right: 10px;
+  margin-right: 1rem;
   object-fit: cover;
 }
 
@@ -48,14 +48,14 @@ $secondary-accent-color: #008005;
 }
 
 #sidebar {
-    position: fixed;
-    height: 100%;
+  position: fixed;
+  height: 100%;
 }
 
 #following {
-    display: flex;
-    align-items: center;
-    margin-right: 3rem;
+  display: flex;
+  align-items: center;
+  margin-right: 3rem;
 }
 
 #message {
@@ -66,19 +66,18 @@ $secondary-accent-color: #008005;
 }
 
 #following button {
-    width: 8rem;
-    height: 2.5rem;
-    border: 2px solid $secondary-accent-color;
-    color: $secondary-accent-color;
-    background-color: $text-color;
-    padding: 10px;
-    padding-top: 8px;
-    border-radius: 25px;
-    font-size: 1rem;
-    &:hover {
-      border-color: darken(red, 10%);
-      background-color: red;
-      color: white;
-    }
+  width: 8rem;
+  height: 2.5rem;
+  border: 2px solid $secondary-accent-color;
+  color: $secondary-accent-color;
+  background-color: $text-color;
+  padding: 10px;
+  padding-top: 8px;
+  border-radius: 25px;
+  font-size: 1rem;
+  &:hover {
+    border-color: darken(red, 10%);
+    background-color: red;
+    color: white;
+  }
 }
-  

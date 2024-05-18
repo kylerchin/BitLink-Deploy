@@ -15,60 +15,60 @@ $secondary-accent-color: #008005;
 
 #message-page-container {
   display: flex;
-  min-height: 99.9vh;
+  // min-height: 99.9vh;
   border-bottom: 1px solid $emphasis-color;
   min-width: 99.9vh;
 }
 
 #sidebar {
-  flex: 1;
+  flex: 15;
 }
 
 #message-side {
-  flex: 4;
-  margin-left: 25px;
+  flex: 85;
+  margin-left: 2%;
   width: 100vw;
   height: 100%;
   margin-bottom: 0;
 }
 
-#top {
+#top-container {
   display: grid;
   grid-template-columns: 4fr 5fr;
   font-size: 25px;
-  padding-bottom: 10px;
+  padding-bottom: 1%;
 }
 
 #home {
-  padding: 10px;
+  padding: 2%;
 }
 
 #messages {
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 2%;
+  padding-bottom: 1%;
 }
 
 #thirdline {
   display: flex;
   justify-content: space-between;
-  margin-top: 10px;
+  margin-top: 1%;
   border-bottom: 1px solid $emphasis-color;
-  font-size: 20px;
+  font-size: 2rem;
 }
 
 #clear {
   background-color: $secondary-accent-color;
-  padding: 10px;
+  padding: 1%;
   border-radius: 25px;
   border: none;
-  font-size: 20px;
+  font-size: 2rem;
 }
 
 #new {
   margin: 0;
-  margin-top: 15px;
-  margin-left: 20px;
-  padding-bottom: 10px;
+  margin-top: 1.5%;
+  margin-left: 2%;
+  padding-bottom: 1%;
 }
 
 // #user-bar{
@@ -117,7 +117,6 @@ $secondary-accent-color: #008005;
   justify-content: center;
   align-items: center;
 }
-
 
 app-send-message {
   margin-top: auto;
