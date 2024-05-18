@@ -1,13 +1,10 @@
-import * as dotenv from "dotenv";
+// @ts-ignore
 import express, { request, response } from "express";
+// @ts-ignore
 import cors from "cors";
 import { User, Message } from "./types";
-import {MongoClient, ServerApiVersion} from 'mongodb';
+import {MongoClient, ObjectId, ServerApiVersion} from 'mongodb';
 const uri = "mongodb+srv://briannw2:IuH2qY69AaAKHGSs@bitlink.wfyrdwt.mongodb.net/?retryWrites=true&w=majority&appName=Bitlink";
-
-dotenv.config();
-const app = express();
-app.use(cors({ origin: '*' }));
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 export const client = new MongoClient(uri, {
@@ -37,6 +34,8 @@ export async function connectToDatabase() {
 connectToDatabase()
   .then((client) => {
     const app = express();  // Assuming express is used
+    app.use(cors())
+    app.use(express.json())
 
     app.get('/api/account/messages', async (req, res) => {
       try {
@@ -133,7 +132,7 @@ connectToDatabase()
       }
     });
 
-    app.post('api/account/sendmessage', cors(), async (req, res) => {
+    app.post('/api/account/sendmessage', cors(), async (req, res) => {
       try{
         const senderid = req.query.id1;
         const receiverid = req.query.id2;
@@ -154,10 +153,67 @@ connectToDatabase()
           console.error("Error sending message", error);
           res.status(500).send('Failed to send message');
       }
+    });
+
+    app.get("/api/account/getAllUsers", async (_req, res) => {
+      try {
+        const db = client.db("account")
+        const allUsers = await db.collection("users").find({}).toArray();
+        res.status(200).send(allUsers);
+      } catch (error) {
+        res.status(500).send(error instanceof Error ? error.message : "Unknown error");
+      }
+    });
+
+    app.post("/api/account/register", async (req, res) => {
+      try {
+        const database = client.db("account")
+        console.log(req.body.username)
+
+        if (await database.collection("users").findOne({username:req.body.username})) {
+          console.log("User already exists");
+          return res.status(500).send("User already exists");
+        }
+        const user = req.body;
+        const result = await database.collection("users").insertOne(user);
+
+        if (result?.acknowledged) {
+          console.log("Success")
+        }
+        else {
+          console.log("Error")
+          res.status(500).send("User account creation failed.")
+        }
+      } catch (e) {
+        console.error(e);
+        res.status(400).send(e instanceof Error ? e.message : "Unknown error");
+      }
+    });
+
+    app.put("/api/account/:id", async (req, res) => {
+      try {
+        if (!req.body) {
+          return res.status(400).send({
+            message: "Data to update can not be empty!"
+          });
+        }
+        const database = client.db("account")
+
+        const id = req?.params?.id;
+        const getID = { _id: new ObjectId(id) };
+        const result = await database.collection("users").updateOne(getID, { $set: req.body });
+
+        if (result?.acknowledged) console.log(`${id} updated successfully.`);
+        else if (!result?.matchedCount) res.status(404).send("User not found.");
+        else res.status(500).send(`${id} unable to be updated.`);
+      } catch (e) {
+        console.error(e);
+        res.status(400).send(e instanceof Error ? e.message : "Unknown error");
+      }
     })
 
-    app.listen(4200, () => {
-      console.log(`Server running at http://localhost:4200...`);
+    app.listen(8888, () => {
+      console.log(`Server running at http://localhost:8888...`);
     });
 
     process.on('SIGINT', () => {

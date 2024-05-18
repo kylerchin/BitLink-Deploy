@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 
@@ -13,4 +13,12 @@ export class TextInputBoxComponent {
   @Input() textField : String | undefined;
   @Input() width : number | undefined;
   @Input() height : number | undefined;
+
+  output: String | undefined;
+  @Output() outputValue = new EventEmitter<string | undefined>();
+
+  dataChanged(event: any) {
+    // console.log(event.target.value);
+    if (event.target.value) {this.outputValue.emit(event.target.value);}
+  }
 }

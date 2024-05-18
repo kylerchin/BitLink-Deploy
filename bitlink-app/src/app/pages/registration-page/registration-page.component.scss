@@ -54,3 +54,17 @@ button {
   background-color: #008005;
   font-size: 32pt;
 }
+
+#errors {
+  color: red;
+  font-size: large;
+}
+
+#success {
+  color: $emphasis-color;
+}
+
+#accounts {
+  font-size: large;
+  color: $text-color;
+}
