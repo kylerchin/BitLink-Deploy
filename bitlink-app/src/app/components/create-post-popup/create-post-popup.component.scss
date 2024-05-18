@@ -26,8 +26,8 @@ $secondary-accent-color: #008005;
   background-color: rgba(9, 9, 9, 0.7); /* Semi-transparent grey background */
 }
 .content {
-  height: 30rem;
-  width: 60rem;
+  height: 80vh;
+  width: 65vw;
   border-radius: 30px;
   padding: 1rem;
   display: grid;
@@ -36,8 +36,8 @@ $secondary-accent-color: #008005;
 
 #close {
   border: none;
-  height: 2rem;
-  width: 2rem;
+  height: 2vh;
+  width: 2vw;
   margin-right: 1rem;
 }
 #cancel-icon {
@@ -45,7 +45,7 @@ $secondary-accent-color: #008005;
   width: 3rem;
 }
 #textbox {
-  margin: 1rem;
+  margin: 1vh;
   margin-top: 0;
   border: 1px solid $emphasis-color;
 }
@@ -55,7 +55,6 @@ $secondary-accent-color: #008005;
   height: 4rem;
   object-fit: cover;
   border-radius: 50%;
-  margin-left: 0.5rem;
 }
 #space {
   width: 4rem;
@@ -68,7 +67,8 @@ $secondary-accent-color: #008005;
 .poster {
   display: grid;
   grid-template-columns: auto 1fr;
-  margin: 10px;
+  margin: 1vh;
+  margin-left: 2vh;
 }
 
 #profile_info {
@@ -148,37 +148,43 @@ $secondary-accent-color: #008005;
 }
 #bottom-container {
   display: grid;
-  grid-template-columns: auto auto auto auto auto 1fr;
+  grid-template-columns: auto 1fr;
 }
 #post-image {
-  width: 3rem;
-  height: 3rem;
+  width: 2vw;
+  height: auto;
   margin-right: 1rem;
   background-color: $secondary-accent-color;
 }
 #post-text {
   background-color: $secondary-accent-color;
 }
+#button-format {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
 #post-button {
   background-color: $secondary-accent-color;
-  padding: 0.7rem;
-  padding-left: 2rem;
-  padding-right: 2rem;
-  margin: 1rem;
-  margin-bottom: 2rem;
+  padding: 1vh;
+  padding-left: 2vh;
+  padding-right: 2vh;
+  margin: 1vh;
+  margin-bottom: 1vh;
+  margin-top: 2vh;
   font-size: 2rem;
   border-radius: 20px;
   display: flex;
-  justify-content: center;
+  justify-self: flex-end;
   align-items: center;
   border: none;
 }
 #icons {
-  margin-right: 20rem;
+  margin-right: 5vh;
 }
 .attachments {
   margin-top: 1rem;
   margin-left: 1rem;
-  height: 4rem;
-  width: 4rem;
+  height: auto;
+  width: 4vw;
 }

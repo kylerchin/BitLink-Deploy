@@ -16,19 +16,19 @@ $grey-color: rgba(100, 100, 100);
 #bar {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  margin: 10px;
-  padding-left: 10px;
+  margin: 1vh;
+  padding-left: 1vh;
 }
 .format {
   display: flex;
   justify-content: start;
   align-items: center;
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 .image {
-  height: 3rem;
-  width: 3rem;
-  margin-right: 7px;
+  height: 2rem;
+  width: 2rem;
+  margin-right: 1%;
   color: $text-color;
 }
 .center {
@@ -37,11 +37,11 @@ $grey-color: rgba(100, 100, 100);
   align-items: center;
 }
 .button-image {
-  height: 3rem;
-  width: 3rem;
+  height: 2rem;
+  width: 2rem;
   color: $text-color;
   padding: 0;
-  margin-right: 7px;
+  margin-right: 2%;
 }
 #share-button {
   padding: 0;

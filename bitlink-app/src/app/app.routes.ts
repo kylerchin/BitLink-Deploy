@@ -13,11 +13,11 @@ import { FollowingPageComponent } from './pages/following-page/following-page.co
 import { TermsAndConditionsComponent } from './pages/terms-and-conditions/terms-and-conditions.component';
 import { ContactPageComponent } from './pages/contact-page/contact-page.component';
 import { SearchPageComponent } from './pages/search-page/search-page.component';
-
+import { UserPageComponent } from './pages/user-page/user-page.component';
 export const routes: Routes = [
   { path: 'login', component: LoginPageComponent },
   { path: 'register', component: RegistrationPageComponent },
-  { path: 'profile', component: ProfilePageComponent },
+  { path: 'settings', component: ProfilePageComponent },
   { path: 'notifications', component: NotificationPageComponent },
   { path: 'post', component: PostPageComponent },
   { path: '', component: HomePageComponent },
@@ -28,4 +28,5 @@ export const routes: Routes = [
   { path: 'terms-and-conditions', component: TermsAndConditionsComponent },
   { path: 'contact', component: ContactPageComponent },
   { path: 'search', component: SearchPageComponent },
+  { path: 'user', component: UserPageComponent },
 ];
