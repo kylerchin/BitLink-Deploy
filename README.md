@@ -1,5 +1,7 @@
 # BitLink
 
+Team Members: Phillip Peterson, Anthony Wong, Susannah Liu, Justin Chan
+
 a social media platform catered towards computer science lovers!
 
 Our stack:
