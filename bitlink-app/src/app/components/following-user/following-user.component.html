@@ -9,7 +9,7 @@
     <!-- <span>{{ usertag }}</span> -->
     <span id="message">{{ action }}</span>
     <span id="following" *ngIf="following">
-      <button (mouseenter)="isHovering=true" (mouseleave)="isHovering=false">
+      <button (mouseenter)="isHovering=true" (mouseleave)="isHovering=false" (click)="unfollowuser(user_id)">
         {{ isHovering ? 'Unfollow?' : following }}
       </button>
     </span>    

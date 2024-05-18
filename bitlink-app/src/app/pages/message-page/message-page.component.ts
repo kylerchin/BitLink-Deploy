@@ -15,6 +15,19 @@ interface User {
   username: string;
   usertag: string;
   profile_pic: string;
+  user_id: string;
+}
+
+interface Message {
+  sender_id: string;
+  receiver_id: string;
+  content: string;
+  timestamp: string;
+}
+
+interface ApiResponse {
+  users: User[];
+  messages: Message[];
 }
 
 
@@ -39,14 +52,21 @@ interface User {
 })
 export class MessagePageComponent implements OnInit {
   users: User[] = [];
+  messages: Message[] = [];
 
   constructor(private http: HttpClient) { }
 
   fetchUserInformation(): void {
-    this.http.get<User[]>('http://localhost:4200/api/account/messages')
+    this.http.get<ApiResponse>('http://localhost:4200/api/account/messages')
       .subscribe({
-        next: (data: User[]) => {
-          this.users = data;
+        next: (data: ApiResponse) => {
+          this.users = data.users;
+          this.messages = data.messages;
+          for (let i = 0; i < this.users.length; i++) {
+            if (!this.users[i].usertag.startsWith('@')) {
+                this.users[i].usertag = '@' + this.users[i].usertag;
+            }
+          }
         },
         error: (error) => {
           console.error("Error fetching user information:", error);
@@ -95,6 +115,8 @@ export class MessagePageComponent implements OnInit {
   action9: string = 'seen 5 days ago';
   action10: string = 'seen now';
   */
+  id1: string = '0';
+  id2: string = '1';
   action1: string = 'seen 2 hours ago';
   time: string = '12:02 PM';
   message: string = 'Yo';
