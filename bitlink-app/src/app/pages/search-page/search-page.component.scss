@@ -22,16 +22,17 @@ h1 {
 }
 
 .sidebar {
-  flex: 1;
+  flex: 15;
 }
 
 .page {
-  flex: 4;
-  margin-left: 1rem;
+  flex: 85;
+  margin-left: 2%;
+  margin-bottom: 2rem;
 }
 
 .search-bar {
-  padding-top: 10px;
+  padding-top: 1%;
   display: flex;
   align-items: center;
   position: fixed;
@@ -40,23 +41,30 @@ h1 {
 }
 
 .resultbar {
-  display: flex;
+  // display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr;
   gap: 1.4rem;
-  margin-left: 1rem;
+  // margin-left: 1rem;
+  padding-left: 1rem;
   border-bottom: 1px solid $emphasis-color;
   padding-bottom: 1%;
 }
 
-.post {
-  border-bottom: 100px solid $emphasis-color;
-  margin-bottom: 100px;
-}
+// .post {
+//   border-bottom: 1px solid $emphasis-color;
+//   // margin-bottom: 100px;
+// }
 
 .results {
   margin: 1rem;
+  margin-left: 0;
   margin-top: 5rem;
 }
 
+.post-box {
+  border-bottom: 1px solid $emphasis-color;
+}
 .post-format {
   border-bottom: 1px solid $emphasis-color;
 }

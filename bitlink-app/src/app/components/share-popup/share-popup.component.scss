@@ -16,11 +16,14 @@ $secondary-accent-color: #008005;
 .content {
   //   bottom: 10rem;
   //   right: 0;
-  height: 7rem;
-  width: 40rem;
+  height: 15vh;
+  width: 50vw;
   border-radius: 25px;
   border: 1px solid $emphasis-color;
-  padding: 1rem;
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+  padding-right: 1vw;
+  padding-left: 1vw;
   //   display: flex;
   //   justify-content: start;
   //   align-items: center;
@@ -38,11 +41,11 @@ $secondary-accent-color: #008005;
   border: none;
   //   height: 1rem;
   //   width: 1rem;
-  margin-right: 1.5rem;
+  margin-right: 1vw;
 }
 #cancel-icon {
-  height: 2rem;
-  width: 2rem;
+  height: 3vh;
+  width: auto;
 }
 
 #share-options {
@@ -50,28 +53,28 @@ $secondary-accent-color: #008005;
   grid-template-rows: 1fr 1fr;
 }
 .space {
-  height: 2rem;
-  width: 2rem;
+  height: 3vh;
+  width: auto;
   opacity: 0;
   //   margin-right: 3rem;
 }
 .toprow {
   display: grid;
   grid-template-columns: auto 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  padding: 0.5rem;
+  padding-bottom: 1vh;
   padding-top: 0;
 }
 .bottomrow {
   display: grid;
   grid-template-columns: auto 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  padding: 0.5rem;
+  padding-top: 1vh;
   padding-bottom: 0;
 }
 .image-format {
-  height: 2rem;
-  width: 2rem;
+  height: 4vh;
+  width: auto;
 }
 
 .one-share {
-  font-size: 0.8rem;
+  font-size: 1vw;
 }

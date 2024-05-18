@@ -1,7 +1,7 @@
 <div id="message-page-container">
   <app-sidebar id="sidebar"></app-sidebar>
   <div id="message-side">
-    <div id="top">
+    <div id="top-container">
       <div id="home"><a href=""><- Home</a></div>
       <div id="followed">Messages</div>
     </div>
@@ -11,75 +11,25 @@
     </div>
     <div id="message-container">
       <div id="user-bar">
-        <app-message-user-bar
-          [username]="username"
-          [usertag]="usertag"
-          [profile_pic]="profile_pic"
-          [action]="action1"
-        ></app-message-user-bar>
-        <app-message-user-bar
-          [username]="username2"
-          [usertag]="usertag2"
-          [profile_pic]="profile_pic2"
-          [action]="action3"
-        ></app-message-user-bar>
-        <app-message-user-bar
-          [username]="username3"
-          [usertag]="usertag3"
-          [profile_pic]="profile_pic3"
-          [action]="action4"
-        ></app-message-user-bar>
-        <app-message-user-bar
-          [username]="username4"
-          [usertag]="usertag4"
-          [profile_pic]="profile_pic4"
-          [action]="action6"
-        ></app-message-user-bar>
-        <app-message-user-bar
-          [username]="username5"
-          [usertag]="usertag5"
-          [profile_pic]="profile_pic5"
-          [action]="action7"
-        ></app-message-user-bar>
-        <app-message-user-bar
-          [username]="username6"
-          [usertag]="usertag6"
-          [profile_pic]="profile_pic6"
-          [action]="action2"
-        ></app-message-user-bar>
-        <app-message-user-bar
-          [username]="username7"
-          [usertag]="usertag7"
-          [profile_pic]="profile_pic7"
-          [action]="action5"
-        ></app-message-user-bar>
-        <app-message-user-bar
-          [username]="username8"
-          [usertag]="usertag8"
-          [profile_pic]="profile_pic8"
-          [action]="action8"
-        ></app-message-user-bar>
-        <app-message-user-bar
-          [username]="username9"
-          [usertag]="usertag9"
-          [profile_pic]="profile_pic9"
-          [action]="action9"
-        ></app-message-user-bar>
-        <app-message-user-bar
-          [username]="username10"
-          [usertag]="usertag10"
-          [profile_pic]="profile_pic10"
-          [action]="action10"
-        ></app-message-user-bar>
+        <div *ngFor="let user of users">
+          <app-message-user-bar
+            [username]="user.username"
+            [usertag]="user.usertag"
+            [profile_pic]="user.profile_pic"
+          ></app-message-user-bar>
+        </div>
         <app-new-message></app-new-message>
       </div>
       <div id="message-box">
         <div class="center-text-box">
-          <app-message-box
-            [username]="username10"
-            [usertag]="usertag10"
-            [profile_pic]="profile_pic10"
-          ></app-message-box>
+          <div *ngFor="let user of users; let i = index">
+              <app-message-box
+                *ngIf="i === 0"
+                [username]="user.username"
+                [usertag]="user.usertag"
+                [profile_pic]="user.profile_pic"
+              ></app-message-box>
+          </div>
           <app-text-message
             [message]="message"
             [time]="time"
@@ -90,7 +40,10 @@
           ></app-send-message>
         </div>
         <div class="center-text-box">
-          <app-message-text-box></app-message-text-box>
+          <app-message-text-box
+          [sender_id]="id1"
+          [receiver_id]="id2"
+          ></app-message-text-box>
         </div>
       </div>
     </div>

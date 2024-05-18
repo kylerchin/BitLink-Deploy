@@ -19,14 +19,14 @@
   </div>
   <div class="videosection" *ngIf="video">
     <img [src]="profile_picture" alt="space" id="space" />
-    <p class="grey">{{timestamp}}</p>
-    <img [src] = "video" alt="video" id="clip" />
-    <p class="grey">{{videoviews}}</p>
+    <p class="grey">{{ timestamp }}</p>
+    <img [src]="video" alt="video" id="clip" />
+    <p class="grey">{{ videoviews }}</p>
   </div>
   <div class="imagesection" *ngIf="image">
     <img [src]="profile_picture" alt="space" id="space" />
     <div id="image-format">
-      <img [src]="image" alt="image" id = "image"/>
+      <img [src]="image" alt="image" id="image" />
     </div>
   </div>
   <app-like-comment-share-bar
@@ -34,5 +34,6 @@
     [repost]="repost"
     [comment]="comment_number"
     [save]="save"
+    id="scale"
   ></app-like-comment-share-bar>
 </div>

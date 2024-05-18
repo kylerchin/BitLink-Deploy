@@ -1,5 +1,7 @@
 # BitLink
 
+Team Members: Phillip Peterson, Anthony Wong, Susannah Liu, Justin Chan
+
 a social media platform catered towards computer science lovers!
 
 Our stack:
@@ -10,6 +12,8 @@ How to deploy:
 
 `cd bitlink-app`
 
-`npm install`
+`ng build`
 
-`ng server --open`
+then navigate to bitlink-app's parent directory
+
+`npx ts-node server/server.ts`

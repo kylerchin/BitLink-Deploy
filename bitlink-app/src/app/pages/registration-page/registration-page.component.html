@@ -2,11 +2,13 @@
 <div id="page">
   <h1>Create a new account</h1>
   <p class="small">Already have an account? <a href="/login"><span>Log in</span></a></p>
-  <div class="input-spacing"><app-text-input-box [textField]=email [width]="100" [height]="2"></app-text-input-box></div>
-  <div class="input-spacing"><app-text-input-box [textField]=email2 [width]="100" [height]="2"></app-text-input-box></div>
-  <div class="input-spacing"><app-text-input-box [textField]=username [width]="100" [height]="2"></app-text-input-box></div>
-  <div class="input-spacing"><app-text-input-box [textField]=password [width]="100" [height]="2"></app-text-input-box></div>
-  <div class="input-spacing"><app-text-input-box [textField]=password2 [width]="100" [height]="2"></app-text-input-box></div>
-  <div id="button"><button>Create Account</button></div>
+  <div class="input-spacing"><app-text-input-box (outputValue)="GetEmail($event)" [textField]=email [width]="100" [height]="2"></app-text-input-box></div>
+  <div class="input-spacing"><app-text-input-box (outputValue)="GetEmail2($event)" [textField]=email2 [width]="100" [height]="2"></app-text-input-box></div>
+  <div class="input-spacing"><app-text-input-box (outputValue)="GetUsername($event)" [textField]=username [width]="100" [height]="2"></app-text-input-box></div>
+  <div class="input-spacing"><app-text-input-box (outputValue)="GetPassword($event)" [textField]=password [width]="100" [height]="2"></app-text-input-box></div>
+  <div class="input-spacing"><app-text-input-box (outputValue)="GetPassword2($event)" [textField]=password2 [width]="100" [height]="2"></app-text-input-box></div>
+  <div id="errors" *ngIf="error">{{error}}</div>
+  <div id="success" *ngIf="success">You have successfully made an account! <a href="/login"><span>Log in</span></a></div>
+  <div id="button" (click)="validate()"><button>Create Account</button></div>
+  <div id="accounts" *ngFor="let account of accounts">Username: {{account.username}}, Password: {{account.password}}</div>
 </div>
-

@@ -15,19 +15,18 @@ $secondary-accent-color: #008005;
 #post-container {
   display: flex;
 }
-
 #sidebar {
-  flex: 1;
+  flex: 15;
 }
 #post-side {
-  flex: 4;
-  margin-left: 25px;
+  flex: 85;
+  margin-left: 2%;
   margin-bottom: 2rem;
 }
 
 #search-bar {
-  padding-top: 10px;
-  font-size: 20px;
+  padding-top: 1%;
+  font-size: 5rem;
   display: flex;
   align-items: center;
   position: fixed;
@@ -35,13 +34,13 @@ $secondary-accent-color: #008005;
   width: 100%;
 }
 #secondline {
-  padding-bottom: 30px;
+  padding-bottom: 2%;
   border-bottom: 1px solid $emphasis-color;
 }
 
 #to-home {
-  margin: 10px;
-  font-size: 30px;
+  margin: 1%;
+  font-size: 2rem;
   margin-top: 3rem;
 }
 

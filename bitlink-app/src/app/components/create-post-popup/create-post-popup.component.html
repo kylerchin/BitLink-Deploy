@@ -26,6 +26,7 @@
           type="text"
           class="input-box title-box"
           placeholder="Title (Optional)"
+          formControlName="title"
         />
       </div>
       <div id="body">
@@ -33,6 +34,7 @@
           class="input-box body-box"
           placeholder="Give more details"
           rows="6"
+          formControlName="content"
         ></textarea>
       </div>
     </div>
@@ -44,10 +46,12 @@
         <img src="assets/icons/icons8-gif-100.png" class="attachments" />
         <img src="assets/icons/icons8-file-100.png" class="attachments" />
       </div>
-      <button id="post-button">
-        <img src="assets/icons/post.png" id="post-image" />
-        <div id="post-text">Post</div>
-      </button>
+      <div id="button-format">
+        <button (click)="submit()" id="post-button">
+          <img src="assets/icons/post.png" id="post-image" />
+          <div id="post-text">Post</div>
+        </button>
+      </div>
     </div>
   </div>
 </div>

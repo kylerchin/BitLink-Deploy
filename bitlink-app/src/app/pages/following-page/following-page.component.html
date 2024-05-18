@@ -9,55 +9,15 @@
       <div id="thirdline">
         <div id="new">Recent</div>
       </div>
-      <app-following-user
-        [username]="username"
-        [usertag]="usertag"
-        [profile_pic]="profile_pic"
-        [action]="action1"
-        [following]="following"
-      ></app-following-user>
-      <app-following-user
-        [username]="username2"
-        [usertag]="usertag2"
-        [profile_pic]="profile_pic2"
-        [action]="action3"
-        [following]="following"
-      ></app-following-user>
-      <app-following-user
-        [username]="username3"
-        [usertag]="usertag3"
-        [profile_pic]="profile_pic3"
-        [action]="action4"
-        [following]="following"
-      ></app-following-user>
-      <app-following-user
-        [username]="username4"
-        [usertag]="usertag4"
-        [profile_pic]="profile_pic4"
-        [action]="action6"
-        [following]="following"
-      ></app-following-user>
-      <app-following-user
-        [username]="username5"
-        [usertag]="usertag5"
-        [profile_pic]="profile_pic5"
-        [action]="action7"
-        [following]="following"
-      ></app-following-user>
-      <app-following-user
-        [username]="username6"
-        [usertag]="usertag6"
-        [profile_pic]="profile_pic6"
-        [action]="action2"
-        [following]="following"
-      ></app-following-user>
-      <app-following-user
-        [username]="username7"
-        [usertag]="usertag7"
-        [profile_pic]="profile_pic7"
-        [action]="action5"
-        [following]="following"
-      ></app-following-user>
+      <div *ngFor="let following of followinglist">
+        <app-following-user
+          [username]="following.username"
+          [usertag]="following.usertag"
+          [profile_pic]="following.profile_pic"
+          [action]="following.time"
+          [following]="following.following"
+          [user_id]="following.user_id"
+        ></app-following-user>
+      </div>
     </div>
 </div>
-  
