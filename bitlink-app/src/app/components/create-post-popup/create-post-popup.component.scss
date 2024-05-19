@@ -37,7 +37,7 @@ $secondary-accent-color: #008005;
 #close {
   border: none;
   height: 2vh;
-  width: 2vw;
+  width: auto;
   margin-right: 1rem;
 }
 #cancel-icon {
@@ -179,7 +179,9 @@ $secondary-accent-color: #008005;
   align-items: center;
   border: none;
 }
-#icons {
+.icons {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   margin-right: 5vh;
 }
 .attachments {
