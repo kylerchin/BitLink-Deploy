@@ -10,8 +10,8 @@ $secondary-accent-color: #008005;
   background-color: $background-color;
   font-family: Inter, sans-serif;
   color: $text-color;
-  padding: 0;
-  margin: 0;
+  // padding: 0;
+  //margin: 0;
 }
 
 #homepage-container {
@@ -28,7 +28,7 @@ $secondary-accent-color: #008005;
   // margin-bottom: 2rem;
   // margin-left: 1rem;
   flex: 85;
-  margin-left: 2%;
+  // margin-left: 2%;
   margin-bottom: 2rem;
 }
 

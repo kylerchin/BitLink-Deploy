@@ -7,12 +7,14 @@ $grey-color: rgba(100, 100, 100);
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
 
 * {
-  background-color: $background-color;
-  font-family: Inter, sans-serif;
-  color: $grey-color;
-  margin: 0;
-  padding: 0;
+  //background-color: $background-color;
+  // font-family: Inter, sans-serif;
+  // color: $grey-color;
+  //margin: 0;
+  //padding: 0;
 }
+
+/*
 #bar {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
@@ -56,4 +58,4 @@ $grey-color: rgba(100, 100, 100);
   left: 140%;
   background-color: transparent;
   // transform: translate(-50%, -50%);
-}
+}*/
