@@ -1,39 +1,58 @@
-<div id="bar">
-  <div class="format">
-    <img src="assets/icons/icons8-heart-100.png" alt="like" class="image" />
-    {{ like }}
+<div
+  id=""
+  class="flex flex-row gap-x-3 sm:gap-x-6 lg:gap-x-8 w-full my-auto text-white mb-4 mx-3"
+>
+  <div
+    class="flex flex-row justify-center justify-items-center align-middle gap-x-1"
+  >
+    <img
+      src="assets/icons/icons8-heart-100.png"
+      alt="like"
+      class="h-5 md:h-8"
+    />
+    <p class="text-sm md:text-base text-white my-auto">{{ like }}</p>
   </div>
-  <div class="format">
-    <img src="assets/icons/icons8-recycle-64.png" alt="repost" class="image" />
-    {{ repost }}
+  <div
+    class="flex flex-row justify-center justify-items-center align-middle gap-x-1"
+  >
+    <img
+      src="assets/icons/icons8-recycle-64.png"
+      alt="repost"
+      class="h-5 md:h-8"
+    />
+    <p class="text-sm md:text-base text-white my-auto">{{ repost }}</p>
   </div>
-  <div class="format">
+  <div
+    class="flex flex-row justify-center justify-items-center align-middle gap-x-1"
+  >
     <img
       src="assets/icons/icons8-comment-100.png"
       alt="comment"
-      class="image"
+      class="h-5 md:h-8"
     />
-    {{ comment }}
+    <p class="text-sm md:text-base text-white my-auto">{{ comment }}</p>
   </div>
-  <div class="format">
+  <div
+    class="flex flex-row justify-center justify-items-center align-middle gap-x-1"
+  >
     <img
       src="assets/icons/icons8-bookmark-100.png"
       alt="bookmark"
-      class="image"
+      class="h-5 md:h-8"
     />
-    {{ save }}
+    <p class="text-sm md:text-base text-white my-auto">{{ save }}</p>
   </div>
   <div id="center">
     <button id="share-button" (click)="openpopup()">
       <img
         src="assets/icons/icons8-share-100.png"
         alt="share"
-        class="button-image"
+        class="h-5 md:h-8"
       />
     </button>
   </div>
-  <div *ngIf="show" id="parent">
-    <div id="relative-format">
+  <div *ngIf="show" id="parent" class="relative">
+    <div id="relative-format" class="absolute left-[140%]">
       <app-share-popup [show]="show" (showChange)="popupclosed($event)">
       </app-share-popup>
     </div>
