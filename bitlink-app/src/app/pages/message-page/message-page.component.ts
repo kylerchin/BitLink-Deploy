@@ -57,7 +57,7 @@ export class MessagePageComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   fetchUserInformation(): void {
-    this.http.get<ApiResponse>('http://localhost:4200/api/account/messages')
+    this.http.get<ApiResponse>('http://localhost:8888/api/account/messages')
       .subscribe({
         next: (data: ApiResponse) => {
           this.users = data.users;

@@ -271,6 +271,8 @@ connectToDatabase()
           timestamp:time
         })
 
+        console.log("Message Sent Successfully!");
+
       } catch (error) {
           console.error("Error sending message", error);
           res.status(500).send('Failed to send message');

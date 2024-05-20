@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, EventEmitter } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
 import { FollowingUserComponent } from '../../components/following-user/following-user.component';
 import { SidebarComponent } from '../../components/sidebar/sidebar.component';
@@ -40,7 +40,7 @@ export class FollowingPageComponent {
   constructor(private http: HttpClient) { }
 
   fetchFollowingListInformation(): void {
-    this.http.get<FollowingArray[]>('http://localhost:4200/api/account/following')
+    this.http.get<FollowingArray[]>('http://localhost:8888/api/account/following')
       .subscribe({
         next: (data) => {
           this.followinglist = data;
@@ -82,5 +82,19 @@ export class FollowingPageComponent {
       dates.push(this.getRandomDate(startDate, endDate));
     }
     return dates;
+  }
+
+  readonly APIUrl = "http://localhost:8888/api/account/unfollow";
+  handleUnfollow(id:any){
+    this.http.delete(this.APIUrl+'?id='+id).subscribe({
+      next: (data) => {
+        alert(data);
+        this.fetchFollowingListInformation();
+      },
+      error: (error) => {
+        console.error("Error unfollowing user:", error);
+        this.fetchFollowingListInformation();
+      }
+    } )
   }
 }

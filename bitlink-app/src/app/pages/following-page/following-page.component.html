@@ -17,6 +17,7 @@
           [action]="following.time"
           [following]="following.following"
           [user_id]="following.user_id"
+          (unfollow)="handleUnfollow($event)"
         ></app-following-user>
       </div>
     </div>
