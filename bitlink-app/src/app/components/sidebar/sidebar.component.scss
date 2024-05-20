@@ -5,8 +5,8 @@ $text-color: #ffffff;
 $emphasis-color: #00ff0a;
 $secondary-accent-color: #008005;
 
-$mobile: 600px;
-
+$tablet: 768px;
+$mobile: 480px;
 #sidebar {
   display: grid;
   grid-template-rows: auto 1fr auto;
@@ -110,11 +110,16 @@ $mobile: 600px;
   padding: 4%;
   border-radius: 25px;
   margin-bottom: 1%;
+  overflow: hidden;
 }
 .whole-width img {
   // justify-content: flex;
-  margin-right: 4%;
+  // width: 2.5rem;
+  // height: 2.5rem;
+  align-self: center;
   background-color: $secondary-accent-color;
+  // border-radius: 25px;
+  object-fit: cover;
 }
 .whole-width div {
   margin-top: 1%;
@@ -128,7 +133,7 @@ $mobile: 600px;
   margin-bottom: 2%;
 }
 
-@media (max-width: $mobile) {
+@media (max-width: $tablet) {
   .hide-text {
     display: none;
   }
@@ -136,9 +141,27 @@ $mobile: 600px;
     display: flex;
     justify-items: center;
     align-items: center;
-    padding-left: 1rem;
+    // padding-left: 1rem;
   }
   .whole-width .hide-post {
     display: none;
+  }
+  #profile_pic {
+    height: 3.5rem;
+    width: 3.5rem;
+  }
+}
+
+@media (max-width: $mobile) {
+  .main-icon {
+    height: 2rem;
+    width: 2rem;
+  }
+  #settings {
+    margin-bottom: 1rem;
+  }
+  #profile_pic {
+    height: 3rem;
+    width: 3rem;
   }
 }
