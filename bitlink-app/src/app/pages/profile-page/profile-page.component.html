@@ -1,28 +1,25 @@
 <div id="profile-page">
   <div id="sidebar-format"><app-sidebar></app-sidebar></div>
   <div id="main">
-    <h1>{{ name }}</h1>
+    <h1>{{ currentName }}</h1>
     <div id="form">
-      <div><label>Name: </label><input class="inputs" type="text" /></div>
-      <div><label>Username: </label><input class="inputs" type="text" /></div>
-      <div><label>Email: </label><input class="inputs" type="text" /></div>
+      <div><label>Name: </label><input class="inputs" type="text" [(ngModel)]="nameInput"/></div>
+      <div><label>Username: </label><input class="inputs" type="text" [(ngModel)]="usernameInput"/></div>
+      <div><label>Email: </label><input class="inputs" type="text" [(ngModel)]="emailInput"/></div>
       <p class="small">Email will not be publicly shared.</p>
       <div>
-        <label>New Password: </label><input class="inputs" type="text" />
+        <label>New Password: </label><input class="inputs" type="text" [(ngModel)]="passwordInput"/>
       </div>
       <div>
-        <label>Confirm Password: </label><input class="inputs" type="text" />
+        <label>Confirm Password: </label><input class="inputs" type="text" [(ngModel)]="password2Input"/>
       </div>
+      <button class="buttons" (click)="update()">Confirm changes</button>
+      <div id="errors" *ngIf="error">{{error}}</div>
+      <div id="success" *ngIf="success">Changes made successfully!</div>
       <div id="pictures">
-        <div>
-          <img
-            id="profile-img"
-            src="assets/profile_picture.png"
-            alt="Profile picture"
-          />
-        </div>
-        <div><button class="avatar">Choose new image</button></div>
-        <div><button class="avatar">Delete profile picture</button></div>
+        <div><img id="profile-img" src="assets/profile_picture.png" alt="Profile picture"/></div>
+        <div><button class="buttons">Choose new image</button></div>
+        <div><button class="buttons">Delete profile picture</button></div>
         <div id="footer">
           <a href="/contact">Contact Us</a>
           <a href="/terms-and-conditions">Terms and Conditions</a>

@@ -15,6 +15,11 @@ $secondary-accent-color: #008005;
   padding: 0;
 }
 
+h1 {
+  font-size: x-large;
+  font-weight: bold;
+}
+
 #main {
   margin-top: 1%;
   margin-left: 23%;
@@ -26,17 +31,18 @@ $secondary-accent-color: #008005;
 
 input {
   background-color: $alt-background-color;
-  font-size: 2rem;
+  color: black;
+  font-size: 1rem;
   margin-top: 1%;
 }
 
 .small {
-  font-size: 1rem;
+  font-size: small;
   margin: 0;
 }
 
 #pictures {
-  margin-top: 5%;
+  margin-top: 2%;
 }
 
 #profile-img {
@@ -45,10 +51,11 @@ input {
   object-fit: cover;
 }
 
-.avatar {
+.buttons {
   background-color: $secondary-accent-color;
   font-size: 1.2rem;
   margin-top: 1%;
+  padding: .5%;
 }
 
 #footer {
@@ -65,4 +72,8 @@ input {
 
 #footer a {
   text-decoration: none;
+}
+
+#success {
+  color: $emphasis-color;
 }
