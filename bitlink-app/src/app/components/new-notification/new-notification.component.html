@@ -1,26 +1,26 @@
-<div class="notification">
+<div class="notification flex flex-row px-4 py-2 align-middle gap-x-3">
   <span
-    ><img [src]="profile_pic" alt="Profile Picture" id="profile_pic"
+    ><img
+      [src]="profile_pic"
+      alt="Profile Picture"
+      class="profile_pic h-12 w-12 rounded-full mr-3"
   /></span>
-  <span id="profile"
-    ><div class="username">{{ username }}</div>
-    <div class="usertag">{{ usertag }}</div></span
-  >
   <!-- <span>{{ usertag }}</span> -->
-  <span id="message">{{ action }}</span>
-  <span id="following" *ngIf="following"
-    ><button>{{ following }}</button></span
-  >
-  <span id="followback" *ngIf="followback"
-    ><button>{{ followback }}</button></span
-  >
-  <span id="cancel-button"
-    ><button>
-      <img
-        ngSrc="assets/icons8-cancel-100.png"
-        width="30"
-        height="30"
-        alt="cancel"
-      /></button
-  ></span>
+  <span class="mt-2">{{ username }} {{ action }}</span>
+  <div class="mt-1 ml-auto">
+    <span class="ml-auto" *ngIf="following"
+      ><button
+        class="flex flex-row align-center items-center following rounded-full px-3 py-1"
+      >
+        {{ following }}
+      </button></span
+    >
+    <span class="ml-auto" *ngIf="followback"
+      ><button
+        class="flex flex-row align-center items-center followback rounded-full px-3 py-1"
+      >
+        {{ followback }}
+      </button></span
+    >
+  </div>
 </div>

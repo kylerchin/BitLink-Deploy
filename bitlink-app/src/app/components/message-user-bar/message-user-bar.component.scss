@@ -39,11 +39,12 @@ $secondary-accent-color: #008005;
   justify-items: start;
   color: rgba(255, 255, 255, 0.5);
 }
-  
 
 #profile_pic {
-  height: 50px;
-  width: 50px;
+  height: 3rem;
+  width: 3rem;
+  max-height: 3rem;
+  max-width: 3rem;
   border-radius: 50%;
   margin-right: 10px;
   object-fit: cover;

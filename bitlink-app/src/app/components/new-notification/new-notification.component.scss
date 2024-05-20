@@ -9,9 +9,8 @@ $secondary-accent-color: #008005;
   background-color: $background-color;
   font-family: Inter, sans-serif;
   color: $text-color;
-  margin: 0;
-  padding: 0;
 }
+
 #profile {
   display: grid;
   grid-template-rows: 1fr 1fr;
@@ -28,17 +27,13 @@ $secondary-accent-color: #008005;
   display: flex;
   justify-items: start;
 }
-#profile_pic {
-  height: 3.5rem;
-  width: 3.5rem;
-  border-radius: 50%;
-  margin-right: 1rem;
+.profile_pic {
   object-fit: cover;
 }
 .notification {
-  display: grid;
-  grid-template-columns: auto 15rem 1fr auto auto auto;
-  padding: 10px;
+  /// display: grid;
+  //grid-template-columns: auto 15rem 1fr auto auto auto;
+  // padding: 10px;
   border: 1px solid $emphasis-color;
 }
 #sidebar {
@@ -47,15 +42,9 @@ $secondary-accent-color: #008005;
 }
 #new-notif {
   position: fixed;
-  display: flex;
+  // display: flex;
   width: 20%;
   justify-content: flex-end;
-}
-
-#message {
-  display: flex;
-  // justify-content: center;
-  align-items: center;
 }
 
 #cancel-button {
@@ -68,12 +57,22 @@ $secondary-accent-color: #008005;
   border: none;
 }
 
-#following {
+.following {
+  border: 2px solid $secondary-accent-color;
+  color: $secondary-accent-color;
+  background-color: $text-color;
+}
+
+.followback {
+  background-color: $secondary-accent-color;
+}
+/*
+.following {
   display: flex;
   align-items: center;
   margin-right: 3rem;
 }
-#following button {
+/following button {
   width: 8rem;
   height: 2.5rem;
   border: 2px solid $secondary-accent-color;
@@ -98,4 +97,4 @@ $secondary-accent-color: #008005;
   padding: 10px;
   border-radius: 25px;
   font-size: 1rem;
-}
+}*/

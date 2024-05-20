@@ -30,10 +30,12 @@ $mobile: 480px;
 #info {
   display: grid;
   grid-template-columns: auto 1fr;
+  margin-bottom: 1rem;
 }
 #profile {
   display: grid;
   grid-template-rows: auto 1fr;
+  font-size: 1rem;
 }
 .username {
   // line-height: 0.5;
@@ -48,11 +50,12 @@ $mobile: 480px;
   justify-items: start;
 }
 #profile_pic {
-  height: 4rem;
-  width: 4rem;
+  height: 3.5rem;
+  width: 3.5rem;
   border-radius: 50%;
   object-fit: cover;
   margin-right: 1rem;
+  margin-top: 0.8rem;
 }
 .nav {
   display: grid;
@@ -78,7 +81,7 @@ $mobile: 480px;
 
 .main-text {
   margin-left: 3%;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   display: flex;
   align-items: center;
 }

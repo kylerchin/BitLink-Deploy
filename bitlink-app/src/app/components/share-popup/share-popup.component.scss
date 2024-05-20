@@ -60,13 +60,13 @@ $secondary-accent-color: #008005;
 }
 .toprow {
   display: grid;
-  grid-template-columns: auto 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr auto;
   padding-bottom: 1vh;
   padding-top: 0;
 }
 .bottomrow {
   display: grid;
-  grid-template-columns: auto 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr auto;
   padding-top: 1vh;
   padding-bottom: 0;
 }
