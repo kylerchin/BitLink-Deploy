@@ -6,7 +6,6 @@ import express, {
   Express,
   Request,
   Response,
-  bn,
 } from "express";
 // @ts-ignore
 import cors from "cors";
@@ -305,9 +304,10 @@ connectToDatabase()
 
         res.status(200).send('Message Sent successfully');
 
-      } catch (error) {
-        console.error("Error sending message", error);
-        res.status(500).send('Failed to send message');
+        } catch (error) {
+          console.error("Error sending message", error);
+          res.status(500).send('Failed to send message');
+        }
       }
     );
 
