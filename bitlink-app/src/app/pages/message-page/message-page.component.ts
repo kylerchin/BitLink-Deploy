@@ -62,10 +62,8 @@ export class MessagePageComponent implements OnInit {
       .subscribe({
         next: (data: ApiResponse) => {
           this.users = data.users;
-          console.log(data.messages);
           this.messages = data.messages;
           this.sortedMessages = this.sortMessages(data.messages);
-          console.log(this.sortMessages);
           for (let i = 0; i < this.users.length; i++) {
             if (!this.users[i].usertag.startsWith('@')) {
                 this.users[i].usertag = '@' + this.users[i].usertag;
@@ -86,7 +84,6 @@ export class MessagePageComponent implements OnInit {
       // Check if the timestamp is already in the format "09:10 AM"
       if (!/^\d{1,2}:\d{2} [AP]M$/.test(message.timestamp)) {
           const date = new Date(message.timestamp);
-          console.log("Parsed date:", date);
           message.timestamp = date.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit', hour12: true });
       }
     });
