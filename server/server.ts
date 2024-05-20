@@ -263,18 +263,18 @@ connectToDatabase()
         const message = body.message;
         const time = body.time
 
-        collection.insertOne({
+        await collection.insertOne({
           sender_id:senderid,
           receiver_id:receiverid,
           content:message,
           timestamp:time
         })
 
-        console.log("Message Sent Successfully!");
+        res.status(200).send('Message Sent successfully');
 
       } catch (error) {
-          console.error("Error sending message", error);
-          res.status(500).send('Failed to send message');
+        console.error("Error sending message", error);
+        res.status(500).send('Failed to send message');
       }
     });
 

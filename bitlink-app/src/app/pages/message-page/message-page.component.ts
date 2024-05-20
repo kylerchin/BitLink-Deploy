@@ -53,6 +53,7 @@ interface ApiResponse {
 export class MessagePageComponent implements OnInit {
   users: User[] = [];
   messages: Message[] = [];
+  sortedMessages: Message[] = [];
 
   constructor(private http: HttpClient) { }
 
@@ -61,7 +62,10 @@ export class MessagePageComponent implements OnInit {
       .subscribe({
         next: (data: ApiResponse) => {
           this.users = data.users;
+          console.log(data.messages);
           this.messages = data.messages;
+          this.sortedMessages = this.sortMessages(data.messages);
+          console.log(this.sortMessages);
           for (let i = 0; i < this.users.length; i++) {
             if (!this.users[i].usertag.startsWith('@')) {
                 this.users[i].usertag = '@' + this.users[i].usertag;
@@ -74,9 +78,51 @@ export class MessagePageComponent implements OnInit {
       });
   }
 
+  sortMessages(messages: Message[]): Message[] {
+    // Combine received and sent messages into a single array
+    const combinedMessages = [...messages];
+    // Convert UTC timestamps to local time and sort the combined array based on timestamp
+    combinedMessages.forEach(message => {
+      // Check if the timestamp is already in the format "09:10 AM"
+      if (!/^\d{1,2}:\d{2} [AP]M$/.test(message.timestamp)) {
+          const date = new Date(message.timestamp);
+          console.log("Parsed date:", date);
+          message.timestamp = date.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit', hour12: true });
+      }
+    });
+    // Sort the combined array based on timestamp
+    combinedMessages.sort((a, b) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime());
+    return combinedMessages;
+  }
+
+
+
   ngOnInit(): void {
     this.fetchUserInformation();
   }
+
+  readonly APIUrl = "http://localhost:8888/api/account/sendmessage";
+  handleSendMessage(messageData: string[]) {
+    const [text, sender_id, receiver_id, currentTime] = messageData;
+    const url = `${this.APIUrl}?id1=${sender_id}&id2=${receiver_id}`;
+    const postData = {
+      message: text,
+      time: currentTime
+    };
+  
+    this.http.post(url, postData).subscribe({
+      next: (data) => {
+        alert(data);
+        this.fetchUserInformation();
+      },
+      error: (error) => {
+        console.error("Error Sending message:", error);
+        this.fetchUserInformation();
+      }
+    });
+  }
+  
+
 /*
   username2: string = 'C++ Chef';
   username3: string = 'XxEmo CoderxX';
@@ -115,11 +161,6 @@ export class MessagePageComponent implements OnInit {
   action9: string = 'seen 5 days ago';
   action10: string = 'seen now';
   */
-  id1: string = '0';
-  id2: string = '1';
-  action1: string = 'seen 2 hours ago';
-  time: string = '12:02 PM';
-  message: string = 'Yo';
-  time2: string = '8:52 PM';
-  message2: string = 'What\'s up? Did you need something?';
+  id1: string = '1';
+  id2: string = '0';
 }

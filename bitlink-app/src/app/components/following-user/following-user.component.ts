@@ -1,4 +1,4 @@
-import { Component, Input, Output, output } from '@angular/core';
+import { Component, Input, Output } from '@angular/core';
 import { NgOptimizedImage, CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';

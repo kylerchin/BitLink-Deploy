@@ -14,4 +14,6 @@ import { NgOptimizedImage, CommonModule } from '@angular/common';
 export class SendMessageComponent {
   @Input() message: string = '';
   @Input() time: string ='';
+  @Input() sender_id: string ='';
+  @Input() receiver_id: string ='';
 }
