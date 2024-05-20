@@ -4,7 +4,6 @@ import {TextInputBoxComponent} from "../../components/text-input-box/text-input-
 import {User} from "../../schemas/user";
 import {AccountManagementService} from "../../services/account-management/account-management.service";
 import {HttpClientModule} from "@angular/common/http";
-import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-registration-page',
@@ -32,7 +31,7 @@ export class RegistrationPageComponent {
 
   newUser:any = {};
 
-  constructor(private router:Router, private accountManagementService: AccountManagementService) {
+  constructor(private accountManagementService: AccountManagementService) {
   }
 
   GetEmail(email: string | undefined) {this.newUser.email = email;}
@@ -56,7 +55,7 @@ export class RegistrationPageComponent {
       validUser.email = this.newUser.email;
       validUser.password = this.newUser.password;
       validUser.username = this.newUser.username;
-      validUser.name = this.newUser.username;
+      validUser.name = this.newUser.name;
 
       this.accountManagementService.createNewUser(validUser).subscribe({
         next: () => {

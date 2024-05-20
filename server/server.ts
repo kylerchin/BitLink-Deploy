@@ -6,7 +6,6 @@ import { User, Message } from "./types";
 import { Post } from "./types";
 import { ProfileInfo } from "./types";
 import {MongoClient, ObjectId, ServerApiVersion} from 'mongodb';
-import { title } from "process";
 const uri = "mongodb+srv://briannw2:IuH2qY69AaAKHGSs@bitlink.wfyrdwt.mongodb.net/?retryWrites=true&w=majority&appName=Bitlink";
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
@@ -316,12 +315,12 @@ connectToDatabase()
       try {
         if (!req.body) {
           return res.status(400).send({
-            message: "Data to update can not be empty!"
+            message: "Data to update cannot be empty!"
           });
         }
         const database = client.db("account")
 
-        const id = req?.params?.id;
+        const id = req.params.id;
         const getID = { _id: new ObjectId(id) };
         const result = await database.collection("users").updateOne(getID, { $set: req.body });
 
@@ -332,7 +331,22 @@ connectToDatabase()
         console.error(e);
         res.status(400).send(e instanceof Error ? e.message : "Unknown error");
       }
-    })
+    });
+
+    app.get("/api/account/:id", async (req, res) => {
+      try {
+        const database = client.db("account");
+        const getID = { _id: new ObjectId(req.params.id) };
+
+        let result = await database.collection("users").findOne(getID);
+
+        if (!result) res.status(404).send("User not found.");
+        else res.status(200).send(result);
+      } catch (e) {
+        console.error(e);
+        res.status(400).send(e instanceof Error ? e.message : "Unknown error");
+      }
+    });
 
     app.listen(8888, () => {
       console.log(`Server running at http://localhost:8888...`);
@@ -346,6 +360,8 @@ connectToDatabase()
     });
   })
   .catch((error) => {
-    console.error("Failed to connect to database:", error);
-    process.exit(1); // Exit with error code on failure
+    client.close().then(() => {
+      console.error("Failed to connect to database:", error);
+      process.exit(1); // Exit with error code on failure
+    });
   });

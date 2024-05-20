@@ -24,7 +24,11 @@ export class AccountManagementService {
   }
 
   updateUser(id: string, data: User) {
-    return this.http.put(`${this.baseUrl}/${id}`, data, { responseType: 'text' });
+    return this.http.put(`${this.baseUrl}/${id}`, data);
+  }
+
+  fetchUser(id: string) {
+    return this.http.get(`${this.baseUrl}/${id}`, { responseType: 'text' });
   }
 
   printUsers() {
