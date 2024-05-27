@@ -6,53 +6,59 @@ $secondary-accent-color: #008005;
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
 
 * {
-  background-color: $secondary-accent-color;
+  background-color: $background-color;
   font-family: Inter, sans-serif;
   color: $text-color;
   margin: 0;
   padding: 0;
-}
-.background {
-  padding-left: 10rem;
-  padding-right: 10rem;
-  background-color: $background-color;
-  width: 60rem;
-}
-.search {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  padding: 1%;
-  padding-left: 3%;
-  padding-right: 3%;
-  border-radius: 25px;
+  border-radius: 1.5625rem;
+  box-sizing: border-box;
 }
 
-.input-label {
-  border: none;
-}
-.input-box {
-  border: none;
-  //   padding-top: 0.1rem;
-  justify-content: center;
-  align-items: center;
-  width: 97%;
-  font-size: 1.2rem;
-  margin-left: 1%;
+.search-box-background {
   display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 80%;
 }
 
-.input-box:focus {
+.input-box {
+  position: relative;
+  height: 2.5rem;
+  max-width: 100%;
+  width: 50rem;
+  margin: 0 1.875rem;
+  border-radius: 1.5625rem;
+  background-color: $secondary-accent-color;
+}
+
+.input-box input {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  padding: 0 0.9375rem 0 4.0625rem;
   outline: none;
+  border: none;
+  border-radius: 1.5625rem;
+  font-size: 1rem;
+  font-weight: 400;
+  color: white;
+  background-color: $secondary-accent-color;
 }
 
-#search-icon {
-  margin: 1vh;
-  margin-bottom: 0;
-  margin-top: 0;
+.input-box .search {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 3.75rem;
+  display: flex;
+  align-items: center;
+  background-color: $secondary-accent-color;
+  justify-content: center;
 }
 
-.text-box {
-  margin: 1vh;
-  margin-bottom: 0;
-  margin-top: 0;
+.search .search-icon {
+  font-size: 1.875rem;
+  background-color: $secondary-accent-color;
 }
