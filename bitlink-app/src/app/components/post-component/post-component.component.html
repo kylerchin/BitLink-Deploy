@@ -1,15 +1,31 @@
 <div id="post-component">
   <div id="profile">
     <div class="poster">
-      <img [src]="profile_picture" alt="profile" id="profile-icon" />
+      <img
+        [src]="profile_picture"
+        class="h-8 w-8 md:h-12 md:w-12 lg:h-12 lg:w-12"
+        alt="profile"
+        id="post-profile-icon"
+      />
       <div id="profile_info">
         <div id="userline">
-          <div class="text-sm md:text-sm lg:text-md" id="username">
+          <div
+            class="text-sm md:text-sm lg:text-md whitespace-nowrap"
+            id="username"
+          >
             {{ username }}
           </div>
-          <div class="text-sm md:text-sm lg:text-md" id="date">{{ date }}</div>
+          <div
+            class="text-sm md:text-sm lg:text-md whitespace-nowrap"
+            id="date"
+          >
+            {{ date }}
+          </div>
         </div>
-        <div class="text-sm md:text-sm lg:text-md" id="usertag">
+        <div
+          class="text-sm md:text-sm lg:text-md whitespace-nowrap"
+          id="usertag"
+        >
           {{ usertag }}
         </div>
       </div>
