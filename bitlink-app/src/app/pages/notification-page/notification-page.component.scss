@@ -26,12 +26,12 @@ $secondary-accent-color: #008005;
 #search-bar {
   padding-top: 1%;
   // font-size: 5rem;
-  // // display: flex;
-  // // align-items: center;
-  // // position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   // // z-index: 3000;
   // // width: auto;
-  // width: 85%;
+  width: 85%;
 }
 #top-container {
   display: grid;
@@ -51,7 +51,8 @@ $secondary-accent-color: #008005;
 #thirdline {
   display: flex;
   justify-content: space-between;
-  margin: 1.2%;
+  margin-left: 2%;
+  margin-right: 2%;
   margin-top: 1%;
   font-size: 1.5rem;
 }
