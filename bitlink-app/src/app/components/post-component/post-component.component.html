@@ -4,10 +4,14 @@
       <img [src]="profile_picture" alt="profile" id="profile-icon" />
       <div id="profile_info">
         <div id="userline">
-          <div id="username">{{ username }}</div>
-          <div id="date">{{ date }}</div>
+          <div class="text-sm md:text-sm lg:text-md" id="username">
+            {{ username }}
+          </div>
+          <div class="text-sm md:text-sm lg:text-md" id="date">{{ date }}</div>
         </div>
-        <div id="usertag">{{ usertag }}</div>
+        <div class="text-sm md:text-sm lg:text-md" id="usertag">
+          {{ usertag }}
+        </div>
       </div>
     </div>
   </div>

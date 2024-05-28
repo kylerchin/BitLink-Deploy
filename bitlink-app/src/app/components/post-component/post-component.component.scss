@@ -39,7 +39,7 @@ $grey-color: rgba(100, 100, 100);
   display: grid;
   grid-template-rows: 1fr 1fr;
   margin-left: 0.8rem;
-  font-size: 1rem;
+  // font-size: 1rem;
 }
 #userline {
   line-height: 1;
@@ -99,13 +99,12 @@ $grey-color: rgba(100, 100, 100);
 
 #image {
   width: 100%;
-  height: 100%;
   max-width: 100vh;
   max-height: 50vh;
   object-fit: contain;
 }
 
-#scale {
-  width: 100%;
-  font-size: 5%;
-}
+// #scale {
+//   width: 100%;
+//   font-size: 5%;
+// }

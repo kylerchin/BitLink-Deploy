@@ -1,9 +1,32 @@
-<img ngSrc="assets/logo.png" id="logo" height="324" width="324" alt="BitLink logo">
+<img
+  ngSrc="assets/logo.png"
+  class="h-28 w-28 sm:h-32 sm:w-32 md:h-40 md:w-40 lg:h-44 lg:w-44"
+  height="324"
+  width="324"
+  alt="BitLink logo"
+/>
 <div id="login">
-  <h1>Login</h1>
-  <p class="small-text">Don’t have an account yet? <a href="/register"><span class="link">Sign up</span></a></p>
-  <div id="input1"><app-text-input-box [textField]="username_field" [width]="100" [height]="2"></app-text-input-box></div>
-  <div><app-text-input-box [textField]="password_field" [width]="100" [height]="2"></app-text-input-box></div>
-  <p><a href="/login" id="password" class="small-text">Forgot your password?</a></p>
-  <button>Login</button>
+  <h1 class="text-7xl lg:text-9xl mb-6 m-0 font-normal">Login</h1>
+  <p class="small-text">
+    Don’t have an account yet?
+    <a href="/register"><span class="link">Sign up</span></a>
+  </p>
+  <div id="input1">
+    <app-text-input-box
+      [textField]="username_field"
+      [width]="100"
+      [height]="2"
+    ></app-text-input-box>
+  </div>
+  <div>
+    <app-text-input-box
+      [textField]="password_field"
+      [width]="100"
+      [height]="2"
+    ></app-text-input-box>
+  </div>
+  <p>
+    <a href="/login" id="password" class="small-text">Forgot your password?</a>
+  </p>
+  <button class="my-6">Login</button>
 </div>

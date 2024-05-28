@@ -44,12 +44,12 @@ $secondary-accent-color: #008005;
 #buttons-container {
   margin-top: 3rem;
   // display: flex;
-  // justify-content: center; // Space out the buttons horizontally
-  // // width: 25%; // Ensure buttons take full width of container
+  // justify-content: center;
+  // // width: 25%;
   // // padding-left: 38%;
   // // padding-left: 30%;
   // // padding-right: 0;
-  // border-bottom: 1px solid $emphasis-color;
+  border-bottom: 1px solid $emphasis-color;
 }
 
 // #following-button,
@@ -58,8 +58,8 @@ $secondary-accent-color: #008005;
 //   color: white;
 //   // padding: 10px;
 //   padding-bottom: 1rem;
-//   // width: 48%; // Adjust width to leave space for margin
-//   // text-align: center; // Center text inside buttons
+//   // width: 48%;
+//   // text-align: center;
 //   cursor: pointer;
 // }
 // #following-button {
@@ -69,12 +69,12 @@ $secondary-accent-color: #008005;
 // }
 
 // // #divider-line {
-// //     // width: 100vh; // Ensure the line stretches across the container
+// //     // width: 100vh;
 // //     // padding-left: 64vh;
 // //     padding-right: 0;
 // //     margin-right: 0;
-// //     height: 1px; // Adjust line thickness as needed
-// //     background-color: #00FF0A; // Set the color of the line
+// //     height: 1px;
+// //     background-color: #00FF0A;
 // // }
 
 // .attachments {
@@ -83,9 +83,9 @@ $secondary-accent-color: #008005;
 //   width: 4rem;
 //   margin-right: 2rem;
 // }
-// .post-box {
-//   border-bottom: 1px solid $emphasis-color;
-// }
-// .post-format {
-//   border-bottom: 1px solid $emphasis-color;
-// }
+.post-box {
+  border-bottom: 1px solid $emphasis-color;
+}
+.post-format {
+  border-bottom: 1px solid $emphasis-color;
+}
