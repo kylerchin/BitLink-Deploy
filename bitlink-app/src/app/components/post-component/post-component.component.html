@@ -3,27 +3,27 @@
     <div class="poster">
       <img
         [src]="profile_picture"
-        class="h-8 w-8 md:h-12 md:w-12 lg:h-12 lg:w-12"
+        class="h-8 w-8 md:h-12 md:w-12 lg:h-12 lg:w-12 mr-auto"
         alt="profile"
         id="post-profile-icon"
       />
       <div id="profile_info">
         <div id="userline">
           <div
-            class="text-sm md:text-sm lg:text-md whitespace-nowrap"
+            class="text-xs md:text-sm lg:text-md overflow-hidden"
             id="username"
           >
             {{ username }}
           </div>
           <div
-            class="text-sm md:text-sm lg:text-md whitespace-nowrap"
+            class="text-xs md:text-sm lg:text-md whitespace-nowrap"
             id="date"
           >
             {{ date }}
           </div>
         </div>
         <div
-          class="text-sm md:text-sm lg:text-md whitespace-nowrap"
+          class="text-xs md:text-sm lg:text-md whitespace-nowrap"
           id="usertag"
         >
           {{ usertag }}

@@ -21,10 +21,10 @@ import { CommentComponent } from '../../components/comment/comment.component';
   ],
   templateUrl: './for-you-page.component.html',
   styleUrl: './for-you-page.component.scss',
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class ForYouPageComponent {
-  like: string = '122K'
+  like: string = '122K';
   repost: string = '62K';
   comment_number: string = '6,232';
   save: string = '12K';
@@ -48,12 +48,13 @@ export class ForYouPageComponent {
   date: string = '12:01 PM May 1, 2024';
   date2: string = '4:21 PM Apr 28, 2024';
   date4: string = '9:02 AM Apr 25, 2024';
-  message: string = 'R is SUPERIOR, and I MEAN SUPERIOR, to any other coding language out there, you all don\'t know anything about coding fr.';
+  message: string =
+    "R is SUPERIOR, and I MEAN SUPERIOR, to any other coding language out there, you all don't know anything about coding fr.";
   message2: string = 'C++ MAKES THE WORLD GO AROUND, GOD CODES IN C++!!!!!';
   message4: string = `Who lives in a pineapple under the sea? SpongeBob SquarePants! Absorbent and yellow and porous is he. SpongeBob SquarePants! If nautical nonsense be something you wish. 
                         SpongeBob SquarePants! Then drop on the deck and flop like a fish. SpongeBob SquarePants! SpongeBob SquarePants! SpongeBob SquarePants!`;
   comment: string =
     'I really like this post! I think it is very informative and helpful for people looking to learn Rust. However, I feel like people should look towards C++ instead. C++ is a much more practical language than R or Rust.';
-  image: string = 'assets/crown.jpg'; 
+  image: string = 'assets/crown.jpg';
   image2: string = 'assets/godcode.jpg';
 }
