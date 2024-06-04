@@ -5,11 +5,13 @@
   <div
     class="flex flex-row justify-center justify-items-center align-middle gap-x-1"
   >
-    <img
-      src="assets/icons/icons8-heart-100.png"
-      alt="like"
-      class="h-5 md:h-8"
-    />
+    <button class="focus:outline-none" (click)="liked()">
+      <img
+        src="assets/icons/icons8-heart-100.png"
+        alt="like"
+        class="h-5 md:h-8"
+      />
+    </button>
     <p class="text-sm md:text-base text-white my-auto">{{ like }}</p>
   </div>
   <div

@@ -12,8 +12,9 @@ import cors from "cors";
 import { User, Message } from "./types";
 import { Post } from "./types";
 import { ProfileInfo } from "./types";
-import {MongoClient, ObjectId, ServerApiVersion} from 'mongodb';
-const uri = "mongodb+srv://briannw2:IuH2qY69AaAKHGSs@bitlink.wfyrdwt.mongodb.net/?retryWrites=true&w=majority&appName=Bitlink";
+import { MongoClient, ObjectId, ServerApiVersion } from "mongodb";
+const uri =
+  "mongodb+srv://briannw2:IuH2qY69AaAKHGSs@bitlink.wfyrdwt.mongodb.net/?retryWrites=true&w=majority&appName=Bitlink";
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 export const client = new MongoClient(uri, {
@@ -93,7 +94,64 @@ connectToDatabase()
         res.status(500).send("Failed to fetch users & messages");
       }
     });
+    app.post("/api/posts/create", async (req: Request, res: Response) => {
+      try {
+        //add a post to the database
+        const database = client.db("account");
+        const collection = database.collection("post");
+        const newPostBody = req.body;
+        const newPost = {
+          title: newPostBody.title || "",
+          content: {
+            message: newPostBody.content?.message || "",
+            image: newPostBody.content?.image || "",
+            video: newPostBody.content?.video || "",
+          },
+          user: {
+            username: newPostBody.user?.username || "Anonymous",
+            usertag: newPostBody.user?.usertag || "",
+            profile_pic: newPostBody?.user.profile_pic || "",
+          },
+          comments: [],
+          timestamp: new Date(),
+          likes: 0,
+          reposts: 0,
+          comment_num: 0,
+          saves: 0,
+        };
 
+        await collection.insertOne(newPost);
+        res.status(201).send("Post created successfully");
+      } catch (err) {
+        console.error(err);
+        res.status(500).send("Failed to create post");
+      }
+    });
+    app.put("/api/posts/:id/like", async (req: Request, res: Response) => {
+      //add a like to the post with the specific id
+      try {
+        const database = client.db("account");
+        const collection = database.collection("post");
+        const query = { _id: new ObjectId(req.params.id) };
+        const post = await collection.findOne(query);
+        if (!post) {
+          res.status(404).send("Post not found");
+          return;
+        }
+        await collection.updateOne(query, { $inc: { likes: 1 } });
+        res.status(200).send("Post liked successfully");
+      } catch (err) {
+        console.error(err);
+        res.status(500).send("Failed to like post");
+      }
+    });
+    app.put("/api/posts/:id/comment", async (req: Request, res: Response) => {
+      //add a comment to the post with the specific id
+    });
+
+    app.get("/api/posts/:id", async (req: Request, res: Response) => {
+      //get the post with the specific id
+    });
     app.get("/api/posts", async (req: Request, res: Response) => {
       try {
         const database = client.db("account");
@@ -295,18 +353,17 @@ connectToDatabase()
           const message = body.message;
           const time = body.time;
 
-        await collection.insertOne({
-          sender_id:senderid,
-          receiver_id:receiverid,
-          content:message,
-          timestamp:time
-        })
+          await collection.insertOne({
+            sender_id: senderid,
+            receiver_id: receiverid,
+            content: message,
+            timestamp: time,
+          });
 
-        res.status(200).send('Message Sent successfully');
-
+          res.status(200).send("Message Sent successfully");
         } catch (error) {
           console.error("Error sending message", error);
-          res.status(500).send('Failed to send message');
+          res.status(500).send("Failed to send message");
         }
       }
     );
@@ -358,7 +415,7 @@ connectToDatabase()
       try {
         if (!req.body) {
           return res.status(400).send({
-            message: "Data to update cannot be empty!"
+            message: "Data to update cannot be empty!",
           });
         }
         const database = client.db("account");
@@ -392,7 +449,6 @@ connectToDatabase()
         res.status(400).send(e instanceof Error ? e.message : "Unknown error");
       }
     });
-
     app.listen(8888, () => {
       console.log(`Server running at http://localhost:8888...`);
     });

@@ -12,25 +12,20 @@ import { HttpClient } from '@angular/common/http';
 export class CreatePostPopupComponent {
   @Output() showChange = new EventEmitter<boolean>();
   @Input() show: boolean = false;
-  // form: FormGroup;
-  // constructor(private fb: FormBuilder, private http: HttpClient) {
-  //   this.form = this.fb.group({
-  //     title: [''],
-  //     content: [''],
-  //   });
-  // }
+  myForm: FormGroup;
+  constructor(private fb: FormBuilder, private http: HttpClient) {
+    this.myForm = this.fb.group({
+      title: [''],
+      content: [''],
+    });
+  }
   closepopup() {
     this.show = false;
     this.showChange.emit(this.show);
   }
   submit() {
-    // const post = this.form.value;
-    // this.http.post('http://localhost:4200/posts', post).subscribe({
-    //   next: (data) => {
-    //     this.closepopup();
-    //   },
-    //   error: (error) => console.error(error),
-    // });
     this.closepopup();
+    const title = this.myForm.get('title')?.value ?? '';
+    const content = this.myForm.get('content')?.value ?? '';
   }
 }
