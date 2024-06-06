@@ -1,5 +1,5 @@
 <div class="overlay" *ngIf="show">
-  <div class="content">
+  <form [formGroup]="myForm" class="content" (ngSubmit)="submit()">
     <div class="top">
       <button (click)="closepopup()" id="close">
         <img src="assets/icons8-cancel-100.png" id="cancel-icon" />
@@ -7,8 +7,8 @@
       <div class="poster">
         <img src="assets/profile_picture.png" alt="profile" id="profile-icon" />
         <div id="profile_info">
-          <div id="username">Jonny Boy</div>
-          <div id="usertag">&#64; John BitLink</div>
+          <div id="username">{{ name }}</div>
+          <div id="usertag">&#64; {{ username }}</div>
         </div>
       </div>
       <div id="public">
@@ -47,11 +47,11 @@
         <img src="assets/icons/icons8-file-100.png" class="attachments" />
       </div>
       <div id="button-format">
-        <button (click)="submit()" id="post-button">
+        <button type="submit" id="post-button">
           <img src="assets/icons/post.png" id="post-image" />
           <div id="post-text">Post</div>
         </button>
       </div>
     </div>
-  </div>
+  </form>
 </div>

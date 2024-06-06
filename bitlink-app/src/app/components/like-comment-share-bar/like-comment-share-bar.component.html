@@ -1,6 +1,6 @@
 <div
   id=""
-  class="flex flex-row gap-x-4 sm:gap-x-6 lg:gap-x-20 w-full my-auto text-white mb-4 mx-3"
+  class="flex flex-row gap-x-4 sm:gap-x-6 lg:gap-x-20 w-full my-auto text-white mb-4 mx-6"
 >
   <div
     class="flex flex-row justify-center justify-items-center align-middle gap-x-1"
@@ -54,7 +54,10 @@
         />
       </button>
     </div>
-    <div id="relative-format" class="absolute right-1 bottom-1 rounded-3xl">
+    <div
+      id="relative-format"
+      class="absolute bottom-1 right-1 rounded-3xl xl:left-1"
+    >
       <app-share-popup [show]="show" (showChange)="popupclosed($event)">
       </app-share-popup>
     </div>

@@ -101,16 +101,16 @@ connectToDatabase()
         const collection = database.collection("post");
         const newPostBody = req.body;
         const newPost = {
-          title: newPostBody.title || "",
+          title: newPostBody.title,
           content: {
-            message: newPostBody.content?.message || "",
-            image: newPostBody.content?.image || "",
-            video: newPostBody.content?.video || "",
+            message: newPostBody.content?.message,
+            image: newPostBody.content?.image,
+            video: newPostBody.content?.video,
           },
           user: {
-            username: newPostBody.user?.username || "Anonymous",
-            usertag: newPostBody.user?.usertag || "",
-            profile_pic: newPostBody?.user.profile_pic || "",
+            username: newPostBody.user?.username,
+            usertag: newPostBody.user?.usertag,
+            profile_pic: newPostBody?.user.profile_pic,
           },
           comments: [],
           timestamp: new Date(),
@@ -152,6 +152,7 @@ connectToDatabase()
     app.get("/api/posts/:id", async (req: Request, res: Response) => {
       //get the post with the specific id
     });
+
     app.get("/api/posts", async (req: Request, res: Response) => {
       try {
         const database = client.db("account");
