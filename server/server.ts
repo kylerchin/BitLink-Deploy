@@ -13,6 +13,9 @@ import { User, Message } from "./types";
 import { Post } from "./types";
 import { ProfileInfo } from "./types";
 import {MongoClient, ObjectId, ServerApiVersion} from 'mongodb';
+
+const postsRouter = require("./routers/posts");
+
 const uri = "mongodb+srv://briannw2:IuH2qY69AaAKHGSs@bitlink.wfyrdwt.mongodb.net/?retryWrites=true&w=majority&appName=Bitlink";
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
@@ -47,6 +50,8 @@ connectToDatabase()
     const app: Express = express(); // Assuming express is used
     app.use(cors());
     app.use(express.json());
+
+    app.use(postsRouter);
 
     app.get("/api/account/messages", async (req: Request, res: Response) => {
       try {
@@ -94,38 +99,8 @@ connectToDatabase()
       }
     });
 
-    app.get("/api/posts", async (req: Request, res: Response) => {
-      try {
-        const database = client.db("account");
-        const posts = await database.collection("post").find().toArray();
+    //app.get("/api/posts", postsContoller.getPosts);
 
-        // Map the post documents to the required format
-        const data: Post[] = posts.map((post) => ({
-          title: post.title,
-          content: {
-            message: post.content.message,
-            image: post.content.image,
-            video: post.content.video,
-          },
-          user: {
-            username: post.user.username,
-            usertag: post.user.usertag,
-            profile_pic: post.user.profile_pic,
-          },
-          comments: post.comments,
-          timestamp: post.timestamp,
-          likes: post.likes,
-          reposts: post.reposts,
-          comment_num: post.comment_num,
-          saves: post.saves,
-        }));
-
-        res.json(data);
-      } catch (error) {
-        console.error("Error fetching messages:", error);
-        res.status(500).send("Failed to fetch messages");
-      }
-    });
 
     app.get("/api/user/:id", async (req: Request, res: Response) => {
       try {
@@ -185,42 +160,7 @@ connectToDatabase()
       }
     });
 
-    app.get("/api/search/", async (req: Request, res: Response) => {
-      try {
-        const database = client.db("account");
-        const post_query = { "content.message": { $regex: req.query.q } };
-        const search = await database
-          .collection("post")
-          .find(post_query)
-          .toArray();
-
-        // Map the user documents to the required format
-        const data: Post[] = search.map((post) => ({
-          title: post.title,
-          content: {
-            message: post.content.message,
-            image: post.content.image,
-            video: post.content.video,
-          },
-          user: {
-            username: post.user.username,
-            usertag: post.user.usertag,
-            profile_pic: post.user.profile_pic,
-          },
-          comments: post.comments,
-          timestamp: post.timestamp,
-          likes: post.likes,
-          reposts: post.reposts,
-          comment_num: post.comment_num,
-          saves: post.saves,
-        }));
-
-        res.json(data);
-      } catch (error) {
-        console.error("Error searching:", error);
-        res.status(500).send("Failed to search");
-      }
-    });
+    //app.get("/api/search/", async (req: Request, res: Response);
 
     app.get("/api/account/following", async (req: Request, res: Response) => {
       try {
