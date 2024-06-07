@@ -11,15 +11,16 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json())
 
-
 const bcrypt = require('bcrypt');
 import {client} from "../server";
 const saltRounds = 10;
 
+const database = client.db("account").collection("user");
+
+
 exports.getUsers = asyncHandler(async (res: any) => {
   try {
-    const db = client.db("account")
-    const allUsers = await db.collection("users").find({}).toArray();
+    const allUsers = await database.find({}).toArray();
     res.send(allUsers)
   } catch (error) {
     res.status(500).send(error instanceof Error ? error.message : "Unknown error");
@@ -28,10 +29,9 @@ exports.getUsers = asyncHandler(async (res: any) => {
 
 exports.register = asyncHandler(async (req: any, res: any) => {
   try {
-    const database = client.db("account")
     console.log(req.body.username)
 
-    if (await database.collection("users").findOne({username:req.body.username})) {
+    if (await database.findOne({username:req.body.username})) {
       console.log("User already exists");
       return res.status(500).send("User already exists");
     }
@@ -41,7 +41,7 @@ exports.register = asyncHandler(async (req: any, res: any) => {
         console.log(err);
       }
       user.password = hash;
-      const result = await database.collection("users").insertOne(user);
+      const result = await database.insertOne(user);
 
       if (result?.acknowledged) {
         console.log("Success")
@@ -64,11 +64,10 @@ exports.updateUser = asyncHandler(async (req: any, res: any) => {
         message: "Data to update cannot be empty!"
       });
     }
-    const database = client.db("account")
 
     const id = req.params.id;
     const getID = { _id: new ObjectId(id) };
-    const result = await database.collection("users").updateOne(getID, { $set: req.body });
+    const result = await database.updateOne(getID, { $set: req.body });
 
     if (result?.acknowledged) console.log(`${id} updated successfully.`);
     else if (!result?.matchedCount) res.status(404).send("User not found.");
@@ -81,11 +80,10 @@ exports.updateUser = asyncHandler(async (req: any, res: any) => {
 
 exports.getUser = asyncHandler(async (req: any, res: any) => {
   try {
-    const database = client.db("account");
     const id = new ObjectId(req.params.id);
     const getID = { _id: id };
 
-    let result = await database.collection("users").findOne(getID);
+    let result = await database.findOne(getID);
 
     if (!result) res.status(404).send("User not found.");
     else res.status(200).send(result);

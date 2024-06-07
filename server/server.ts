@@ -1,17 +1,19 @@
-// @ts-ignore
-import express, { query, request, response } from "express";
-// @ts-ignore
-import cors from "cors";
+
 import { User, Message } from "./types";
 import { Post } from "./types";
 import { ProfileInfo } from "./types";
 import {MongoClient, ServerApiVersion} from 'mongodb';
 const uri = "mongodb+srv://briannw2:IuH2qY69AaAKHGSs@bitlink.wfyrdwt.mongodb.net/?retryWrites=true&w=majority&appName=Bitlink";
+
 const accountsRouter = require("./routers/accounts");
+
+const express = require("express");
+const cors = require("cors");
 const session = require('express-session');
 const passport = require("passport");
 const bodyParser = require("body-parser")
 const MongoStore = require('connect-mongo');
+
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 export const client = new MongoClient(uri, {
     serverApi: {
@@ -48,7 +50,6 @@ connectToDatabase()
       credentials: true,
     };
     app.use(cors(corsOptions));
-
 
     app.use(session({
       cookieName: "UserStuff",

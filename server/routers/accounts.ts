@@ -8,6 +8,8 @@ const app = express.Router();
 
 const accountController = require("../controllers/accountsController");
 
+const database = client.db("account").collection("user");
+
 app.get("/getAllUsers", accountController.getUsers);
 
 app.post("/register", accountController.register);
@@ -24,7 +26,7 @@ passport.serializeUser((user:any, done:any) => {
 
 passport.deserializeUser(async (id:any, done:any) => {
   console.log("deserialize")
-  client.db("account").collection("users").findOne({email:id}).then((user:any) => {
+  database.findOne({email:id}).then((user:any) => {
     console.log(user)
     return done(null, user);
   })
@@ -36,8 +38,7 @@ passport.use("local", new LocalStrategy({
 }, function verify(email:any, password:any, cb:any) {
   console.log("Verifying...")
   try {
-    const database = client.db("account");
-    database.collection("users").findOne({email:email}).then(user => {
+    database.findOne({email:email}).then(user => {
       if (!user) {
         console.log("User not found")
         return cb(null, false, { message: 'Incorrect username or password.' })
