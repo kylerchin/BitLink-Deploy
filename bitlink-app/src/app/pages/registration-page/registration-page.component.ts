@@ -67,13 +67,6 @@ export class RegistrationPageComponent {
 
       this.success = true;
 
-      this.accountManagementService.printUsers().subscribe({
-        next: (res) => {
-          this.accounts = res;
-        }
-      })
-
-
     }
   }
 }

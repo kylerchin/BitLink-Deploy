@@ -5,9 +5,13 @@ import cors from "cors";
 import { User, Message } from "./types";
 import { Post } from "./types";
 import { ProfileInfo } from "./types";
-import {MongoClient, ObjectId, ServerApiVersion} from 'mongodb';
+import {MongoClient, ServerApiVersion} from 'mongodb';
 const uri = "mongodb+srv://briannw2:IuH2qY69AaAKHGSs@bitlink.wfyrdwt.mongodb.net/?retryWrites=true&w=majority&appName=Bitlink";
-
+const accountsRouter = require("./routers/accounts");
+const session = require('express-session');
+const passport = require("passport");
+const bodyParser = require("body-parser")
+const MongoStore = require('connect-mongo');
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 export const client = new MongoClient(uri, {
     serverApi: {
@@ -35,9 +39,36 @@ export async function connectToDatabase() {
 // Connect to MongoDB and start Express server
 connectToDatabase()
   .then((client) => {
-    const app = express();  // Assuming express is used
-    app.use(cors())
+    const app = express();
     app.use(express.json())
+    app.use(bodyParser.urlencoded({ extended: true }))
+    app.set("trust proxy", true)
+    const corsOptions = {
+      origin: ["http://localhost:4200"],
+      credentials: true,
+    };
+    app.use(cors(corsOptions));
+
+
+    app.use(session({
+      cookieName: "UserStuff",
+      secret: "A73C1437873813D98C9D281D7F195",
+      resave: true,
+      saveUninitialized: true,
+      cookie: {
+        maxAge: 1000 * 60 * 60 * 24 * 7,
+        secure: false,
+      },
+      store: new MongoStore({
+        client: client,
+        collection : 'sessions',
+      }),
+    }));
+    app.use(express.urlencoded({ extended: true }));
+    app.use(passport.initialize());
+    app.use(passport.session());
+
+    app.use("/accounts", accountsRouter);
 
     app.get('/api/account/messages', async (req, res) => {
       try {
@@ -273,78 +304,6 @@ connectToDatabase()
       } catch (error) {
           console.error("Error sending message", error);
           res.status(500).send('Failed to send message');
-      }
-    });
-
-    app.get("/api/account/getAllUsers", async (_req, res) => {
-      try {
-        const db = client.db("account")
-        const allUsers = await db.collection("users").find({}).toArray();
-        res.status(200).send(allUsers);
-      } catch (error) {
-        res.status(500).send(error instanceof Error ? error.message : "Unknown error");
-      }
-    });
-
-    app.post("/api/account/register", async (req, res) => {
-      try {
-        const database = client.db("account")
-        console.log(req.body.username)
-
-        if (await database.collection("users").findOne({username:req.body.username})) {
-          console.log("User already exists");
-          return res.status(500).send("User already exists");
-        }
-        const user = req.body;
-        const result = await database.collection("users").insertOne(user);
-
-        if (result?.acknowledged) {
-          console.log("Success")
-        }
-        else {
-          console.log("Error")
-          res.status(500).send("User account creation failed.")
-        }
-      } catch (e) {
-        console.error(e);
-        res.status(400).send(e instanceof Error ? e.message : "Unknown error");
-      }
-    });
-
-    app.put("/api/account/:id", async (req, res) => {
-      try {
-        if (!req.body) {
-          return res.status(400).send({
-            message: "Data to update cannot be empty!"
-          });
-        }
-        const database = client.db("account")
-
-        const id = req.params.id;
-        const getID = { _id: new ObjectId(id) };
-        const result = await database.collection("users").updateOne(getID, { $set: req.body });
-
-        if (result?.acknowledged) console.log(`${id} updated successfully.`);
-        else if (!result?.matchedCount) res.status(404).send("User not found.");
-        else res.status(500).send(`${id} unable to be updated.`);
-      } catch (e) {
-        console.error(e);
-        res.status(400).send(e instanceof Error ? e.message : "Unknown error");
-      }
-    });
-
-    app.get("/api/account/:id", async (req, res) => {
-      try {
-        const database = client.db("account");
-        const getID = { _id: new ObjectId(req.params.id) };
-
-        let result = await database.collection("users").findOne(getID);
-
-        if (!result) res.status(404).send("User not found.");
-        else res.status(200).send(result);
-      } catch (e) {
-        console.error(e);
-        res.status(400).send(e instanceof Error ? e.message : "Unknown error");
       }
     });
 
