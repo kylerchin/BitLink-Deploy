@@ -17,14 +17,12 @@ export class LikeCommentShareBarComponent {
   @Output() LikePost = new EventEmitter<string[]>();
 
   show = false;
+  isLiked = false;
+
   liked() {
-    if (this.like === 'liked') {
-      this.like = '';
-    } else {
-      this.like = 'liked';
-    }
-    this.LikePost.emit([this.like, this.repost, this.comment, this.save]);
+    this.isLiked = !this.isLiked;
   }
+
   openpopup() {
     this.show = true;
     console.log('clicked');

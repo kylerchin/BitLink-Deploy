@@ -1,7 +1,7 @@
 // @ts-ignore
 import { query, request, response, Express, Request, Response } from "express";
 // @ts-ignore
-import cors from "cors";
+// import cors from "@types/cors";
 import { User, Message } from "./types";
 import { Post } from "./types";
 import { ProfileInfo } from "./types";

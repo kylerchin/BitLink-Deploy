@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {User} from "../../schemas/user";
+import { HttpClient } from '@angular/common/http';
+import { User } from '../../schemas/user';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AccountManagementService {
   baseUrl: string = 'http://localhost:8888/accounts';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   createNewUser(data: User) {
-    console.log(`${this.baseUrl}/`)
-    console.log(data)
+    console.log(`${this.baseUrl}/`);
+    console.log(data);
     return this.http.post(`${this.baseUrl}/register`, data);
   }
 
@@ -25,18 +25,25 @@ export class AccountManagementService {
   }
 
   printUsers() {
-    return this.http.get<User[]>(this.baseUrl + "/getAllUsers");
+    return this.http.get<User[]>(this.baseUrl + '/getAllUsers');
   }
 
   login(email: string, password: string) {
     let data = {
       email: email,
-      password: password
-    }
-    return this.http.post(`${this.baseUrl}/login/?email=${email}&password=${password}`, data, {withCredentials:true});
+      password: password,
+    };
+    return this.http.post(
+      `${this.baseUrl}/login/?email=${email}&password=${password}`,
+      data,
+      { withCredentials: true }
+    );
   }
 
   getCurrentUser() {
-    return this.http.get(this.baseUrl + "/user", {responseType: "text", withCredentials:true});
+    return this.http.get(this.baseUrl + '/user', {
+      responseType: 'text',
+      withCredentials: true,
+    });
   }
 }
