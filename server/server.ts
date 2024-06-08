@@ -1,12 +1,5 @@
 // @ts-ignore
-import express, {
-  query,
-  request,
-  response,
-  Express,
-  Request,
-  Response,
-} from "express";
+import { query, request, response, Express, Request, Response } from "express";
 // @ts-ignore
 import cors from "cors";
 import { User, Message } from "./types";
@@ -15,6 +8,15 @@ import { ProfileInfo } from "./types";
 import { MongoClient, ObjectId, ServerApiVersion } from "mongodb";
 const uri =
   "mongodb+srv://briannw2:IuH2qY69AaAKHGSs@bitlink.wfyrdwt.mongodb.net/?retryWrites=true&w=majority&appName=Bitlink";
+
+const accountsRouter = require("./routers/accounts");
+
+const express = require("express");
+const cors = require("cors");
+const session = require("express-session");
+const passport = require("passport");
+const bodyParser = require("body-parser");
+const MongoStore = require("connect-mongo");
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 export const client = new MongoClient(uri, {
@@ -45,11 +47,39 @@ export async function connectToDatabase() {
 // Connect to MongoDB and start Express server
 connectToDatabase()
   .then((client) => {
-    const app: Express = express(); // Assuming express is used
-    app.use(cors());
+    const app = express();
     app.use(express.json());
+    app.use(bodyParser.urlencoded({ extended: true }));
+    app.set("trust proxy", true);
+    const corsOptions = {
+      origin: ["http://localhost:4200"],
+      credentials: true,
+    };
+    app.use(cors(corsOptions));
 
-    app.get("/api/account/messages", async (req: Request, res: Response) => {
+    app.use(
+      session({
+        cookieName: "UserStuff",
+        secret: "A73C1437873813D98C9D281D7F195",
+        resave: true,
+        saveUninitialized: true,
+        cookie: {
+          maxAge: 1000 * 60 * 60 * 24 * 7,
+          secure: false,
+        },
+        store: new MongoStore({
+          client: client,
+          collection: "sessions",
+        }),
+      })
+    );
+    app.use(express.urlencoded({ extended: true }));
+    app.use(passport.initialize());
+    app.use(passport.session());
+
+    app.use("/accounts", accountsRouter);
+
+    app.get("/api/account/messages", async (req: any, res: any) => {
       try {
         const database = client.db("account");
         const query = { $or: [{ sender_id: "1" }, { receiver_id: "1" }] };
@@ -281,7 +311,7 @@ connectToDatabase()
       }
     });
 
-    app.get("/api/account/following", async (req: Request, res: Response) => {
+    app.get("/api/account/following", async (req: any, res: any) => {
       try {
         const database = client.db("account");
         const collections = database.collection("user");
@@ -308,148 +338,46 @@ connectToDatabase()
       }
     });
 
-    app.delete(
-      "/api/account/unfollow",
-      cors(),
-      async (req: Request, res: Response) => {
-        try {
-          const database = client.db("account");
-          const query = { user_id: "1" };
-          const followingIDlist = await database
-            .collection("user")
-            .findOne(query);
-          if (!followingIDlist) {
-            res.status(404).send("User not found");
-            return;
-          }
-          const followingIDs = followingIDlist.following;
-          const id = req.query.id;
-          const index = followingIDs.indexOf(id);
-          if (index > -1) {
-            followingIDs.splice(index, 1);
-            await database
-              .collection("user")
-              .updateOne(query, { $set: { following: followingIDs } });
-            res.status(200).send("Unfollowed successfully");
-          } else {
-            res.status(404).send("ID to unfollow not found in following list");
-          }
-        } catch (error) {
-          console.error("Error unfollowing user:", error);
-          res.status(500).send("Failed to unfollow user");
-        }
-      }
-    );
-
-    app.post(
-      "/api/account/sendmessage",
-      cors(),
-      async (req: Request, res: Response) => {
-        try {
-          const senderid = req.query.id1;
-          const receiverid = req.query.id2;
-          const database = client.db("account");
-          const collection = database.collection("message");
-          const body = req.body;
-          const message = body.message;
-          const time = body.time;
-
-          await collection.insertOne({
-            sender_id: senderid,
-            receiver_id: receiverid,
-            content: message,
-            timestamp: time,
-          });
-
-          res.status(200).send("Message Sent successfully");
-        } catch (error) {
-          console.error("Error sending message", error);
-          res.status(500).send("Failed to send message");
-        }
-      }
-    );
-
-    app.get(
-      "/api/account/getAllUsers",
-      async (_req: Request, res: Response) => {
-        try {
-          const db = client.db("account");
-          const allUsers = await db.collection("users").find({}).toArray();
-          res.status(200).send(allUsers);
-        } catch (error) {
-          res
-            .status(500)
-            .send(error instanceof Error ? error.message : "Unknown error");
-        }
-      }
-    );
-
-    app.post("/api/account/register", async (req: Request, res: Response) => {
+    app.delete("/api/account/unfollow", cors(), async (req: any, res: any) => {
       try {
         const database = client.db("account");
-        console.log(req.body.username);
-
-        if (
-          await database
-            .collection("users")
-            .findOne({ username: req.body.username })
-        ) {
-          console.log("User already exists");
-          return res.status(500).send("User already exists");
+        const query = { user_id: "1" };
+        const followingIDlist = await database
+          .collection("user")
+          .findOne(query);
+        if (!followingIDlist) {
+          res.status(404).send("User not found");
+          return;
         }
-        const user = req.body;
-        const result = await database.collection("users").insertOne(user);
-
-        if (result?.acknowledged) {
-          console.log("Success");
-        } else {
-          console.log("Error");
-          res.status(500).send("User account creation failed.");
-        }
-      } catch (e) {
-        console.error(e);
-        res.status(400).send(e instanceof Error ? e.message : "Unknown error");
+      } catch (error) {
+        console.error(error);
       }
     });
 
-    app.put("/api/account/:id", async (req: Request, res: Response) => {
+    app.post("/api/account/sendmessage", cors(), async (req: any, res: any) => {
       try {
-        if (!req.body) {
-          return res.status(400).send({
-            message: "Data to update cannot be empty!",
-          });
-        }
+        const senderid = req.query.id1;
+        const receiverid = req.query.id2;
         const database = client.db("account");
+        const collection = database.collection("message");
+        const body = req.body;
+        const message = body.message;
+        const time = body.time;
 
-        const id = req.params.id;
-        const getID = { _id: new ObjectId(id) };
-        const result = await database
-          .collection("users")
-          .updateOne(getID, { $set: req.body });
+        await collection.insertOne({
+          sender_id: senderid,
+          receiver_id: receiverid,
+          content: message,
+          timestamp: time,
+        });
 
-        if (result?.acknowledged) console.log(`${id} updated successfully.`);
-        else if (!result?.matchedCount) res.status(404).send("User not found.");
-        else res.status(500).send(`${id} unable to be updated.`);
-      } catch (e) {
-        console.error(e);
-        res.status(400).send(e instanceof Error ? e.message : "Unknown error");
+        res.status(200).send("Message Sent successfully");
+      } catch (error) {
+        console.error("Error sending message", error);
+        res.status(500).send("Failed to send message");
       }
     });
 
-    app.get("/api/account/:id", async (req, res) => {
-      try {
-        const database = client.db("account");
-        const getID = { _id: new ObjectId(req.params.id) };
-
-        let result = await database.collection("users").findOne(getID);
-
-        if (!result) res.status(404).send("User not found.");
-        else res.status(200).send(result);
-      } catch (e) {
-        console.error(e);
-        res.status(400).send(e instanceof Error ? e.message : "Unknown error");
-      }
-    });
     app.listen(8888, () => {
       console.log(`Server running at http://localhost:8888...`);
     });

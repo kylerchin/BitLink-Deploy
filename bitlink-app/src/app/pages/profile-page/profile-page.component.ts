@@ -30,16 +30,13 @@ export class ProfilePageComponent {
   password2Input: string | undefined;
 
   constructor(private accountManagementService: AccountManagementService) {
-    this.currentName = this.nameInit();
+    this.nameInit();
   }
 
   nameInit() {
-    let name = undefined;
-    this.accountManagementService.fetchUser("664a8e9008885a342d2837b4").subscribe({
-      next: (res)=> {console.log(res); name = JSON.parse(res).name}
-    });
-    if (name) return name;
-    else return undefined;
+    this.accountManagementService.getCurrentUser().subscribe({
+      next: (res)=> {console.log(res); this.id = JSON.parse(res)._id; this.currentName = JSON.parse(res).username}
+    })
   }
 
   update() {

@@ -6,16 +6,9 @@ import {User} from "../../schemas/user";
   providedIn: 'root'
 })
 export class AccountManagementService {
-  baseUrl: string = 'http://localhost:8888/api/account';
+  baseUrl: string = 'http://localhost:8888/accounts';
 
   constructor(private http: HttpClient) { }
-
-  // private refreshEmployees() {
-  //   this.http.get<User[]>(`${this.baseUrl}/account`)
-  //     .subscribe(employees => {
-  //       this.accounts$.set(employees);
-  //     });
-  // }
 
   createNewUser(data: User) {
     console.log(`${this.baseUrl}/`)
@@ -33,5 +26,17 @@ export class AccountManagementService {
 
   printUsers() {
     return this.http.get<User[]>(this.baseUrl + "/getAllUsers");
+  }
+
+  login(email: string, password: string) {
+    let data = {
+      email: email,
+      password: password
+    }
+    return this.http.post(`${this.baseUrl}/login/?email=${email}&password=${password}`, data, {withCredentials:true});
+  }
+
+  getCurrentUser() {
+    return this.http.get(this.baseUrl + "/user", {responseType: "text", withCredentials:true});
   }
 }

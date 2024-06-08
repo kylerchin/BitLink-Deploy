@@ -29,4 +29,27 @@
     <a href="/login" id="password" class="small-text">Forgot your password?</a>
   </p>
   <button class="my-6">Login</button>
+  <h1>Login</h1>
+  <p class="small-text">
+    Don’t have an account yet?
+    <a href="/register"><span class="link">Sign up</span></a>
+  </p>
+  <div id="input1">
+    <app-text-input-box
+      (outputValue)="GetEmail($event)"
+      [textField]="username_field"
+      [width]="100"
+      [height]="2"
+    ></app-text-input-box>
+  </div>
+  <div>
+    <app-text-input-box
+      (outputValue)="GetPassword($event)"
+      [textField]="password_field"
+      [width]="100"
+      [height]="2"
+    ></app-text-input-box>
+  </div>
+  <button (click)="validate()">Login</button>
+  <div id="message" *ngIf="message">{{ message }}</div>
 </div>
