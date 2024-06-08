@@ -15,10 +15,11 @@ const bcrypt = require('bcrypt');
 import {client} from "../server";
 const saltRounds = 10;
 
-const database = client.db("account").collection("user");
 
 
 exports.getUsers = asyncHandler(async (res: any) => {
+  const database = client.db("account").collection("user");
+
   try {
     const allUsers = await database.find({}).toArray();
     res.send(allUsers)
@@ -30,6 +31,8 @@ exports.getUsers = asyncHandler(async (res: any) => {
 exports.register = asyncHandler(async (req: any, res: any) => {
   try {
     console.log(req.body.username)
+    const database = client.db("account").collection("user");
+
 
     if (await database.findOne({username:req.body.username})) {
       console.log("User already exists");
@@ -58,6 +61,8 @@ exports.register = asyncHandler(async (req: any, res: any) => {
 });
 
 exports.updateUser = asyncHandler(async (req: any, res: any) => {
+  const database = client.db("account").collection("user");
+
   try {
     if (!req.body) {
       return res.status(400).send({
@@ -79,6 +84,8 @@ exports.updateUser = asyncHandler(async (req: any, res: any) => {
 })
 
 exports.getUser = asyncHandler(async (req: any, res: any) => {
+  const database = client.db("account").collection("user");
+
   try {
     const id = new ObjectId(req.params.id);
     const getID = { _id: id };

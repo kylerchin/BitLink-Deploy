@@ -71,7 +71,7 @@ connectToDatabase()
 
     app.use("/accounts", accountsRouter);
 
-    app.get('/api/account/messages', async (req, res) => {
+    app.get('/api/account/messages', async (req:any, res:any) => {
       try {
         const database = client.db("account");
         const query = { $or: [{ sender_id: "1" }, { receiver_id: "1" }] };
@@ -114,7 +114,7 @@ connectToDatabase()
       }
     });
 
-    app.get('/api/posts', async (req, res) => {
+    app.get('/api/posts', async (req:any, res:any) => {
       try {
         const database = client.db("account");
         const posts = await database.collection("post").find().toArray();
@@ -147,7 +147,7 @@ connectToDatabase()
       }
     });
 
-    app.get('/api/user/:id', async (req, res) => {
+    app.get('/api/user/:id', async (req:any, res:any) => {
       try {
         const database = client.db("account");
         const user_query = {'user_tag': req.params.id};
@@ -199,7 +199,7 @@ connectToDatabase()
       }
     });
 
-    app.get('/api/search/', async (req, res) => {
+    app.get('/api/search/', async (req:any, res:any) => {
       try {
         const database = client.db("account");
         const post_query = {'content.message': {$regex: req.query.q}}
@@ -233,7 +233,7 @@ connectToDatabase()
       }
     });
 
-    app.get('/api/account/following', async (req, res) => {
+    app.get('/api/account/following', async (req:any, res:any) => {
       try{
         const database = client.db("account");
         const collections = database.collection("user");
@@ -260,7 +260,7 @@ connectToDatabase()
       }
     });
 
-    app.delete('/api/account/unfollow', cors(), async (req, res) => {
+    app.delete('/api/account/unfollow', cors(), async (req:any, res:any) => {
       try {
         const database = client.db("account");
         const query = { user_id: "1" };
@@ -285,7 +285,7 @@ connectToDatabase()
       }
     });
 
-    app.post('/api/account/sendmessage', cors(), async (req, res) => {
+    app.post('/api/account/sendmessage', cors(), async (req:any, res:any) => {
       try{
         const senderid = req.query.id1;
         const receiverid = req.query.id2;

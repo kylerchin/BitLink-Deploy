@@ -8,8 +8,6 @@ const app = express.Router();
 
 const accountController = require("../controllers/accountsController");
 
-const database = client.db("account").collection("user");
-
 app.get("/getAllUsers", accountController.getUsers);
 
 app.post("/register", accountController.register);
@@ -25,6 +23,8 @@ passport.serializeUser((user:any, done:any) => {
 });
 
 passport.deserializeUser(async (id:any, done:any) => {
+  const database = client.db("account").collection("user");
+
   console.log("deserialize")
   database.findOne({email:id}).then((user:any) => {
     console.log(user)
@@ -36,6 +36,8 @@ passport.use("local", new LocalStrategy({
   usernameField: 'email',
   passwordField: 'password'
 }, function verify(email:any, password:any, cb:any) {
+  const database = client.db("account").collection("user");
+
   console.log("Verifying...")
   try {
     database.findOne({email:email}).then(user => {
