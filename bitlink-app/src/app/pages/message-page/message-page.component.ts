@@ -9,14 +9,18 @@ import { MessageTextBoxComponent } from '../../components/message-text-box/messa
 import { TextMessageComponent } from '../../components/text-message/text-message.component';
 import { SendMessageComponent } from '../../components/send-message/send-message.component';
 import { HttpClientModule } from '@angular/common/http';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgIf } from '@angular/common';
+import { AccountManagementService } from "../../services/account-management/account-management.service";
 
 interface User {
   username: string;
-  usertag: string;
+  password?: string;
+  email?: string;
+  name: string;
   profile_pic: string;
-  user_id: string;
+  _id: string;
 }
+
 
 interface Message {
   sender_id: string;
@@ -29,7 +33,6 @@ interface ApiResponse {
   users: User[];
   messages: Message[];
 }
-
 
 @Component({
   selector: 'app-message-page',
@@ -44,7 +47,8 @@ interface ApiResponse {
     TextMessageComponent,
     SendMessageComponent,
     HttpClientModule,
-    CommonModule
+    CommonModule,
+    NgIf
   ],
   templateUrl: './message-page.component.html',
   styleUrls: ['./message-page.component.scss'],
@@ -53,20 +57,59 @@ interface ApiResponse {
 export class MessagePageComponent implements OnInit {
   users: User[] = [];
   messages: Message[] = [];
+  sortedMessages: Message[] = [];
+  id1: string = '';
+  id2: string = '';
+  otherUser: string = '';
 
-  constructor(private http: HttpClient) { }
+  currentName : String | undefined;
+  error: string | undefined;
+  success: boolean | undefined;
+
+  id: string = '"664a8e9008885a342d2837b4"';
+  nameInput: string | undefined;
+  usernameInput: string | undefined;
+  emailInput: string | undefined;
+  passwordInput: string | undefined;
+  password2Input: string | undefined;
+
+  constructor(private accountManagementService: AccountManagementService, private http: HttpClient) {
+    this.nameInit();
+  }
+
+  nameInit() {
+    this.accountManagementService.getCurrentUser().subscribe({
+      next: (res)=> {console.log(res); this.id = JSON.parse(res)._id; this.currentName = JSON.parse(res).username}
+    })
+  }
+
 
   fetchUserInformation(): void {
-    this.http.get<ApiResponse>('http://localhost:4200/api/account/messages')
+    this.fetchMessages(this.id, this.otherUser);
+  }
+
+  fetchMessages(userId: string, otherUser: string): void {
+    this.http.get<ApiResponse>(`http://localhost:8888/api/account/messages?user_id=${userId}`)
       .subscribe({
         next: (data: ApiResponse) => {
           this.users = data.users;
           this.messages = data.messages;
+          this.sortedMessages = this.sortMessages(data.messages);
+          console.log(this.messages);
           for (let i = 0; i < this.users.length; i++) {
-            if (!this.users[i].usertag.startsWith('@')) {
-                this.users[i].usertag = '@' + this.users[i].usertag;
+            if (this.users && this.users[i] && !this.users[i].name?.startsWith('@')) {
+              this.users[i].name = '@' + this.users[i].name;
             }
           }
+          this.id1 = userId;
+          if (otherUser == ''){
+            this.id2 = this.users[0]._id;
+          }
+          else {
+            this.id2 = otherUser;
+          }
+          console.log(this.users);
+
         },
         error: (error) => {
           console.error("Error fetching user information:", error);
@@ -74,52 +117,49 @@ export class MessagePageComponent implements OnInit {
       });
   }
 
+  sortMessages(messages: Message[]): Message[] {
+    // Combine received and sent messages into a single array
+    const combinedMessages = [...messages];
+    // Convert UTC timestamps to local time and sort the combined array based on timestamp
+    combinedMessages.forEach(message => {
+      // Check if the timestamp is already in the format "09:10 AM"
+      if (!/^\d{1,2}:\d{2} [AP]M$/.test(message.timestamp)) {
+          const date = new Date(message.timestamp);
+          message.timestamp = date.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit', hour12: true });
+      }
+    });
+    // Sort the combined array based on timestamp
+    combinedMessages.sort((a, b) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime());
+    return combinedMessages;
+  }
+
   ngOnInit(): void {
     this.fetchUserInformation();
   }
-/*
-  username2: string = 'C++ Chef';
-  username3: string = 'XxEmo CoderxX';
-  username4: string = 'Looking for Love';
-  username5: string = 'Pineapple Under the Sea';
-  username6: string = 'CS Coder';
-  username7: string = 'LF GF';
-  username8: string = 'SMILE';
-  username9: string = 'UWU';
-  username10: string = 'ID WIN';
-  usertag2: string = '@ChefCPP';
-  usertag3: string = '@SilkSongWhen';
-  usertag4: string = '@LookingForBoyfriend';
-  usertag5: string = '@RealSpongebob22';
-  usertag6: string = '@CounterStrikePlayer';
-  usertag7: string = '@NeedGFNow';
-  usertag8: string = '@SmileyCoder';
-  usertag9: string = '@UWUCODE';
-  usertag10: string = '@NahIdWin';
-  profile_pic2: string = 'assets/remy.jpg';
-  profile_pic3: string = 'assets/cool-pfp.jpg';
-  profile_pic4: string = 'assets/bw-female.jpg';
-  profile_pic5: string = 'assets/sponge.jpg';
-  profile_pic6: string = 'assets/sweating-mask.jpg';
-  profile_pic7: string = 'assets/yada.jpg';
-  profile_pic8: string = 'assets/smile.jpg';
-  profile_pic9: string = 'assets/female.jpg';
-  profile_pic10: string = 'assets/nahidwin.jpg';
-  action2: string = 'seen 5 hours ago';
-  action3: string = 'seen 9 hours ago';
-  action4: string = 'seen 3 hours ago';
-  action5: string = 'seen 10 hours ago';
-  action6: string = 'seen 5 minutes ago';
-  action7: string = 'seen 9 minutes ago';
-  action8: string = 'seen 3 minutes ago';
-  action9: string = 'seen 5 days ago';
-  action10: string = 'seen now';
-  */
-  id1: string = '0';
-  id2: string = '1';
-  action1: string = 'seen 2 hours ago';
-  time: string = '12:02 PM';
-  message: string = 'Yo';
-  time2: string = '8:52 PM';
-  message2: string = 'What\'s up? Did you need something?';
+
+  handleUserSwap(id: string){
+    this.fetchMessages(this.id, id);
+  }
+
+  readonly APIUrl = "http://localhost:8888/api/account/sendmessage";
+  handleSendMessage(messageData: string[]) {
+    const [text, sender_id, receiver_id, currentTime] = messageData;
+    const url = `${this.APIUrl}?id1=${sender_id}&id2=${receiver_id}`;
+    const postData = {
+      message: text,
+      time: currentTime
+    };
+  
+    this.http.post(url, postData).subscribe({
+      next: (data) => {
+        alert(data);
+        this.fetchUserInformation();
+      },
+      error: (error) => {
+        console.error("Error Sending message:", error);
+        this.fetchUserInformation();
+      }
+    });
+  }
+
 }

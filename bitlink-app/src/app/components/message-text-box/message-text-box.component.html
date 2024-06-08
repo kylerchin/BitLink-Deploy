@@ -1,4 +1,11 @@
 <div class="inputs">
   <label class="input-label" for="TextField">{{textField}}</label>
-  <input type="text" class="input-box" id="TextField" [style.width.%]="width" [style.line-height.em]="height" (keyup.enter)="submitFunction(sender_id, receiver_id)">
+  <input 
+    type="text" 
+    class="input-box" 
+    id="TextField" 
+    [style.width.%]="width" 
+    [style.line-height.em]="height" 
+    #textInput
+    (keyup.enter)="submitFunction(textInput.value, sender_id, receiver_id)">
 </div>
