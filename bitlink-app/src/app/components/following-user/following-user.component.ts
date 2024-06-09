@@ -1,7 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output } from '@angular/core';
 import { NgOptimizedImage, CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
+import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-following-user',
@@ -12,18 +13,17 @@ import { HttpClientModule } from '@angular/common/http';
 })
 export class FollowingUserComponent {
   constructor(private http: HttpClient) { }
-  readonly APIUrl = "http://localhost:4200/api/account/unfollow";
+  readonly APIUrl = "http://localhost:8888/api/account/unfollow";
 
   isHovering: boolean = false;
-  unfollowuser(id:any){
-    this.http.delete(this.APIUrl+'?id='+id).subscribe(data => {
-      alert(data);
-    })
-  }
+  @Output() unfollow = new EventEmitter<string>();
   @Input() username: string = '';
   @Input() usertag: string = '';
   @Input() action: string = '';
   @Input() profile_pic: string = '';
   @Input() following: string = '';
   @Input() user_id: string = '';
+  unfollowuser(id:any){
+      this.unfollow.emit(id);
+  }
 }

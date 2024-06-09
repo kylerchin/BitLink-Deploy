@@ -1,5 +1,5 @@
 
-import { User, Message } from "./types";
+import { User, Message, Follow } from "./types";
 import { Post } from "./types";
 import { ProfileInfo } from "./types";
 import {MongoClient, ServerApiVersion} from 'mongodb';
@@ -260,14 +260,14 @@ connectToDatabase()
           res.status(404).send('User not found');
           return;
         }
-        const followingIDs = followingIDlist.following;
-
-        const query2 = { user_id: { $in: followingIDs } };
+        const followingIDs = followingIDlist.following.map((id: string) => new ObjectId(id));
+        const query2 = { _id: { $in: followingIDs } };
         const followingAcc = await collections.find(query2).toArray();
-        const userInfo: User[] = followingAcc.map(followingAcc => ({
-          user_id: followingAcc.user_id,
+        console.log(followingAcc);
+        const userInfo: Follow[] = followingAcc.map(followingAcc => ({
+          _id: followingAcc._id,
           username: followingAcc.username,
-          usertag: followingAcc.user_tag,
+          name: followingAcc.name,
           profile_pic: followingAcc.profile_picture,
         }));
         res.json(userInfo);
@@ -279,8 +279,9 @@ connectToDatabase()
 
     app.delete('/api/account/unfollow', cors(), async (req:any, res:any) => {
       try {
+        const userid = new ObjectId(req.query.id2);
         const database = client.db("account");
-        const query = { user_id: "1" };
+        const query = { _id: userid };
         const followingIDlist = await database.collection("user").findOne(query);
         if (!followingIDlist) {
           res.status(404).send('User not found');

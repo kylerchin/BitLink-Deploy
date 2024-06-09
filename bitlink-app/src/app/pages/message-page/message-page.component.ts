@@ -54,7 +54,7 @@ interface ApiResponse {
   styleUrls: ['./message-page.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class MessagePageComponent implements OnInit {
+export class MessagePageComponent {
   users: User[] = [];
   messages: Message[] = [];
   sortedMessages: Message[] = [];
@@ -79,8 +79,17 @@ export class MessagePageComponent implements OnInit {
 
   nameInit() {
     this.accountManagementService.getCurrentUser().subscribe({
-      next: (res)=> {console.log(res); this.id = JSON.parse(res)._id; this.currentName = JSON.parse(res).username}
-    })
+      next: (res) => {
+        console.log(res);
+        this.id = JSON.parse(res)._id;
+        this.currentName = JSON.parse(res).username;
+        this.fetchUserInformation();
+      },
+      error: (error) => {
+        console.error("Error fetching current user information:", error);
+        this.fetchUserInformation();
+      }
+    });
   }
 
 
@@ -95,7 +104,6 @@ export class MessagePageComponent implements OnInit {
           this.users = data.users;
           this.messages = data.messages;
           this.sortedMessages = this.sortMessages(data.messages);
-          console.log(this.messages);
           for (let i = 0; i < this.users.length; i++) {
             if (this.users && this.users[i] && !this.users[i].name?.startsWith('@')) {
               this.users[i].name = '@' + this.users[i].name;
@@ -108,7 +116,6 @@ export class MessagePageComponent implements OnInit {
           else {
             this.id2 = otherUser;
           }
-          console.log(this.users);
 
         },
         error: (error) => {
@@ -131,10 +138,6 @@ export class MessagePageComponent implements OnInit {
     // Sort the combined array based on timestamp
     combinedMessages.sort((a, b) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime());
     return combinedMessages;
-  }
-
-  ngOnInit(): void {
-    this.fetchUserInformation();
   }
 
   handleUserSwap(id: string){
