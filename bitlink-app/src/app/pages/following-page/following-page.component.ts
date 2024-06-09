@@ -5,13 +5,15 @@ import { SidebarComponent } from '../../components/sidebar/sidebar.component';
 import { SearchBarComponent } from '../../components/search-bar/search-bar.component';
 import { NewNotificationComponent } from '../../components/new-notification/new-notification.component';
 import { HttpClientModule } from '@angular/common/http';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgIf } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
+import { AccountManagementService } from '../../services/account-management/account-management.service';
+
 
 interface FollowingArray {
-  user_id: string;
-  username: string;
-  usertag: string;
+  _id: string;
+  username:string
+  name: string;
   profile_pic: string;
   following: string;
   time: string;
@@ -27,7 +29,8 @@ interface FollowingArray {
     SearchBarComponent,
     NewNotificationComponent,
     HttpClientModule,
-    CommonModule
+    CommonModule,
+    NgIf
   ],
   templateUrl: './following-page.component.html',
   styleUrls: ['./following-page.component.scss'],
@@ -36,11 +39,39 @@ interface FollowingArray {
 
 export class FollowingPageComponent {
   followinglist: FollowingArray[] = [];
-  
-  constructor(private http: HttpClient) { }
+  currentName : String | undefined;
+  error: string | undefined;
+  success: boolean | undefined;
 
-  fetchFollowingListInformation(): void {
-    this.http.get<FollowingArray[]>('http://localhost:8888/api/account/following')
+  id: string = '"664a8e9008885a342d2837b4"';
+  nameInput: string | undefined;
+  usernameInput: string | undefined;
+  emailInput: string | undefined;
+  passwordInput: string | undefined;
+  password2Input: string | undefined;
+
+  constructor(private accountManagementService: AccountManagementService, private http: HttpClient) {
+    this.nameInit();
+  }
+
+  nameInit() {
+    this.accountManagementService.getCurrentUser().subscribe({
+      next: (res) => {
+        console.log(res);
+        this.id = JSON.parse(res)._id;
+        this.currentName = JSON.parse(res).username;
+        console.log(this.id);
+        this.fetchFollowingListInformation(this.id)
+      },
+      error: (error) => {
+        console.error("Error fetching current user information:", error);
+      }
+    });
+  }
+
+
+  fetchFollowingListInformation(userId: string): void {
+    this.http.get<FollowingArray[]>(`http://localhost:8888/api/account/following?user_id=${userId}`)
       .subscribe({
         next: (data) => {
           this.followinglist = data;
@@ -52,21 +83,17 @@ export class FollowingPageComponent {
             this.followinglist[i].following = 'Following \u2713';
             this.followinglist[i].time = `Following Since ${dates[i].toLocaleDateString()}`;
           }
+          console.log(this.followinglist);
           for (let i = 0; i < this.followinglist.length; i++) {
-            if (!this.followinglist[i].usertag.startsWith('@')) {
-                this.followinglist[i].usertag = '@' + this.followinglist[i].usertag;
+            if (!this.followinglist[i].name.startsWith('@')) {
+                this.followinglist[i].name = '@' + this.followinglist[i].name;
             }
           }
-        
         },
         error: (error) => {
           console.error("Error fetching user information:", error);
         }
       });
-  }
-
-  ngOnInit(): void {
-    this.fetchFollowingListInformation();
   }
 
   getRandomDate(startDate: Date, endDate: Date): Date {
@@ -86,15 +113,16 @@ export class FollowingPageComponent {
 
   readonly APIUrl = "http://localhost:8888/api/account/unfollow";
   handleUnfollow(id:any){
-    this.http.delete(this.APIUrl+'?id='+id).subscribe({
+    this.http.delete(this.APIUrl+'?id='+id+'&id2='+this.id).subscribe({
       next: (data) => {
         alert(data);
-        this.fetchFollowingListInformation();
+        this.fetchFollowingListInformation(this.id);
       },
       error: (error) => {
         console.error("Error unfollowing user:", error);
-        this.fetchFollowingListInformation();
+        this.fetchFollowingListInformation(this.id);
       }
     } )
   }
+
 }

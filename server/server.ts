@@ -2,7 +2,7 @@
 import { query, request, response, Express, Request, Response } from "express";
 // @ts-ignore
 // import cors from "@types/cors";
-import { User, Message } from "./types";
+import { User, Message, Follow } from "./types";
 import { Post } from "./types";
 import { ProfileInfo } from "./types";
 import { MongoClient, ObjectId, ServerApiVersion } from "mongodb";
@@ -18,8 +18,9 @@ const express = require("express");
 const cors = require("cors");
 const session = require("express-session");
 const passport = require("passport");
-const bodyParser = require("body-parser");
-const MongoStore = require("connect-mongo");
+const bodyParser = require("body-parser")
+const MongoStore = require('connect-mongo');
+const { ObjectId } = require('mongodb');
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 export const client = new MongoClient(uri, {
@@ -84,45 +85,53 @@ connectToDatabase()
 
     app.use("/accounts", accountsRouter);
 
-    app.get("/api/account/messages", async (req: any, res: any) => {
+    app.get("/api/account/messages", async (req: any , res: any) => {
       try {
+        const userId = req.query.user_id; // Expect a user_id query parameter
+        if (!userId) {
+          return res.status(400).send('User ID must be provided');
+        }
+    
         const database = client.db("account");
-        const query = { $or: [{ sender_id: "1" }, { receiver_id: "1" }] };
-        const messages = await database
-          .collection("message")
-          .find(query)
-          .toArray();
+    
+        // Modify the query to use ObjectId
+        const query = { $or: [{ sender_id: userId }, { receiver_id: userId }] };
+        const messages = await database.collection("message").find(query).toArray();
         const userIds = new Set<string>();
-        messages.forEach((message) => {
-          if (message.sender_id === "1") userIds.add(message.receiver_id);
-          if (message.receiver_id === "1") userIds.add(message.sender_id);
+    
+        // Update logic to use ObjectId
+        messages.forEach(message => { 
+          if (message.sender_id === userId) userIds.add(message.receiver_id.toString());
+          if (message.receiver_id === userId) userIds.add(message.sender_id.toString());
         });
+    
         const userIdArray = Array.from(userIds);
-        const query2 = { user_id: { $in: userIdArray } };
+        const userIdsAsObjectId = userIdArray.map(userId => new ObjectId(userId));
+        const query2 = { _id : { $in: userIdsAsObjectId } };
         const collections = database.collection("user");
         // Fetch user information from the user collection
         const users = await collections.find(query2).toArray();
-
-        // Map the user documents to the required format
-        const userInfo: User[] = users.map((user) => ({
+    
+        // Ensure the mapping corresponds to the expected User interface
+        const userInfo = users.map(user => ({
           username: user.username,
-          usertag: user.user_tag,
-          profile_pic: user.profile_picture,
-          user_id: user.user_id,
+          name: user.name, // Verify this is the correct property name
+          profile_pic: user.profile_picture, // Verify this is the correct property name
+          _id: user._id.toString(), // Ensure correct property and conversion to string
         }));
-
-        const messageInfo: Message[] = messages.map((messages) => ({
-          sender_id: messages.sender_id,
-          receiver_id: messages.receiver_id,
-          content: messages.content,
-          timestamp: messages.timestamp,
+    
+        const messageInfo = messages.map(message => ({
+          sender_id: message.sender_id.toString(), // Convert ObjectId to string
+          receiver_id: message.receiver_id.toString(), // Convert ObjectId to string
+          content: message.content,
+          timestamp: message.timestamp,
         }));
-
+    
         const data = {
           users: userInfo,
           messages: messageInfo,
         };
-
+    
         res.json(data);
       } catch (error) {
         console.error("Error fetching users & messages:", error);
@@ -405,24 +414,29 @@ connectToDatabase()
       }
     });*/
 
-    app.get("/api/account/following", async (req: any, res: any) => {
-      try {
+    app.get('/api/account/following', async (req:any, res:any) => {
+      try{
+        const userId = req.query.user_id; // Expect a user_id query parameter
+        if (!userId) {
+          return res.status(400).send('User ID must be provided');
+        }
         const database = client.db("account");
+        const id = new ObjectId(userId);
         const collections = database.collection("user");
-        const query = { user_id: "1" };
+        const query = { _id: id };
         const followingIDlist = await collections.findOne(query);
         if (!followingIDlist) {
           res.status(404).send("User not found");
           return;
         }
-        const followingIDs = followingIDlist.following;
-
-        const query2 = { user_id: { $in: followingIDs } };
+        const followingIDs = followingIDlist.following.map((id: string) => new ObjectId(id));
+        const query2 = { _id: { $in: followingIDs } };
         const followingAcc = await collections.find(query2).toArray();
-        const userInfo: User[] = followingAcc.map((followingAcc) => ({
-          user_id: followingAcc.user_id,
+        console.log(followingAcc);
+        const userInfo: Follow[] = followingAcc.map(followingAcc => ({
+          _id: followingAcc._id,
           username: followingAcc.username,
-          usertag: followingAcc.user_tag,
+          name: followingAcc.name,
           profile_pic: followingAcc.profile_picture,
         }));
         res.json(userInfo);
@@ -434,11 +448,10 @@ connectToDatabase()
 
     app.delete("/api/account/unfollow", cors(), async (req: any, res: any) => {
       try {
+        const userid = new ObjectId(req.query.id2);
         const database = client.db("account");
-        const query = { user_id: "1" };
-        const followingIDlist = await database
-          .collection("user")
-          .findOne(query);
+        const query = { _id: userid };
+        const followingIDlist = await database.collection("user").findOne(query);
         if (!followingIDlist) {
           res.status(404).send("User not found");
           return;

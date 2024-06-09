@@ -1,10 +1,19 @@
 // D:/Classes/INF124/BitLink/server/types.ts
 
+import { ObjectId } from "mongodb";
+
 export interface User {
-  user_id: string;
-  username: string;
-  usertag: string;
-  profile_pic: string;
+    user_id: string;
+    username: string;
+    usertag: string;
+    profile_pic: string;
+  }
+
+export interface Follow {
+    _id: ObjectId,
+    username: string,
+    name: string,
+    profile_pic: string,
 }
 
 export interface Message {
