@@ -20,18 +20,16 @@ $secondary-accent-color: #008005;
 }
 #post-side {
   flex: 85;
-  margin-left: 2%;
   margin-bottom: 2rem;
 }
-
 #search-bar {
   padding-top: 1%;
-  font-size: 5rem;
   display: flex;
   align-items: center;
+  justify-content: center;
   position: fixed;
   z-index: 3000;
-  width: 100%;
+  width: 85%;
 }
 #secondline {
   padding-bottom: 2%;

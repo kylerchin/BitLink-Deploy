@@ -1,24 +1,23 @@
 <div id="following-container">
-    <app-sidebar id="sidebar"></app-sidebar>
-    <div id="following-side">
-      <div id="top">
-        <div id="home"><a href=""><- Home</a></div>
-        <div id="followed">Following</div>
-      </div>
-      <app-search-bar id="search-bar"></app-search-bar>
-      <div id="thirdline">
-        <div id="new">Recent</div>
-      </div>
-      <div *ngFor="let following of followinglist">
-        <app-following-user
-          [username]="following.username"
-          [usertag]="following.usertag"
-          [profile_pic]="following.profile_pic"
-          [action]="following.time"
-          [following]="following.following"
-          [user_id]="following.user_id"
-          (unfollow)="handleUnfollow($event)"
-        ></app-following-user>
-      </div>
+  <app-sidebar id="sidebar"></app-sidebar>
+  <div id="following-side">
+    <div id="top" class="flex text-2xl justify-between">
+      <div id="home"><a href=""><- Home</a></div>
+      <div id="followed" class="mx-auto">Following</div>
     </div>
+    <div id="thirdline">
+      <div id="new">Recent</div>
+    </div>
+    <div *ngFor="let following of followinglist">
+      <app-following-user
+        [username]="following.username"
+        [usertag]="following.usertag"
+        [profile_pic]="following.profile_pic"
+        [action]="following.time"
+        [following]="following.following"
+        [user_id]="following.user_id"
+        (unfollow)="handleUnfollow($event)"
+      ></app-following-user>
+    </div>
+  </div>
 </div>

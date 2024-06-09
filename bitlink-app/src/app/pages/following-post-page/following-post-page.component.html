@@ -2,9 +2,18 @@
   <app-sidebar id="sidebar"></app-sidebar>
   <div id="top-right-container">
     <app-search-bar id="search-bar"></app-search-bar>
-    <div id="buttons-container">
-      <app-following-button id="following-button"></app-following-button>
-      <app-for-you-button id="for-you-button"></app-for-you-button>
+    <div
+      id="buttons-container"
+      class="flex flex-row py-4 justify-center items-center"
+    >
+      <app-following-button
+        class="mx-4 sm:mx-6 md:mx-8 lg:mx-12"
+        id="following-button"
+      ></app-following-button>
+      <app-for-you-button
+        class="mx-4 sm:mx-6 md:mx-8 lg:mx-10"
+        id="for-you-button"
+      ></app-for-you-button>
     </div>
     <div id="post-box">
       <div class="post-format">

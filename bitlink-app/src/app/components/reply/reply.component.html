@@ -1,4 +1,4 @@
-<div class="reply">
+<form [formGroup]="commentForm" class="reply" (ngSubmit)="submit()">
   <img [src]="profile_picture" alt="profile" id="profile-icon" />
   <div class="text-box">
     <label class="input-label" for="TextField">{{ textField }}</label>
@@ -7,7 +7,8 @@
       class="input-box"
       id="TextField"
       placeholder="Give your thoughts"
+      formControlName="content"
     />
   </div>
-  <div class="reply-button"><button>Reply</button></div>
-</div>
+  <div class="reply-button"><button type="submit">Reply</button></div>
+</form>
