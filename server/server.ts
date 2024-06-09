@@ -274,7 +274,7 @@ connectToDatabase()
         res.status(500).send("Failed to fetch comment");
       }
     });
-    app.get("/api/posts", async (req: Request, res: Response) => {
+    /*app.get("/api/posts", async (req: Request, res: Response) => {
       try {
         const database = client.db("account");
         const posts = await database.collection("post").find().toArray();
@@ -306,7 +306,7 @@ connectToDatabase()
         console.error("Error fetching messages:", error);
         res.status(500).send("Failed to fetch messages");
       }
-    });
+    });*/
 
     app.get("/api/user/:id", async (req: Request, res: Response) => {
       try {
@@ -367,7 +367,7 @@ connectToDatabase()
       }
     });
 
-    app.get("/api/search/", async (req: Request, res: Response) => {
+    /*app.get("/api/search/", async (req: Request, res: Response) => {
       try {
         const database = client.db("account");
         const post_query = { "content.message": { $regex: req.query.q } };
@@ -403,7 +403,7 @@ connectToDatabase()
         console.error("Error searching:", error);
         res.status(500).send("Failed to search");
       }
-    });
+    });*/
 
     app.get("/api/account/following", async (req: any, res: any) => {
       try {
@@ -470,7 +470,7 @@ connectToDatabase()
         console.error("Error sending message", error);
         res.status(500).send("Failed to send message");
       }
-    });*/
+    });
 
     app.listen(8888, () => {
       console.log(`Server running at http://localhost:8888...`);
