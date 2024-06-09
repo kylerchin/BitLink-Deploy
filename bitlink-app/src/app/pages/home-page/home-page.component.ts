@@ -41,9 +41,9 @@ export class HomePageComponent {
   save3: string = '921K';
   username: string = 'C++ Chef';
   username4: string = 'Looking for Love';
-  usertag4: string = '@LookingForBoyfriend';
-  usertag: string = '@ChefCPP';
-  usertag2: string = '@RustyRustacean';
+  usertag4: string = 'LookingForBoyfriend';
+  usertag: string = 'ChefCPP';
+  usertag2: string = 'RustyRustacean';
   username2: string = 'Ferris the Crab';
   profile_picture3: string = 'assets/ferris-on-pattern.jpg';
   date: string = '9:19 AM Apr 13, 2024';

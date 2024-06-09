@@ -13,13 +13,13 @@ import { PostComponentComponent } from '../../components/post-component/post-com
 })
 export class SearchPageComponent {
   username: string = 'Totally Real Guy';
-  usertag: string = '@realguytrustme99';
+  usertag: string = 'realguytrustme99';
   profile_picture: string = 'assets/ferris-on-pattern.jpg';
   date: string = '10:54 AM Jan 9, 2024';
   message: string =
     "Python's new features are game-changers! From pattern matching to improved error handling, this language keeps getting better. 🐍🚀 #Python #Coding #Tech";
   username2: string = 'PythonHaterTM';
-  usertag2: string = '@whypythonisntgreat';
+  usertag2: string = 'whypythonisntgreat';
   profile_picture2: string = 'assets/ferris-on-pattern.jpg';
   date2: string = '2:53 PM Jan 11, 2024';
   message2: string =

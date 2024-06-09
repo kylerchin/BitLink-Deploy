@@ -143,11 +143,12 @@ connectToDatabase()
             profile_pic: newPostBody?.user.profile_pic,
           },
           comments: [],
-          timestamp: new Date(),
+          date: new Date(),
           likes: 0,
           reposts: 0,
           comment_num: 0,
           saves: 0,
+          likedby: [],
         };
 
         await collection.insertOne(newPost);
@@ -164,25 +165,77 @@ connectToDatabase()
         const collection = database.collection("post");
         const query = { _id: new ObjectId(req.params.id) };
         const post = await collection.findOne(query);
+        const userId = req.body.userId;
+        console.log(userId);
         if (!post) {
           res.status(404).send("Post not found");
           return;
         }
-        await collection.updateOne(query, { $inc: { likes: 1 } });
-        res.status(200).send("Post liked successfully");
+        await collection.updateOne(query, {
+          $inc: { likes: 1 },
+          $addToSet: { likedby: userId },
+        });
+        res.status(200).json({ message: "Post liked successfully" });
       } catch (err) {
         console.error(err);
-        res.status(500).send("Failed to like post");
+        res.status(500).json({ message: "Failed to like post" });
       }
     });
+    app.put("/api/posts/:id/dislike", async (req: Request, res: Response) => {
+      //add a like to the post with the specific id
+      try {
+        const database = client.db("account");
+        const collection = database.collection("post");
+        const query = { _id: new ObjectId(req.params.id) };
+        const post = await collection.findOne(query);
+        const userId = req.body.userId;
+        if (!post) {
+          res.status(404).send("Post not found");
+          return;
+        }
+        await collection.updateOne(query, {
+          $inc: { likes: -1 },
+          $pull: { likedby: userId },
+        });
+        res.status(200).json({ message: "Post disliked successfully" });
+      } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Failed to dislike post" });
+      }
+    });
+
     app.put("/api/posts/:id/comment", async (req: Request, res: Response) => {
       //add a comment to the post with the specific id
     });
 
     app.get("/api/posts/:id", async (req: Request, res: Response) => {
       //get the post with the specific id
+      try {
+        const postId = req.params.id;
+        const database = client.db("account");
+        const collection = database.collection("post");
+        const post = await collection.findOne({ _id: new ObjectId(postId) });
+        res.status(200).json(post);
+      } catch (err) {
+        console.error(err);
+        res.status(500).send("Failed to fetch post");
+      }
     });
-
+    app.get("/api/comments/:id", async (req: Request, res: Response) => {
+      //get the comment with the specific id
+      try {
+        const commentId = req.params.id;
+        const database = client.db("account");
+        const collection = database.collection("comment");
+        const comment = await collection.findOne({
+          _id: new ObjectId(commentId),
+        });
+        res.status(200).json(comment);
+      } catch (err) {
+        console.error(err);
+        res.status(500).send("Failed to fetch comment");
+      }
+    });
     app.get("/api/posts", async (req: Request, res: Response) => {
       try {
         const database = client.db("account");
@@ -202,11 +255,12 @@ connectToDatabase()
             profile_pic: post.user.profile_pic,
           },
           comments: post.comments,
-          timestamp: post.timestamp,
+          date: post.date,
           likes: post.likes,
           reposts: post.reposts,
           comment_num: post.comment_num,
           saves: post.saves,
+          likedby: post.likedby,
         }));
 
         res.json(data);
@@ -255,11 +309,12 @@ connectToDatabase()
             profile_pic: post.user.profile_pic,
           },
           comments: post.comments,
-          timestamp: post.timestamp,
+          date: post.date,
           likes: post.likes,
           reposts: post.reposts,
           comment_num: post.comment_num,
           saves: post.saves,
+          likedby: post.likedby,
         }));
 
         const data = {
@@ -297,11 +352,12 @@ connectToDatabase()
             profile_pic: post.user.profile_pic,
           },
           comments: post.comments,
-          timestamp: post.timestamp,
+          date: post.date,
           likes: post.likes,
           reposts: post.reposts,
           comment_num: post.comment_num,
           saves: post.saves,
+          likedby: post.likedby,
         }));
 
         res.json(data);

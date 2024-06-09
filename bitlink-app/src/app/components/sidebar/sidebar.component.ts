@@ -11,7 +11,7 @@ import { AccountManagementService } from '../../services/account-management/acco
 })
 export class SidebarComponent {
   profileImagePath: string = 'assets/profile_picture.png';
-  id: string = '664a8e9008885a342d2837b4';
+  id: string = '6647cf24ebe437ca2de4e30d';
   name: string | undefined;
   username: string | undefined;
   show = false;

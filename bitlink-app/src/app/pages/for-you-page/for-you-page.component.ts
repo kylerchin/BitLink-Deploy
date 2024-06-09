@@ -37,13 +37,13 @@ export class ForYouPageComponent {
   comment_number3: string = '923K';
   save3: string = '912K';
   username: string = 'ID WIN';
-  usertag: string = '@NahIdWin';
+  usertag: string = 'NahIdWin';
   profile_picture: string = 'assets/nahidwin.jpg';
   username2: string = 'SMILE';
-  usertag2: string = '@SmileyCoder';
+  usertag2: string = 'SmileyCoder';
   profile_picture2: string = 'assets/smile.jpg';
   username3: string = 'Pineapple Under the Sea';
-  usertag3: string = '@RealSpongebob22';
+  usertag3: string = 'RealSpongebob22';
   profile_picture3: string = 'assets/sponge.jpg';
   date: string = '12:01 PM May 1, 2024';
   date2: string = '4:21 PM Apr 28, 2024';
