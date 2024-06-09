@@ -74,7 +74,9 @@ export class LikeCommentShareBarComponent {
       .subscribe((data: any) => {
         this.post = data;
         this.like = data.likes;
+        this.comment = data.comment_num;
         console.log(this.like);
+        console.log(data.comment_num);
       });
   }
   openpopup() {

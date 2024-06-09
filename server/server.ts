@@ -18,9 +18,9 @@ const express = require("express");
 const cors = require("cors");
 const session = require("express-session");
 const passport = require("passport");
-const bodyParser = require("body-parser")
-const MongoStore = require('connect-mongo');
-const { ObjectId } = require('mongodb');
+const bodyParser = require("body-parser");
+const MongoStore = require("connect-mongo");
+const { ObjectId } = require("mongodb");
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 export const client = new MongoClient(uri, {
@@ -85,53 +85,60 @@ connectToDatabase()
 
     app.use("/accounts", accountsRouter);
 
-    app.get("/api/account/messages", async (req: any , res: any) => {
+    app.get("/api/account/messages", async (req: any, res: any) => {
       try {
         const userId = req.query.user_id; // Expect a user_id query parameter
         if (!userId) {
-          return res.status(400).send('User ID must be provided');
+          return res.status(400).send("User ID must be provided");
         }
-    
+
         const database = client.db("account");
-    
+
         // Modify the query to use ObjectId
         const query = { $or: [{ sender_id: userId }, { receiver_id: userId }] };
-        const messages = await database.collection("message").find(query).toArray();
+        const messages = await database
+          .collection("message")
+          .find(query)
+          .toArray();
         const userIds = new Set<string>();
-    
+
         // Update logic to use ObjectId
-        messages.forEach(message => { 
-          if (message.sender_id === userId) userIds.add(message.receiver_id.toString());
-          if (message.receiver_id === userId) userIds.add(message.sender_id.toString());
+        messages.forEach((message) => {
+          if (message.sender_id === userId)
+            userIds.add(message.receiver_id.toString());
+          if (message.receiver_id === userId)
+            userIds.add(message.sender_id.toString());
         });
-    
+
         const userIdArray = Array.from(userIds);
-        const userIdsAsObjectId = userIdArray.map(userId => new ObjectId(userId));
-        const query2 = { _id : { $in: userIdsAsObjectId } };
+        const userIdsAsObjectId = userIdArray.map(
+          (userId) => new ObjectId(userId)
+        );
+        const query2 = { _id: { $in: userIdsAsObjectId } };
         const collections = database.collection("user");
         // Fetch user information from the user collection
         const users = await collections.find(query2).toArray();
-    
+
         // Ensure the mapping corresponds to the expected User interface
-        const userInfo = users.map(user => ({
+        const userInfo = users.map((user) => ({
           username: user.username,
           name: user.name, // Verify this is the correct property name
           profile_pic: user.profile_picture, // Verify this is the correct property name
           _id: user._id.toString(), // Ensure correct property and conversion to string
         }));
-    
-        const messageInfo = messages.map(message => ({
+
+        const messageInfo = messages.map((message) => ({
           sender_id: message.sender_id.toString(), // Convert ObjectId to string
           receiver_id: message.receiver_id.toString(), // Convert ObjectId to string
           content: message.content,
           timestamp: message.timestamp,
         }));
-    
+
         const data = {
           users: userInfo,
           messages: messageInfo,
         };
-    
+
         res.json(data);
       } catch (error) {
         console.error("Error fetching users & messages:", error);
@@ -245,7 +252,10 @@ connectToDatabase()
           const commentId = await collection.insertOne(newComment);
           await postCollection.updateOne(
             { _id: new ObjectId(postId) },
-            { $addToSet: { comments: commentId.insertedId } }
+            {
+              $addToSet: { comments: commentId.insertedId },
+              $inc: { comment_num: 1 },
+            }
           );
           res.status(201).send("Comment created successfully");
         } catch (err) {
@@ -414,11 +424,11 @@ connectToDatabase()
       }
     });*/
 
-    app.get('/api/account/following', async (req:any, res:any) => {
-      try{
+    app.get("/api/account/following", async (req: any, res: any) => {
+      try {
         const userId = req.query.user_id; // Expect a user_id query parameter
         if (!userId) {
-          return res.status(400).send('User ID must be provided');
+          return res.status(400).send("User ID must be provided");
         }
         const database = client.db("account");
         const id = new ObjectId(userId);
@@ -429,11 +439,13 @@ connectToDatabase()
           res.status(404).send("User not found");
           return;
         }
-        const followingIDs = followingIDlist.following.map((id: string) => new ObjectId(id));
+        const followingIDs = followingIDlist.following.map(
+          (id: string) => new ObjectId(id)
+        );
         const query2 = { _id: { $in: followingIDs } };
         const followingAcc = await collections.find(query2).toArray();
         console.log(followingAcc);
-        const userInfo: Follow[] = followingAcc.map(followingAcc => ({
+        const userInfo: Follow[] = followingAcc.map((followingAcc) => ({
           _id: followingAcc._id,
           username: followingAcc.username,
           name: followingAcc.name,
@@ -451,7 +463,9 @@ connectToDatabase()
         const userid = new ObjectId(req.query.id2);
         const database = client.db("account");
         const query = { _id: userid };
-        const followingIDlist = await database.collection("user").findOne(query);
+        const followingIDlist = await database
+          .collection("user")
+          .findOne(query);
         if (!followingIDlist) {
           res.status(404).send("User not found");
           return;
