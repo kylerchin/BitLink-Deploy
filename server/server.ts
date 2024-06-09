@@ -5,7 +5,7 @@ import { query, request, response, Express, Request, Response } from "express";
 import { User, Message, Follow } from "./types";
 import { Post } from "./types";
 import { ProfileInfo } from "./types";
-import { MongoClient, ObjectId, ServerApiVersion } from "mongodb";
+import { MongoClient, ServerApiVersion } from "mongodb";
 
 const postsRouter = require("./routers/posts");
 

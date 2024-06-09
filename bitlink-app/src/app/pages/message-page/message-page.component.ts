@@ -140,24 +140,6 @@ export class MessagePageComponent {
     return combinedMessages;
   }
 
-
-
-  sortMessages(messages: Message[]): Message[] {
-    // Combine received and sent messages into a single array
-    const combinedMessages = [...messages];
-    // Convert UTC timestamps to local time and sort the combined array based on timestamp
-    combinedMessages.forEach(message => {
-      // Check if the timestamp is already in the format "09:10 AM"
-      if (!/^\d{1,2}:\d{2} [AP]M$/.test(message.timestamp)) {
-          const date = new Date(message.timestamp);
-          message.timestamp = date.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit', hour12: true });
-      }
-    });
-    // Sort the combined array based on timestamp
-    combinedMessages.sort((a, b) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime());
-    return combinedMessages;
-  }
-
   handleUserSwap(id: string){
     this.fetchMessages(this.id, id);
   }
