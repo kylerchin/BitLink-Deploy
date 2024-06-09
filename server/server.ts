@@ -251,7 +251,7 @@ connectToDatabase()
       }
     );
 
-    app.get(
+    /*app.get(
       "/api/account/getAllUsers",
       async (_req: Request, res: Response) => {
         try {
@@ -331,7 +331,7 @@ connectToDatabase()
         console.error(e);
         res.status(400).send(e instanceof Error ? e.message : "Unknown error");
       }
-    });
+    });*/
 
     app.listen(8888, () => {
       console.log(`Server running at http://localhost:8888...`);
