@@ -64,6 +64,7 @@ export class PostPageComponent implements OnInit {
           this.comments.push(comment);
         });
     });
+    this.comments = this.comments.sort((a, b) => b.likes - a.likes);
   }
   refreshComments() {
     this.comments = [];
