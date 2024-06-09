@@ -65,6 +65,10 @@ export class PostPageComponent implements OnInit {
         });
     });
   }
+  refreshComments() {
+    this.comments = [];
+    this.fetchPostData();
+  }
 }
 
 //   profile_picture: string = 'assets/profile_picture.png';

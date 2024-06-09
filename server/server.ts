@@ -204,9 +204,42 @@ connectToDatabase()
       }
     });
 
-    app.put("/api/posts/:id/comment", async (req: Request, res: Response) => {
-      //add a comment to the post with the specific id
-    });
+    app.post(
+      "/api/posts/:postId/comment",
+      async (req: Request, res: Response) => {
+        //make a comment
+        try {
+          //add a post to the database
+          const postId = req.params.postId;
+          const database = client.db("account");
+          const collection = database.collection("comment");
+          const postCollection = database.collection("post");
+          const newCommentBody = req.body;
+          const newComment = {
+            comment: newCommentBody.comment,
+            user: {
+              username: newCommentBody.user?.username,
+              usertag: newCommentBody.user?.usertag,
+              profile_pic: newCommentBody?.user.profile_pic,
+            },
+            likes: 0,
+            reposts: 0,
+            comment_num: 0,
+            saves: 0,
+            likedby: [],
+          };
+          const commentId = await collection.insertOne(newComment);
+          await postCollection.updateOne(
+            { _id: new ObjectId(postId) },
+            { $addToSet: { comments: commentId.insertedId } }
+          );
+          res.status(201).send("Comment created successfully");
+        } catch (err) {
+          console.error(err);
+          res.status(500).send("Failed to create comment");
+        }
+      }
+    );
 
     app.get("/api/posts/:id", async (req: Request, res: Response) => {
       //get the post with the specific id

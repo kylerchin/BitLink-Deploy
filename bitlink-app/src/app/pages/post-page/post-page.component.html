@@ -23,7 +23,11 @@
         [postId]="post?._id"
       ></app-post-component>
     </div>
-    <app-reply [profile_picture]="profileImagePath"></app-reply>
+    <app-reply
+      (commentAdded)="refreshComments()"
+      [profile_picture]="profileImagePath"
+      [postId]="post?._id"
+    ></app-reply>
     <div class="comment-section">
       <div *ngFor="let comment of comments">
         <app-comment

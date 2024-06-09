@@ -2,10 +2,12 @@ import { Component, Input, EventEmitter, Output, OnInit } from '@angular/core';
 import { SharePopupComponent } from '../share-popup/share-popup.component';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
+import { Router } from 'express';
 @Component({
   selector: 'app-like-comment-share-bar',
   standalone: true,
-  imports: [SharePopupComponent, CommonModule],
+  imports: [SharePopupComponent, CommonModule, RouterModule],
   templateUrl: './like-comment-share-bar.component.html',
   styleUrl: './like-comment-share-bar.component.scss',
 })

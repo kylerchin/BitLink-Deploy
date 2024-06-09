@@ -37,6 +37,7 @@ export interface Comment {
   reposts: number;
   comment_num: number;
   saves: number;
+  likedby: string[];
 }
 export interface Post {
   title: string;
