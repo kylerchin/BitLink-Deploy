@@ -293,6 +293,21 @@ connectToDatabase()
         res.status(500).send("Failed to fetch comment");
       }
     });
+
+    app.get("/api/userposts/:usertag", async (req: Request, res: Response) => {
+      try {
+        const usertag = req.params.usertag;
+        const database = client.db("account");
+        const posts = await database
+          .collection("post")
+          .find({ "user.usertag": usertag })
+          .toArray();
+        res.status(200).json(posts);
+      } catch (err) {
+        console.error(err);
+        res.status(500).send("Failed to fetch posts");
+      }
+    });
     /*app.get("/api/posts", async (req: Request, res: Response) => {
       try {
         const database = client.db("account");

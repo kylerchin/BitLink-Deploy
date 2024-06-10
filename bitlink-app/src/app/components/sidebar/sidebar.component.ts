@@ -28,30 +28,6 @@ export class SidebarComponent {
   popupclosed(show: boolean) {
     this.show = show;
   }
-
-  // nameInit() {
-  //   let name;
-  //   this.accountManagementService.fetchUser(this.id).subscribe({
-  //     next: (res)=> {name = JSON.parse(res).name}
-  //   }); return (name)? name : undefined;
-  // }
-
-  // usernameInit() {
-  //   let name;
-  //   this.accountManagementService.fetchUser(this.id).subscribe({
-  //     next:(res)=>{name=JSON.parse(res).username}
-  //   }); return (name)? '@' + name : undefined;
-
-  // }
-  // nameInit() {
-  //   this.accountManagementService.fetchUser(this.id).subscribe({
-  //     next: (res) => {
-  //       this.id = JSON.parse(res)._id;
-  //       this.name = JSON.parse(res).name;
-  //     },
-  //   });
-  // }
-
   usernameInit() {
     this.accountManagementService.getCurrentUser().subscribe({
       next: (res) => {
