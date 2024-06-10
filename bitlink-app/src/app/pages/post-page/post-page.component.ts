@@ -7,6 +7,7 @@ import { CommentComponent } from '../../components/comment/comment.component';
 import { PostComponentComponent } from '../../components/post-component/post-component.component';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { AccountManagementService } from '../../services/account-management/account-management.service';
 
 @Component({
   selector: 'app-post-page',
@@ -45,7 +46,6 @@ export class PostPageComponent implements OnInit {
       }
     });
   }
-
   fetchPostData(): void {
     this.http
       .get(`http://localhost:8888/api/posts/${this.postId}`)

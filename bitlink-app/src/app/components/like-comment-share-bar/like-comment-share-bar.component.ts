@@ -1,44 +1,78 @@
-import { Component, Input, EventEmitter, Output, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  EventEmitter,
+  Output,
+  OnInit,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 import { SharePopupComponent } from '../share-popup/share-popup.component';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import { Router } from 'express';
+import { AccountManagementService } from '../../services/account-management/account-management.service';
+
 @Component({
   selector: 'app-like-comment-share-bar',
   standalone: true,
   imports: [SharePopupComponent, CommonModule, RouterModule],
   templateUrl: './like-comment-share-bar.component.html',
-  styleUrl: './like-comment-share-bar.component.scss',
+  styleUrls: ['./like-comment-share-bar.component.scss'],
 })
-export class LikeCommentShareBarComponent {
+export class LikeCommentShareBarComponent implements OnInit, OnChanges {
   @Input() like: string = '';
   @Input() repost: string = '';
   @Input() comment: string = '';
   @Input() save: string = '';
   @Input() postId: string = '';
-  // @Input() postId: string = '6647e9df10fa058d8154bfd1';
   @Output() LikePost = new EventEmitter<string[]>();
 
   show = false;
   isLiked = false;
-  // postId: string = '6647e9df10fa058d8154bfd1';
-  id: string = '6647cf24ebe437ca2de4e30d';
   post: any;
   peoplewholiked: any[] = [];
+  id: string = '';
+  name: string | undefined;
+  username: string | undefined;
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private accountManagementService: AccountManagementService
+  ) {}
+
   ngOnInit(): void {
-    if (this.postId) {
-      this.fetchLikes();
+    this.usernameInit();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['postId']) {
+      if (this.postId && this.id) {
+        this.fetchLikes();
+        console.log(this.id);
+        console.log(this.postId);
+      }
     }
   }
+
+  usernameInit() {
+    this.accountManagementService.getCurrentUser().subscribe({
+      next: (res) => {
+        const user = JSON.parse(res);
+        this.id = user._id;
+        this.username = user.username;
+        this.name = user.name;
+        if (this.postId) {
+          this.fetchLikes();
+        }
+      },
+    });
+  }
+
   liked() {
-    //need post.id
     this.isLiked = !this.isLiked;
-    console.log(this.postId);
+    console.log(this.id);
     if (this.isLiked) {
-      //call route to add a like
       this.http
         .put(`http://localhost:8888/api/posts/${this.postId}/like`, {
           userId: this.id,
@@ -48,7 +82,6 @@ export class LikeCommentShareBarComponent {
           this.fetchLikeCount();
         });
     } else {
-      //call route to remove a like
       this.http
         .put(`http://localhost:8888/api/posts/${this.postId}/dislike`, {
           userId: this.id,
@@ -59,6 +92,7 @@ export class LikeCommentShareBarComponent {
         });
     }
   }
+
   fetchLikes(): void {
     this.http
       .get(`http://localhost:8888/api/posts/${this.postId}`)
@@ -68,6 +102,7 @@ export class LikeCommentShareBarComponent {
         this.isLiked = this.peoplewholiked.includes(this.id);
       });
   }
+
   fetchLikeCount(): void {
     this.http
       .get(`http://localhost:8888/api/posts/${this.postId}`)
@@ -75,14 +110,14 @@ export class LikeCommentShareBarComponent {
         this.post = data;
         this.like = data.likes;
         this.comment = data.comment_num;
-        console.log(this.like);
-        console.log(data.comment_num);
       });
   }
+
   openpopup() {
     this.show = true;
     console.log('clicked');
   }
+
   popupclosed(show: boolean) {
     this.show = show;
   }
