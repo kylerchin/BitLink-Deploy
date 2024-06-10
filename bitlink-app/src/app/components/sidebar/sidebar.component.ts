@@ -17,7 +17,7 @@ export class SidebarComponent {
   show = false;
 
   constructor(private accountManagementService: AccountManagementService) {
-    this.nameInit();
+    // this.nameInit();
     this.usernameInit();
   }
 
@@ -43,18 +43,22 @@ export class SidebarComponent {
   //   }); return (name)? '@' + name : undefined;
 
   // }
-  nameInit() {
-    this.accountManagementService.fetchUser(this.id).subscribe({
-      next: (res) => {
-        this.name = JSON.parse(res).name;
-      },
-    });
-  }
+  // nameInit() {
+  //   this.accountManagementService.fetchUser(this.id).subscribe({
+  //     next: (res) => {
+  //       this.id = JSON.parse(res)._id;
+  //       this.name = JSON.parse(res).name;
+  //     },
+  //   });
+  // }
 
   usernameInit() {
-    this.accountManagementService.fetchUser(this.id).subscribe({
+    this.accountManagementService.getCurrentUser().subscribe({
       next: (res) => {
-        this.username = '@' + JSON.parse(res).username;
+        console.log(res);
+        this.id = JSON.parse(res)._id;
+        this.username = JSON.parse(res).username;
+        this.name = JSON.parse(res).name;
       },
     });
   }

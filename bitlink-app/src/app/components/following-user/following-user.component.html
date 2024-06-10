@@ -1,16 +1,28 @@
-<div class="following-user">
+<div class="following-user flex flex-row px-4 py-2 align-middle gap-x-auto">
   <span
-    ><img [src]="profile_pic" alt="Profile Picture" id="profile_pic"
+    ><img
+      [src]="profile_pic"
+      alt="Profile Picture"
+      class="h-8 w-8 lg:h-12 lg:w-12 object-cover rounded-full my-2 mr-5 lg:mr-3"
   /></span>
-  <span id="profile"
+  <span class="mt-2 text-xs lg:text-base w-40 md:w-44 lg:w-64 mr-10"
     ><div class="username">{{ username }}</div>
     <div class="usertag">{{ usertag }}</div></span
   >
   <!-- <span>{{ usertag }}</span> -->
-  <span id="message">{{ action }}</span>
-  <span id="following" *ngIf="following">
-    <button (mouseenter)="isHovering=true" (mouseleave)="isHovering=false" (click)="unfollowuser(user_id)">
-      {{ isHovering ? 'Unfollow?' : following }}
+  <span
+    id="message"
+    class="mt-2 text-xs hidden md:block md:text-base lg:block md:text-sm lg:text-base"
+    >{{ action }}</span
+  >
+  <span id="following" class="ml-auto" *ngIf="following">
+    <button
+      (mouseenter)="isHovering = true"
+      (mouseleave)="isHovering = false"
+      (click)="unfollowuser(user_id)"
+      class="w-24 md:w-24 lg:w-32 text-xs lg:text-base flex flex-row align-center items-center followback rounded-full px-5 lg:px-3 py-1 whitespace-nowrap"
+    >
+      {{ isHovering ? "Unfollow?" : following }}
     </button>
-  </span>    
+  </span>
 </div>
