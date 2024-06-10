@@ -30,7 +30,7 @@ $secondary-accent-color: #008005;
   justify-content: center;
   align-items: center;
   width: 90%;
-  font-size: 2.1vw;
+  // font-size: 1.8vw;
   padding-top: 2vw;
   padding-bottom: 2vw;
   margin-left: 2rem;
@@ -42,11 +42,12 @@ $secondary-accent-color: #008005;
 }
 
 #profile-icon {
-  width: 5rem;
-  height: 5rem;
+  width: 4rem;
+  height: 4rem;
   object-fit: cover;
   border-radius: 50%;
   margin-left: 0.5rem;
+  align-self: center;
 }
 .reply-button {
   display: flex;

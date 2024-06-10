@@ -9,15 +9,15 @@ $secondary-accent-color: #008005;
   background-color: $background-color;
   font-family: Inter, sans-serif;
   color: $text-color;
-  margin: 0;
-  padding: 0;
+  // margin: 0;
+  // padding: 0;
 }
 #profile-icon {
-  width: 4rem;
-  height: 4rem;
   object-fit: cover;
   border-radius: 50%;
-  margin-left: 0.5rem;
+  // margin-left: 0.5rem;
+  display: flex;
+  align-self: center;
 }
 #space {
   width: 4rem;
@@ -37,26 +37,28 @@ $secondary-accent-color: #008005;
   display: grid;
   grid-template-rows: 1fr 1fr;
   margin-left: 0.8rem;
-  font-size: 1.2rem;
 }
 #username {
-  line-height: 0.5;
-  padding-top: 1rem;
-  display: flex;
-  justify-items: start;
+  // line-height: 0.5;
+  // padding-top: 1rem;
+  // display: flex;
+  // justify-items: start;
 }
 #usertag {
-  line-height: 0.5;
-  padding-top: 0.3rem;
-  display: flex;
-  justify-items: start;
+  // line-height: 0.5;
+  // padding-top: 0.3rem;
+  // display: flex;
+  // justify-items: start;
 }
 
 #comment-text {
-  margin: 10px;
-  font-size: 1.2rem;
+  // margin: 10px;
+  // font-size: 1.2rem;
+  margin: 1%;
 }
 
 .comment {
+  padding-left: 1%;
+
   border: 1px solid $emphasis-color;
 }
