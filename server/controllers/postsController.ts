@@ -30,6 +30,7 @@ exports.getPosts = asyncHandler(async (req: any, res: any) => {
 
     // Map the post documents to the required format
     const data: Post[] = posts.map((post) => ({
+      _id: post._id,
       title: post.title,
       content: {
         message: post.content.message,
@@ -65,6 +66,7 @@ exports.searchPosts = asyncHandler(async (req: any, res: any) => {
 
     // Map the user documents to the required format
     const data: Post[] = search.map((post) => ({
+      _id: post._id,
       title: post.title,
       content: {
         message: post.content.message,

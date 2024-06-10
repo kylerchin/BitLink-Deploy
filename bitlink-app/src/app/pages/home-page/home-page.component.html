@@ -15,24 +15,24 @@
         id="for-you-button"
       ></app-for-you-button>
     </div>
-    <div *ngFor="let post of posts">
-      <div id="post-box">
-        <div class="post-format">
-          <app-post-component
-              [username]="post?.user?.username"
-              [usertag]="post?.user?.usertag"
-              [profile_picture]="post?.user?.profile_pic"
-              [date]="post?.date"
-              [message]="post?.content?.message"
-              [image]="post?.content?.image"
-              [video]="post?.content?.video"
-              [like]="post?.likes"
-              [repost]="post?.reposts"
-              [comment_number]="post?.comment_num"
-              [save]="post?.saves"
-              [postId]="post?._id"
-          ></app-post-component>
-        </div>
+    <div id="post-box">
+      <div *ngFor="let post of posts" class="post-format">
+        <app-post-component
+          [username]="post?.user?.username"
+          [usertag]="post?.user?.usertag"
+          [profile_picture]="post?.user?.profile_pic"
+          [date]="post?.date"
+          [message]="post?.content?.message"
+          [image]="post?.content?.image"
+          [video]="post?.content?.video"
+          [timestamp]="post?.timestamp"
+          [videoviews]="post?.videoviews"
+          [like]="post?.likes"
+          [repost]="post?.reposts"
+          [comment_number]="post?.comment_num"
+          [save]="post?.saves"
+          [postId]="post?._id"
+        ></app-post-component>
       </div>
     </div>
   </div>
