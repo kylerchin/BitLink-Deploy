@@ -111,7 +111,7 @@ export class FollowingPageComponent {
     return dates;
   }
 
-  readonly APIUrl = "http://localhost:8888/api/account/unfollow";
+  readonly APIUrl = "http://localhost:8888/api/user/unfollow";
   handleUnfollow(id:any){
     this.http.delete(this.APIUrl+'?id='+id+'&id2='+this.id).subscribe({
       next: (data) => {

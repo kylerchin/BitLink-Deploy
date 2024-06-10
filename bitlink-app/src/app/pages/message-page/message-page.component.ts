@@ -116,7 +116,6 @@ export class MessagePageComponent {
           else {
             this.id2 = otherUser;
           }
-
         },
         error: (error) => {
           console.error("Error fetching user information:", error);

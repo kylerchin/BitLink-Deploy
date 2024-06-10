@@ -6,6 +6,11 @@ import { ForYouButtonComponent } from '../../components/for-you-button/for-you-b
 import { PostComponentComponent } from '../../components/post-component/post-component.component';
 import { ReplyComponent } from '../../components/reply/reply.component';
 import { CommentComponent } from '../../components/comment/comment.component';
+import { CommonModule, NgIf } from '@angular/common';
+import { AccountManagementService } from "../../services/account-management/account-management.service";
+import { HttpClient } from '@angular/common/http';
+import { Post } from '../../../../../server/types';
+import { shuffle } from 'lodash';
 
 @Component({
   selector: 'app-following-post-page',
@@ -18,37 +23,46 @@ import { CommentComponent } from '../../components/comment/comment.component';
     PostComponentComponent,
     ReplyComponent,
     CommentComponent,
+    CommonModule,
+    NgIf
   ],
   templateUrl: './following-post-page.component.html',
   styleUrl: './following-post-page.component.scss',
   encapsulation: ViewEncapsulation.None,
 })
 export class FollowingPostPageComponent {
-  like: string = '921k';
-  repost: string = '382K';
-  comment_number: string = '203K';
-  save: string = '282K';
-  like2: string = '1.4M';
-  repost2: string = '892K';
-  comment_number2: string = '621K';
-  save2: string = '402K';
-  like3: string = '2.1M';
-  repost3: string = '1M';
-  comment_number3: string = '865K';
-  save3: string = '921K';
-  username2: string = 'XxEmo CoderxX';
-  usertag2: string = 'SilkSongWhen';
-  profile_picture3: string = 'assets/cool-pfp.jpg';
-  date: string = '6:12 AM Apr 12, 2024';
-  date2: string = '7:23 PM Apr 10, 2024';
-  date4: string = '8:23 PM Apr 9, 2024';
-  message: string =
-    'Just another image of R coders, nothing else to see here LOL';
-  message2: string = 'Wow found my local R coder!';
-  message4: string = 'NEW MEME JUST DROPPED! R Coders = CryBabies!';
-  comment: string =
-    'I really like this post! I think it is very informative and helpful for people looking to learn Rust. However, I feel like people should look towards C++ instead. C++ is a much more practical language than R or Rust.';
-  image: string = 'assets/Crying-girl.jpg';
-  image2: string = 'assets/cry.jpg';
-  image3: string = 'assets/cry2.jpg';
+  currentName : String | undefined;
+  id: string = '"664a8e9008885a342d2837b4"';
+  posts: any[] = [];
+
+  constructor(private accountManagementService: AccountManagementService, private http: HttpClient) {
+    this.nameInit();
+  }
+
+  nameInit() {
+    this.accountManagementService.getCurrentUser().subscribe({
+      next: (res) => {
+        console.log(res);
+        this.id = JSON.parse(res)._id;
+        this.currentName = JSON.parse(res).username;
+        this.fetchPost();
+      },
+      error: (error) => {
+        console.error("Error fetching current user information:", error);
+        this.fetchPost();
+      }
+    });
+  }
+
+  fetchPost(): void {
+    this.http.get<Post[]>(`http://localhost:8888/api/posts`)
+      .subscribe({
+        next: (data: Post[]) => {
+          this.posts = shuffle(data);
+        },
+        error: (error) => {
+          console.error("Error fetching user information:", error);
+        }
+      });
+  }
 }

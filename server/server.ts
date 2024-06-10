@@ -10,6 +10,7 @@ import { MongoClient, ServerApiVersion } from "mongodb";
 const postsRouter = require("./routers/posts");
 const messagesRouter = require("./routers/messages");
 const commentsRouter = require("./routers/comments");
+const followingRouter = require("./routers/following");
 
 const uri =
   "mongodb+srv://briannw2:IuH2qY69AaAKHGSs@bitlink.wfyrdwt.mongodb.net/?retryWrites=true&w=majority&appName=Bitlink";
@@ -83,11 +84,11 @@ connectToDatabase()
     app.use(express.urlencoded({ extended: true }));
     app.use(passport.initialize());
     app.use(passport.session());
-
     app.use("/accounts", accountsRouter);
     app.use(postsRouter);
     app.use(messagesRouter);
     app.use(commentsRouter);
+    app.use(followingRouter);
     // app.get("/api/userposts/:usertag", async (req: Request, res: Response) => {
     //   try {
     //     const usertag = req.params.usertag;
