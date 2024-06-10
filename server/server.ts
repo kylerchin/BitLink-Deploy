@@ -85,7 +85,7 @@ connectToDatabase()
 
     app.use("/accounts", accountsRouter);
 
-    app.get("/api/account/messages", async (req: any, res: any) => {
+    /*app.get("/api/account/messages", async (req: any, res: any) => {
       try {
         const userId = req.query.user_id; // Expect a user_id query parameter
         if (!userId) {
@@ -144,7 +144,8 @@ connectToDatabase()
         console.error("Error fetching users & messages:", error);
         res.status(500).send("Failed to fetch users & messages");
       }
-    });
+    });*/
+  
     app.post("/api/posts/create", async (req: Request, res: Response) => {
       try {
         //add a post to the database
@@ -475,7 +476,7 @@ connectToDatabase()
       }
     });
 
-    app.post("/api/account/sendmessage", cors(), async (req: any, res: any) => {
+    /*app.post("/api/account/sendmessage", cors(), async (req: any, res: any) => {
       try {
         const senderid = req.query.id1;
         const receiverid = req.query.id2;
@@ -497,7 +498,7 @@ connectToDatabase()
         console.error("Error sending message", error);
         res.status(500).send("Failed to send message");
       }
-    });
+    });*/
 
     app.listen(8888, () => {
       console.log(`Server running at http://localhost:8888...`);
