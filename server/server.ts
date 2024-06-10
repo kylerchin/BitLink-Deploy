@@ -56,10 +56,6 @@ connectToDatabase()
     const app = express();
     app.use(express.json());
 
-    app.use(postsRouter);
-    app.use(messagesRouter);
-    app.use(commentsRouter);
-
     app.use(bodyParser.urlencoded({ extended: true }));
     app.set("trust proxy", true);
     const corsOptions = {
@@ -89,6 +85,9 @@ connectToDatabase()
     app.use(passport.session());
 
     app.use("/accounts", accountsRouter);
+    app.use(postsRouter);
+    app.use(messagesRouter);
+    app.use(commentsRouter);
     // app.get("/api/userposts/:usertag", async (req: Request, res: Response) => {
     //   try {
     //     const usertag = req.params.usertag;
