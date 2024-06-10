@@ -55,7 +55,7 @@ export class UserPageComponent {
   }
   fetchPosts(): void {
     this.http
-      .get(`http://localhost:8888/api/userposts/${this.username}`)
+      .get(`https://bitlinkbackend.catenarymaps.org/api/userposts/${this.username}`)
       .subscribe((data: any) => {
         this.posts = data;
         this.postnumber = this.posts.length;

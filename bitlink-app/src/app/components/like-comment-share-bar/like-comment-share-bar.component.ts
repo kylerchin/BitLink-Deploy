@@ -74,7 +74,7 @@ export class LikeCommentShareBarComponent implements OnInit, OnChanges {
     console.log(this.id);
     if (this.isLiked) {
       this.http
-        .put(`http://localhost:8888/api/posts/${this.postId}/like`, {
+        .put(`https://bitlinkbackend.catenarymaps.org/api/posts/${this.postId}/like`, {
           userId: this.id,
         })
         .subscribe((res: any) => {
@@ -83,7 +83,7 @@ export class LikeCommentShareBarComponent implements OnInit, OnChanges {
         });
     } else {
       this.http
-        .put(`http://localhost:8888/api/posts/${this.postId}/dislike`, {
+        .put(`https://bitlinkbackend.catenarymaps.org/api/posts/${this.postId}/dislike`, {
           userId: this.id,
         })
         .subscribe((res: any) => {
@@ -95,7 +95,7 @@ export class LikeCommentShareBarComponent implements OnInit, OnChanges {
 
   fetchLikes(): void {
     this.http
-      .get(`http://localhost:8888/api/posts/${this.postId}`)
+      .get(`https://bitlinkbackend.catenarymaps.org/api/posts/${this.postId}`)
       .subscribe((data: any) => {
         this.post = data;
         this.peoplewholiked = data.likedby;
@@ -105,7 +105,7 @@ export class LikeCommentShareBarComponent implements OnInit, OnChanges {
 
   fetchLikeCount(): void {
     this.http
-      .get(`http://localhost:8888/api/posts/${this.postId}`)
+      .get(`https://bitlinkbackend.catenarymaps.org/api/posts/${this.postId}`)
       .subscribe((data: any) => {
         this.post = data;
         this.like = data.likes;

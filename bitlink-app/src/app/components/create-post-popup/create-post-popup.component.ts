@@ -62,7 +62,7 @@ export class CreatePostPopupComponent {
       },
     };
     this.http
-      .post('http://localhost:8888/api/posts/create', postData, {
+      .post('https://bitlinkbackend.catenarymaps.org/api/posts/create', postData, {
         responseType: 'text',
       })
       .subscribe({

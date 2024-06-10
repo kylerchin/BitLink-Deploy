@@ -48,7 +48,7 @@ export class PostPageComponent implements OnInit {
   }
   fetchPostData(): void {
     this.http
-      .get(`http://localhost:8888/api/posts/${this.postId}`)
+      .get(`https://bitlinkbackend.catenarymaps.org/api/posts/${this.postId}`)
       .subscribe((data: any) => {
         this.post = data;
         // console.log(this.postId);
@@ -59,7 +59,7 @@ export class PostPageComponent implements OnInit {
   fetchComments(commentIds: string[]): void {
     commentIds.forEach((id) => {
       this.http
-        .get(`http://localhost:8888/api/comments/${id}`)
+        .get(`https://bitlinkbackend.catenarymaps.org/api/comments/${id}`)
         .subscribe((comment: any) => {
           this.comments.push(comment);
         });

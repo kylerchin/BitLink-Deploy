@@ -27,7 +27,7 @@ export class SearchPageComponent implements OnInit {
       })
   }
   fetchResults(query: string): void {
-    this.http.get<any[]>(`http://localhost:8888/api/search?q=${query}`).subscribe(results => {
+    this.http.get<any[]>(`https://bitlinkbackend.catenarymaps.org/api/search?q=${query}`).subscribe(results => {
       this.posts = results;
     });
   }

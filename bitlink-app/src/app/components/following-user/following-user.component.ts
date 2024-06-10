@@ -13,7 +13,7 @@ import { EventEmitter } from '@angular/core';
 })
 export class FollowingUserComponent {
   constructor(private http: HttpClient) { }
-  readonly APIUrl = "http://localhost:8888/api/account/unfollow";
+  readonly APIUrl = "https://bitlinkbackend.catenarymaps.org/api/account/unfollow";
 
   isHovering: boolean = false;
   @Output() unfollow = new EventEmitter<string>();

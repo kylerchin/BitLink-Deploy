@@ -98,7 +98,7 @@ export class MessagePageComponent {
   }
 
   fetchMessages(userId: string, otherUser: string): void {
-    this.http.get<ApiResponse>(`http://localhost:8888/api/account/messages?user_id=${userId}`)
+    this.http.get<ApiResponse>(`https://bitlinkbackend.catenarymaps.org/api/account/messages?user_id=${userId}`)
       .subscribe({
         next: (data: ApiResponse) => {
           this.users = data.users;
@@ -143,7 +143,7 @@ export class MessagePageComponent {
     this.fetchMessages(this.id, id);
   }
 
-  readonly APIUrl = "http://localhost:8888/api/account/sendmessage";
+  readonly APIUrl = "https://bitlinkbackend.catenarymaps.org/api/account/sendmessage";
   handleSendMessage(messageData: string[]) {
     const [text, sender_id, receiver_id, currentTime] = messageData;
     const url = `${this.APIUrl}?id1=${sender_id}&id2=${receiver_id}`;

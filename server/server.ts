@@ -60,7 +60,7 @@ connectToDatabase()
     app.use(bodyParser.urlencoded({ extended: true }));
     app.set("trust proxy", true);
     const corsOptions = {
-      origin: ["http://localhost:4200"],
+      origin: ["http://localhost:4200", "https://bitlink.catenarymaps.org"],
       credentials: true,
     };
     app.use(cors(corsOptions));
@@ -103,8 +103,8 @@ connectToDatabase()
     //     res.status(500).send("Failed to fetch posts");
     //   }
     // });
-    app.listen(8888, () => {
-      console.log(`Server running at http://localhost:8888...`);
+    app.listen(56264, () => {
+      console.log(`Server running at http://localhost:56264...`);
     });
 
     process.on("SIGINT", () => {

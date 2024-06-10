@@ -55,7 +55,7 @@ export class FollowingPostPageComponent {
   }
 
   fetchPost(): void {
-    this.http.get<Post[]>(`http://localhost:8888/api/posts`)
+    this.http.get<Post[]>(`https://bitlinkbackend.catenarymaps.org/api/posts`)
       .subscribe({
         next: (data: Post[]) => {
           this.posts = shuffle(data);
