@@ -9,6 +9,7 @@ import { MongoClient, ServerApiVersion } from "mongodb";
 
 const postsRouter = require("./routers/posts");
 const messagesRouter = require("./routers/messages");
+const commentsRouter = require("./routers/comments");
 
 const uri =
   "mongodb+srv://briannw2:IuH2qY69AaAKHGSs@bitlink.wfyrdwt.mongodb.net/?retryWrites=true&w=majority&appName=Bitlink";
@@ -57,6 +58,8 @@ connectToDatabase()
 
     app.use(postsRouter);
     app.use(messagesRouter);
+    app.use(commentsRouter);
+    
     app.use(bodyParser.urlencoded({ extended: true }));
     app.set("trust proxy", true);
     const corsOptions = {
