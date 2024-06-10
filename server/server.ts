@@ -59,7 +59,7 @@ connectToDatabase()
     app.use(postsRouter);
     app.use(messagesRouter);
     app.use(commentsRouter);
-    
+
     app.use(bodyParser.urlencoded({ extended: true }));
     app.set("trust proxy", true);
     const corsOptions = {
@@ -89,7 +89,20 @@ connectToDatabase()
     app.use(passport.session());
 
     app.use("/accounts", accountsRouter);
-
+    // app.get("/api/userposts/:usertag", async (req: Request, res: Response) => {
+    //   try {
+    //     const usertag = req.params.usertag;
+    //     const database = client.db("account");
+    //     const posts = await database
+    //       .collection("post")
+    //       .find({ "user.usertag": usertag })
+    //       .toArray();
+    //     res.status(200).json(posts);
+    //   } catch (err) {
+    //     console.error(err);
+    //     res.status(500).send("Failed to fetch posts");
+    //   }
+    // });
     app.listen(8888, () => {
       console.log(`Server running at http://localhost:8888...`);
     });

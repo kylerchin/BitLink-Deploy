@@ -10,7 +10,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-exports.getPost = asyncHandler(async(req:any, res:any) => {
+exports.getPost = asyncHandler(async (req: any, res: any) => {
   try {
     const postId = req.params.id;
     const database = client.db("account");
@@ -23,7 +23,7 @@ exports.getPost = asyncHandler(async(req:any, res:any) => {
   }
 });
 
-exports.getPosts = asyncHandler(async(req:any, res:any) => {
+exports.getPosts = asyncHandler(async (req: any, res: any) => {
   try {
     const database = client.db("account");
     const posts = await database.collection("post").find().toArray();
@@ -57,14 +57,11 @@ exports.getPosts = asyncHandler(async(req:any, res:any) => {
   }
 });
 
-exports.searchPosts = asyncHandler(async(req:any, res:any) => {
+exports.searchPosts = asyncHandler(async (req: any, res: any) => {
   try {
     const database = client.db("account");
     const post_query = { "content.message": { $regex: req.query.q } };
-    const search = await database
-      .collection("post")
-      .find(post_query)
-      .toArray();
+    const search = await database.collection("post").find(post_query).toArray();
 
     // Map the user documents to the required format
     const data: Post[] = search.map((post) => ({
@@ -95,7 +92,7 @@ exports.searchPosts = asyncHandler(async(req:any, res:any) => {
   }
 });
 
-exports.addPost = asyncHandler(async(req:any, res:any) => {
+exports.addPost = asyncHandler(async (req: any, res: any) => {
   try {
     //add a post to the database
     const database = client.db("account");
@@ -130,7 +127,7 @@ exports.addPost = asyncHandler(async(req:any, res:any) => {
   }
 });
 
-exports.likePost = asyncHandler(async(req:any, res:any) => {
+exports.likePost = asyncHandler(async (req: any, res: any) => {
   try {
     const database = client.db("account");
     const collection = database.collection("post");
@@ -153,7 +150,7 @@ exports.likePost = asyncHandler(async(req:any, res:any) => {
   }
 });
 
-exports.unlikePost = asyncHandler(async(req:any, res:any) => {
+exports.unlikePost = asyncHandler(async (req: any, res: any) => {
   try {
     const database = client.db("account");
     const collection = database.collection("post");
@@ -172,5 +169,20 @@ exports.unlikePost = asyncHandler(async(req:any, res:any) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Failed to dislike post" });
+  }
+});
+
+exports.getUserPosts = asyncHandler(async (req: any, res: any) => {
+  try {
+    const usertag = req.params.usertag;
+    const database = client.db("account");
+    const posts = await database
+      .collection("post")
+      .find({ "user.usertag": usertag })
+      .toArray();
+    res.status(200).json(posts);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Failed to fetch posts");
   }
 });
