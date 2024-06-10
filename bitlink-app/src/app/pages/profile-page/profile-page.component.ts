@@ -1,6 +1,5 @@
 import {Component, ViewEncapsulation} from '@angular/core';
 import {SidebarComponent} from "../../components/sidebar/sidebar.component";
-import {User} from "../../schemas/user";
 import {NgIf} from "@angular/common";
 import {AccountManagementService} from "../../services/account-management/account-management.service";
 import {FormsModule} from "@angular/forms";
@@ -47,11 +46,11 @@ export class ProfilePageComponent {
       }
     }
 
-    let changes = new User();
-    if (this.nameInput) changes.name = this.nameInput;
-    if (this.usernameInput) changes.username = this.usernameInput;
-    if (this.emailInput) changes.email = this.emailInput;
-    if (this.passwordInput) changes.password = this.passwordInput;
+    let changes:any = {};
+    if (this.nameInput) changes["name"] = this.nameInput;
+    if (this.usernameInput) changes["username"] = this.usernameInput;
+    if (this.emailInput) changes["email"] = this.emailInput;
+    if (this.passwordInput) changes["password"] = this.passwordInput;
 
     this.accountManagementService.updateUser(this.id, changes)
       .subscribe(() => {
