@@ -22,4 +22,5 @@ export class PostComponentComponent {
   @Input() timestamp: string = '';
   @Input() videoviews: string = '';
   @Input() image: string = '';
+  @Input() postId: string = '';
 }

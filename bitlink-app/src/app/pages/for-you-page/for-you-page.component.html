@@ -2,50 +2,36 @@
   <app-sidebar id="sidebar"></app-sidebar>
   <div id="top-right-container">
     <app-search-bar id="search-bar"></app-search-bar>
-    <div id="buttons-container">
-      <app-following-button id="following-button"></app-following-button>
-      <app-for-you-button id="for-you-button"></app-for-you-button>
+    <div
+      id="buttons-container"
+      class="flex flex-row py-4 justify-center items-center"
+    >
+      <app-following-button
+        class="mx-4 sm:mx-6 md:mx-8 lg:mx-12"
+        id="following-button"
+      ></app-following-button>
+      <app-for-you-button
+        class="mx-4 sm:mx-6 md:mx-8 lg:mx-10"
+        id="for-you-button"
+      ></app-for-you-button>
     </div>
     <div id="post-box">
-      <div class="post-format">
+      <div *ngFor="let post of posts" class="post-format">
         <app-post-component
-          [username]="username"
-          [usertag]="usertag"
-          [profile_picture]="profile_picture"
-          [date]="date"
-          [message]="message"
-          [image]="image"
-          [like]="like"
-          [comment_number]="comment_number"
-          [repost]="repost"
-          [save]="save"
-        ></app-post-component>
-      </div>
-      <div class="post-format">
-        <app-post-component
-          [username]="username2"
-          [usertag]="usertag2"
-          [profile_picture]="profile_picture2"
-          [date]="date2"
-          [message]="message2"
-          [like]="like2"
-          [comment_number]="comment_number2"
-          [repost]="repost2"
-          [save]="save2"
-          [image]="image2"
-        ></app-post-component>
-      </div>
-      <div class="post-format">
-        <app-post-component
-          [username]="username3"
-          [usertag]="usertag3"
-          [profile_picture]="profile_picture3"
-          [date]="date4"
-          [message]="message4"
-          [like]="like3"
-          [comment_number]="comment_number3"
-          [repost]="repost3"
-          [save]="save3"
+          [username]="post?.user?.username"
+          [usertag]="post?.user?.usertag"
+          [profile_picture]="post?.user?.profile_pic"
+          [date]="post?.date"
+          [message]="post?.content?.message"
+          [image]="post?.content?.image"
+          [video]="post?.content?.video"
+          [timestamp]="post?.timestamp"
+          [videoviews]="post?.videoviews"
+          [like]="post?.likes"
+          [repost]="post?.reposts"
+          [comment_number]="post?.comment_num"
+          [save]="post?.saves"
+          [postId]="post?._id"
         ></app-post-component>
       </div>
     </div>

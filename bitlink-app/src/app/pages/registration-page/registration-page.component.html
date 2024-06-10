@@ -10,5 +10,4 @@
   <div id="errors" *ngIf="error">{{error}}</div>
   <div id="success" *ngIf="success">You have successfully made an account! You may now <a href="/login"><span>log in</span></a></div>
   <div id="button" (click)="validate()"><button>Create Account</button></div>
-  <div id="accounts" *ngFor="let account of accounts">Username: {{account.username}}, Password: {{account.password}}</div>
 </div>

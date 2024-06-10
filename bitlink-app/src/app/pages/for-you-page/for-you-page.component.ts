@@ -6,6 +6,11 @@ import { ForYouButtonComponent } from '../../components/for-you-button/for-you-b
 import { PostComponentComponent } from '../../components/post-component/post-component.component';
 import { ReplyComponent } from '../../components/reply/reply.component';
 import { CommentComponent } from '../../components/comment/comment.component';
+import { CommonModule, NgIf } from '@angular/common';
+import { AccountManagementService } from "../../services/account-management/account-management.service";
+import { HttpClient } from '@angular/common/http';
+import { Post } from '../../../../../server/types';
+import { shuffle } from 'lodash';
 
 @Component({
   selector: 'app-for-you-page',
@@ -18,42 +23,46 @@ import { CommentComponent } from '../../components/comment/comment.component';
     PostComponentComponent,
     ReplyComponent,
     CommentComponent,
+    CommonModule,
+    NgIf
   ],
   templateUrl: './for-you-page.component.html',
   styleUrl: './for-you-page.component.scss',
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class ForYouPageComponent {
-  like: string = '122K'
-  repost: string = '62K';
-  comment_number: string = '6,232';
-  save: string = '12K';
-  like2: string = '422K';
-  repost2: string = '266K';
-  comment_number2: string = '92K';
-  save2: string = '44K';
-  like3: string = '3.2M';
-  repost3: string = '1.01M';
-  comment_number3: string = '923K';
-  save3: string = '912K';
-  username: string = 'ID WIN';
-  usertag: string = '@NahIdWin';
-  profile_picture: string = 'assets/nahidwin.jpg';
-  username2: string = 'SMILE';
-  usertag2: string = '@SmileyCoder';
-  profile_picture2: string = 'assets/smile.jpg';
-  username3: string = 'Pineapple Under the Sea';
-  usertag3: string = '@RealSpongebob22';
-  profile_picture3: string = 'assets/sponge.jpg';
-  date: string = '12:01 PM May 1, 2024';
-  date2: string = '4:21 PM Apr 28, 2024';
-  date4: string = '9:02 AM Apr 25, 2024';
-  message: string = 'R is SUPERIOR, and I MEAN SUPERIOR, to any other coding language out there, you all don\'t know anything about coding fr.';
-  message2: string = 'C++ MAKES THE WORLD GO AROUND, GOD CODES IN C++!!!!!';
-  message4: string = `Who lives in a pineapple under the sea? SpongeBob SquarePants! Absorbent and yellow and porous is he. SpongeBob SquarePants! If nautical nonsense be something you wish. 
-                        SpongeBob SquarePants! Then drop on the deck and flop like a fish. SpongeBob SquarePants! SpongeBob SquarePants! SpongeBob SquarePants!`;
-  comment: string =
-    'I really like this post! I think it is very informative and helpful for people looking to learn Rust. However, I feel like people should look towards C++ instead. C++ is a much more practical language than R or Rust.';
-  image: string = 'assets/crown.jpg'; 
-  image2: string = 'assets/godcode.jpg';
+  currentName : String | undefined;
+  id: string = '"664a8e9008885a342d2837b4"';
+  posts: any[] = [];
+
+  constructor(private accountManagementService: AccountManagementService, private http: HttpClient) {
+    this.nameInit();
+  }
+
+  nameInit() {
+    this.accountManagementService.getCurrentUser().subscribe({
+      next: (res) => {
+        console.log(res);
+        this.id = JSON.parse(res)._id;
+        this.currentName = JSON.parse(res).username;
+        this.fetchPost();
+      },
+      error: (error) => {
+        console.error("Error fetching current user information:", error);
+        this.fetchPost();
+      }
+    });
+  }
+
+  fetchPost(): void {
+    this.http.get<Post[]>(`http://localhost:8888/api/posts`)
+      .subscribe({
+        next: (data: Post[]) => {
+          this.posts = shuffle(data);
+        },
+        error: (error) => {
+          console.error("Error fetching user information:", error);
+        }
+      });
+  }
 }

@@ -1,6 +1,5 @@
 import {Component, ViewEncapsulation} from '@angular/core';
 import {SidebarComponent} from "../../components/sidebar/sidebar.component";
-import {User} from "../../schemas/user";
 import {NgIf} from "@angular/common";
 import {AccountManagementService} from "../../services/account-management/account-management.service";
 import {FormsModule} from "@angular/forms";
@@ -30,16 +29,13 @@ export class ProfilePageComponent {
   password2Input: string | undefined;
 
   constructor(private accountManagementService: AccountManagementService) {
-    this.currentName = this.nameInit();
+    this.nameInit();
   }
 
   nameInit() {
-    let name = undefined;
-    this.accountManagementService.fetchUser("664a8e9008885a342d2837b4").subscribe({
-      next: (res)=> {console.log(res); name = JSON.parse(res).name}
-    });
-    if (name) return name;
-    else return undefined;
+    this.accountManagementService.getCurrentUser().subscribe({
+      next: (res)=> {console.log(res); this.id = JSON.parse(res)._id; this.currentName = JSON.parse(res).username}
+    })
   }
 
   update() {
@@ -50,11 +46,11 @@ export class ProfilePageComponent {
       }
     }
 
-    let changes = new User();
-    if (this.nameInput) changes.name = this.nameInput;
-    if (this.usernameInput) changes.username = this.usernameInput;
-    if (this.emailInput) changes.email = this.emailInput;
-    if (this.passwordInput) changes.password = this.passwordInput;
+    let changes:any = {};
+    if (this.nameInput) changes["name"] = this.nameInput;
+    if (this.usernameInput) changes["username"] = this.usernameInput;
+    if (this.emailInput) changes["email"] = this.emailInput;
+    if (this.passwordInput) changes["password"] = this.passwordInput;
 
     this.accountManagementService.updateUser(this.id, changes)
       .subscribe(() => {

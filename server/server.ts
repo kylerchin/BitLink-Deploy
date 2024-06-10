@@ -1,19 +1,29 @@
 // @ts-ignore
-import express, {
-  query,
-  request,
-  response,
-  Express,
-  Request,
-  Response,
-} from "express";
+import { query, request, response, Express, Request, Response } from "express";
 // @ts-ignore
-import cors from "cors";
-import { User, Message } from "./types";
+// import cors from "@types/cors";
+import { User, Message, Follow } from "./types";
 import { Post } from "./types";
 import { ProfileInfo } from "./types";
-import {MongoClient, ObjectId, ServerApiVersion} from 'mongodb';
-const uri = "mongodb+srv://briannw2:IuH2qY69AaAKHGSs@bitlink.wfyrdwt.mongodb.net/?retryWrites=true&w=majority&appName=Bitlink";
+import { MongoClient, ServerApiVersion } from "mongodb";
+
+const postsRouter = require("./routers/posts");
+const messagesRouter = require("./routers/messages");
+const commentsRouter = require("./routers/comments");
+const followingRouter = require("./routers/following");
+
+const uri =
+  "mongodb+srv://briannw2:IuH2qY69AaAKHGSs@bitlink.wfyrdwt.mongodb.net/?retryWrites=true&w=majority&appName=Bitlink";
+
+const accountsRouter = require("./routers/accounts");
+
+const express = require("express");
+const cors = require("cors");
+const session = require("express-session");
+const passport = require("passport");
+const bodyParser = require("body-parser");
+const MongoStore = require("connect-mongo");
+const { ObjectId } = require("mongodb");
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 export const client = new MongoClient(uri, {
@@ -44,355 +54,55 @@ export async function connectToDatabase() {
 // Connect to MongoDB and start Express server
 connectToDatabase()
   .then((client) => {
-    const app: Express = express(); // Assuming express is used
-    app.use(cors());
+    const app = express();
     app.use(express.json());
 
-    app.get("/api/account/messages", async (req: Request, res: Response) => {
-      try {
-        const database = client.db("account");
-        const query = { $or: [{ sender_id: "1" }, { receiver_id: "1" }] };
-        const messages = await database
-          .collection("message")
-          .find(query)
-          .toArray();
-        const userIds = new Set<string>();
-        messages.forEach((message) => {
-          if (message.sender_id === "1") userIds.add(message.receiver_id);
-          if (message.receiver_id === "1") userIds.add(message.sender_id);
-        });
-        const userIdArray = Array.from(userIds);
-        const query2 = { user_id: { $in: userIdArray } };
-        const collections = database.collection("user");
-        // Fetch user information from the user collection
-        const users = await collections.find(query2).toArray();
+    app.use(bodyParser.urlencoded({ extended: true }));
+    app.set("trust proxy", true);
+    const corsOptions = {
+      origin: ["http://localhost:4200"],
+      credentials: true,
+    };
+    app.use(cors(corsOptions));
 
-        // Map the user documents to the required format
-        const userInfo: User[] = users.map((user) => ({
-          username: user.username,
-          usertag: user.user_tag,
-          profile_pic: user.profile_picture,
-          user_id: user.user_id,
-        }));
-
-        const messageInfo: Message[] = messages.map((messages) => ({
-          sender_id: messages.sender_id,
-          receiver_id: messages.receiver_id,
-          content: messages.content,
-          timestamp: messages.timestamp,
-        }));
-
-        const data = {
-          users: userInfo,
-          messages: messageInfo,
-        };
-
-        res.json(data);
-      } catch (error) {
-        console.error("Error fetching users & messages:", error);
-        res.status(500).send("Failed to fetch users & messages");
-      }
-    });
-
-    app.get("/api/posts", async (req: Request, res: Response) => {
-      try {
-        const database = client.db("account");
-        const posts = await database.collection("post").find().toArray();
-
-        // Map the post documents to the required format
-        const data: Post[] = posts.map((post) => ({
-          title: post.title,
-          content: {
-            message: post.content.message,
-            image: post.content.image,
-            video: post.content.video,
-          },
-          user: {
-            username: post.user.username,
-            usertag: post.user.usertag,
-            profile_pic: post.user.profile_pic,
-          },
-          comments: post.comments,
-          timestamp: post.timestamp,
-          likes: post.likes,
-          reposts: post.reposts,
-          comment_num: post.comment_num,
-          saves: post.saves,
-        }));
-
-        res.json(data);
-      } catch (error) {
-        console.error("Error fetching messages:", error);
-        res.status(500).send("Failed to fetch messages");
-      }
-    });
-
-    app.get("/api/user/:id", async (req: Request, res: Response) => {
-      try {
-        const database = client.db("account");
-        const user_query = { user_tag: req.params.id };
-        const user_post_query = { "user.usertag": req.params.id };
-        const user_info = await database
-          .collection("user")
-          .find(user_query)
-          .toArray();
-        const user_posts = await database
-          .collection("post")
-          .find(user_post_query)
-          .toArray();
-
-        const userInfo: ProfileInfo[] = user_info.map((user) => ({
-          user_id: user.user_id,
-          username: user.username,
-          usertag: user.user_tag,
-          email: user.email,
-          password: user.password,
-          profile_picture: user.profile_picture,
-          bio: user.bio,
-          following: user.following,
-        }));
-
-        // Map the post documents to the required format
-        const posts: Post[] = user_posts.map((post) => ({
-          title: post.title,
-          content: {
-            message: post.content.message,
-            image: post.content.image,
-            video: post.content.video,
-          },
-          user: {
-            username: post.user.username,
-            usertag: post.user.usertag,
-            profile_pic: post.user.profile_pic,
-          },
-          comments: post.comments,
-          timestamp: post.timestamp,
-          likes: post.likes,
-          reposts: post.reposts,
-          comment_num: post.comment_num,
-          saves: post.saves,
-        }));
-
-        const data = {
-          user_info: userInfo,
-          user_posts: posts,
-        };
-
-        res.json(data);
-      } catch (error) {
-        console.error("Error fetching user:", error);
-        res.status(500).send("Failed to fetch user");
-      }
-    });
-
-    app.get("/api/search/", async (req: Request, res: Response) => {
-      try {
-        const database = client.db("account");
-        const post_query = { "content.message": { $regex: req.query.q } };
-        const search = await database
-          .collection("post")
-          .find(post_query)
-          .toArray();
-
-        // Map the user documents to the required format
-        const data: Post[] = search.map((post) => ({
-          title: post.title,
-          content: {
-            message: post.content.message,
-            image: post.content.image,
-            video: post.content.video,
-          },
-          user: {
-            username: post.user.username,
-            usertag: post.user.usertag,
-            profile_pic: post.user.profile_pic,
-          },
-          comments: post.comments,
-          timestamp: post.timestamp,
-          likes: post.likes,
-          reposts: post.reposts,
-          comment_num: post.comment_num,
-          saves: post.saves,
-        }));
-
-        res.json(data);
-      } catch (error) {
-        console.error("Error searching:", error);
-        res.status(500).send("Failed to search");
-      }
-    });
-
-    app.get("/api/account/following", async (req: Request, res: Response) => {
-      try {
-        const database = client.db("account");
-        const collections = database.collection("user");
-        const query = { user_id: "1" };
-        const followingIDlist = await collections.findOne(query);
-        if (!followingIDlist) {
-          res.status(404).send("User not found");
-          return;
-        }
-        const followingIDs = followingIDlist.following;
-
-        const query2 = { user_id: { $in: followingIDs } };
-        const followingAcc = await collections.find(query2).toArray();
-        const userInfo: User[] = followingAcc.map((followingAcc) => ({
-          user_id: followingAcc.user_id,
-          username: followingAcc.username,
-          usertag: followingAcc.user_tag,
-          profile_pic: followingAcc.profile_picture,
-        }));
-        res.json(userInfo);
-      } catch (error) {
-        console.error("Error fetching following list:", error);
-        res.status(500).send("Failed to fetch following list");
-      }
-    });
-
-    app.delete(
-      "/api/account/unfollow",
-      cors(),
-      async (req: Request, res: Response) => {
-        try {
-          const database = client.db("account");
-          const query = { user_id: "1" };
-          const followingIDlist = await database
-            .collection("user")
-            .findOne(query);
-          if (!followingIDlist) {
-            res.status(404).send("User not found");
-            return;
-          }
-          const followingIDs = followingIDlist.following;
-          const id = req.query.id;
-          const index = followingIDs.indexOf(id);
-          if (index > -1) {
-            followingIDs.splice(index, 1);
-            await database
-              .collection("user")
-              .updateOne(query, { $set: { following: followingIDs } });
-            res.status(200).send("Unfollowed successfully");
-          } else {
-            res.status(404).send("ID to unfollow not found in following list");
-          }
-        } catch (error) {
-          console.error("Error unfollowing user:", error);
-          res.status(500).send("Failed to unfollow user");
-        }
-      }
+    app.use(
+      session({
+        cookieName: "UserStuff",
+        secret: "A73C1437873813D98C9D281D7F195",
+        resave: true,
+        saveUninitialized: true,
+        cookie: {
+          maxAge: 1000 * 60 * 60 * 24 * 7,
+          secure: false,
+        },
+        store: new MongoStore({
+          client: client,
+          collection: "sessions",
+        }),
+      })
     );
-
-    app.post(
-      "/api/account/sendmessage",
-      cors(),
-      async (req: Request, res: Response) => {
-        try {
-          const senderid = req.query.id1;
-          const receiverid = req.query.id2;
-          const database = client.db("account");
-          const collection = database.collection("message");
-          const body = req.body;
-          const message = body.message;
-          const time = body.time;
-
-        await collection.insertOne({
-          sender_id:senderid,
-          receiver_id:receiverid,
-          content:message,
-          timestamp:time
-        })
-
-        res.status(200).send('Message Sent successfully');
-
-        } catch (error) {
-          console.error("Error sending message", error);
-          res.status(500).send('Failed to send message');
-        }
-      }
-    );
-
-    app.get(
-      "/api/account/getAllUsers",
-      async (_req: Request, res: Response) => {
-        try {
-          const db = client.db("account");
-          const allUsers = await db.collection("users").find({}).toArray();
-          res.status(200).send(allUsers);
-        } catch (error) {
-          res
-            .status(500)
-            .send(error instanceof Error ? error.message : "Unknown error");
-        }
-      }
-    );
-
-    app.post("/api/account/register", async (req: Request, res: Response) => {
-      try {
-        const database = client.db("account");
-        console.log(req.body.username);
-
-        if (
-          await database
-            .collection("users")
-            .findOne({ username: req.body.username })
-        ) {
-          console.log("User already exists");
-          return res.status(500).send("User already exists");
-        }
-        const user = req.body;
-        const result = await database.collection("users").insertOne(user);
-
-        if (result?.acknowledged) {
-          console.log("Success");
-        } else {
-          console.log("Error");
-          res.status(500).send("User account creation failed.");
-        }
-      } catch (e) {
-        console.error(e);
-        res.status(400).send(e instanceof Error ? e.message : "Unknown error");
-      }
-    });
-
-    app.put("/api/account/:id", async (req: Request, res: Response) => {
-      try {
-        if (!req.body) {
-          return res.status(400).send({
-            message: "Data to update cannot be empty!"
-          });
-        }
-        const database = client.db("account");
-
-        const id = req.params.id;
-        const getID = { _id: new ObjectId(id) };
-        const result = await database
-          .collection("users")
-          .updateOne(getID, { $set: req.body });
-
-        if (result?.acknowledged) console.log(`${id} updated successfully.`);
-        else if (!result?.matchedCount) res.status(404).send("User not found.");
-        else res.status(500).send(`${id} unable to be updated.`);
-      } catch (e) {
-        console.error(e);
-        res.status(400).send(e instanceof Error ? e.message : "Unknown error");
-      }
-    });
-
-    app.get("/api/account/:id", async (req, res) => {
-      try {
-        const database = client.db("account");
-        const getID = { _id: new ObjectId(req.params.id) };
-
-        let result = await database.collection("users").findOne(getID);
-
-        if (!result) res.status(404).send("User not found.");
-        else res.status(200).send(result);
-      } catch (e) {
-        console.error(e);
-        res.status(400).send(e instanceof Error ? e.message : "Unknown error");
-      }
-    });
-
+    app.use(express.urlencoded({ extended: true }));
+    app.use(passport.initialize());
+    app.use(passport.session());
+    app.use("/accounts", accountsRouter);
+    app.use(postsRouter);
+    app.use(messagesRouter);
+    app.use(commentsRouter);
+    app.use(followingRouter);
+    // app.get("/api/userposts/:usertag", async (req: Request, res: Response) => {
+    //   try {
+    //     const usertag = req.params.usertag;
+    //     const database = client.db("account");
+    //     const posts = await database
+    //       .collection("post")
+    //       .find({ "user.usertag": usertag })
+    //       .toArray();
+    //     res.status(200).json(posts);
+    //   } catch (err) {
+    //     console.error(err);
+    //     res.status(500).send("Failed to fetch posts");
+    //   }
+    // });
     app.listen(8888, () => {
       console.log(`Server running at http://localhost:8888...`);
     });

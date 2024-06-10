@@ -19,7 +19,7 @@ export const routes: Routes = [
   { path: 'register', component: RegistrationPageComponent },
   { path: 'settings', component: ProfilePageComponent },
   { path: 'notifications', component: NotificationPageComponent },
-  { path: 'post', component: PostPageComponent },
+  { path: 'post/:postId', component: PostPageComponent },
   { path: '', component: HomePageComponent },
   { path: 'following-posts', component: FollowingPostPageComponent },
   { path: 'for-you', component: ForYouPageComponent },

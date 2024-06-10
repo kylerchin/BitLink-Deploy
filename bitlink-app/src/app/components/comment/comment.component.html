@@ -1,14 +1,23 @@
 <div class="comment">
   <div class="commenter">
-    <img [src]="profile_picture" alt="profile" id="profile-icon" />
+    <img
+      [src]="profile_picture"
+      class="h-8 w-8 md:h-12 md:w-12 lg:h-12 lg:w-12 mr-auto"
+      alt="profile"
+      id="profile-icon"
+    />
     <div id="profile_info">
-      <div id="username">{{ username }}</div>
-      <div id="usertag">{{ usertag }}</div>
+      <div class="text-xs md:text-sm lg:text-md overflow-hidden" id="username">
+        {{ username }}
+      </div>
+      <div class="text-xs md:text-sm lg:text-md whitespace-nowrap" id="usertag">
+        &#64;{{ usertag }}
+      </div>
     </div>
   </div>
   <div class="commenter">
-    <img [src]="profile_picture" alt="space" id="space" />
-    <div id="comment-text">
+    <!-- <img [src]="profile_picture" alt="space" id="space" /> -->
+    <div class="text-sm md:text-base">
       <p>{{ comment }}</p>
     </div>
   </div>

@@ -45,29 +45,29 @@ input {
   margin-top: 2%;
 }
 
-#profile-img {
-  width: 20rem;
-  height: 20rem;
-  object-fit: cover;
-}
+// #profile-img {
+//   width: 20rem;
+//   height: 20rem;
+//   object-fit: cover;
+// }
 
 .buttons {
   background-color: $secondary-accent-color;
   font-size: 1.2rem;
   margin-top: 1%;
-  padding: .5%;
+  padding: 0.5%;
+  border-radius: 10px;
 }
 
 #footer {
   border-top: 1px solid $emphasis-color;
-  font-size: 1.2rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-right: 20%;
-  padding-top: 1%;
-  padding-bottom: 1%;
-  margin-top: 2%;
+  // display: flex;
+  // align-items: center;
+  // justify-content: space-between;
+  // margin-right: 20%;
+  // padding-top: 1%;
+  // padding-bottom: 1%;
+  // margin-top: 2%;
 }
 
 #footer a {

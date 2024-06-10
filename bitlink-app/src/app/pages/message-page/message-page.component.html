@@ -14,8 +14,10 @@
         <div *ngFor="let user of users">
           <app-message-user-bar
             [username]="user.username"
-            [usertag]="user.usertag"
+            [usertag]="user.name"
             [profile_pic]="user.profile_pic"
+            [id]="user._id"
+            (SwapMessageUsers)="handleUserSwap($event)"
           ></app-message-user-bar>
         </div>
         <app-new-message></app-new-message>
@@ -23,15 +25,15 @@
       <div id="message-box">
         <div class="center-text-box">
           <div *ngFor="let user of users; let i = index">
-              <app-message-box
-                *ngIf="i === 0"
+            <app-message-box
+                *ngIf="user._id === id2"
                 [username]="user.username"
-                [usertag]="user.usertag"
+                [usertag]="user.name"
                 [profile_pic]="user.profile_pic"
-              ></app-message-box>
-          </div>
+            ></app-message-box>
+          </div>        
           <ng-container *ngFor="let message of messages">
-            <ng-container *ngIf="message.sender_id === '0' && message.receiver_id === '1'">
+            <ng-container *ngIf="message.sender_id === id2 && message.receiver_id === id1">
               <app-text-message
                 [message]="message.content"
                 [time]="message.timestamp"
@@ -39,7 +41,7 @@
                 [receiver_id]="message.receiver_id"
               ></app-text-message>
             </ng-container>
-            <ng-container *ngIf="message.sender_id === '1' && message.receiver_id === '0'">
+            <ng-container *ngIf="message.sender_id === id1 && message.receiver_id === id2">
               <app-send-message
                 [message]="message.content"
                 [time]="message.timestamp"

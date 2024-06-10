@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NgOptimizedImage, CommonModule } from '@angular/common';
 import { CreatePostPopupComponent } from '../create-post-popup/create-post-popup.component';
-import {AccountManagementService} from "../../services/account-management/account-management.service";
+import { AccountManagementService } from '../../services/account-management/account-management.service';
 @Component({
   selector: 'app-sidebar',
   standalone: true,
@@ -11,14 +11,14 @@ import {AccountManagementService} from "../../services/account-management/accoun
 })
 export class SidebarComponent {
   profileImagePath: string = 'assets/profile_picture.png';
-  id: string = "664a8e9008885a342d2837b4";
+  id: string = '6647cf24ebe437ca2de4e30d';
   name: string | undefined;
   username: string | undefined;
   show = false;
 
   constructor(private accountManagementService: AccountManagementService) {
-    this.name = this.nameInit();
-    this.username = this.usernameInit();
+    // this.nameInit();
+    this.usernameInit();
   }
 
   openpopup() {
@@ -28,19 +28,14 @@ export class SidebarComponent {
   popupclosed(show: boolean) {
     this.show = show;
   }
-
-  nameInit() {
-    let name;
-    this.accountManagementService.fetchUser(this.id).subscribe({
-      next: (res)=> {name = JSON.parse(res).name}
-    }); return (name)? name : undefined;
-  }
-
   usernameInit() {
-    let name;
-    this.accountManagementService.fetchUser(this.id).subscribe({
-      next:(res)=>{name=JSON.parse(res).username}
-    }); return (name)? '@' + name : undefined;
-
+    this.accountManagementService.getCurrentUser().subscribe({
+      next: (res) => {
+        console.log(res);
+        this.id = JSON.parse(res)._id;
+        this.username = JSON.parse(res).username;
+        this.name = JSON.parse(res).name;
+      },
+    });
   }
 }
