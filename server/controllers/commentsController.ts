@@ -46,7 +46,7 @@ exports.postComment = asyncHandler(async(req:any, res:any) => {
       }
 });
 
-exports.getComment = asyncHandler(async(req:any, res:any) => {
+exports.getComments = asyncHandler(async(req:any, res:any) => {
     try {
         const commentId = req.params.id;
         const database = client.db("account");
