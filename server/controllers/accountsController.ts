@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors")
 import {ObjectId} from "mongodb";
+import { ProfileInfo, Post, Follow } from "../types";
 const asyncHandler = require("express-async-handler");
 
 const app = express();
@@ -112,5 +113,113 @@ exports.currentUser = asyncHandler(async (req:any, res:any) => {
   }
 });
 
+exports.getUserInfo = asyncHandler(async(req:any, res:any) => {
+  try {
+    const database = client.db("account");
+    const user_query = { user_tag: req.params.id };
+    const user_post_query = { "user.usertag": req.params.id };
+    const user_info = await database
+      .collection("user")
+      .find(user_query)
+      .toArray();
+    const user_posts = await database
+      .collection("post")
+      .find(user_post_query)
+      .toArray();
 
+    const userInfo: ProfileInfo[] = user_info.map((user) => ({
+      user_id: user.user_id,
+      username: user.username,
+      usertag: user.user_tag,
+      email: user.email,
+      password: user.password,
+      profile_picture: user.profile_picture,
+      bio: user.bio,
+      following: user.following,
+    }));
+
+    // Map the post documents to the required format
+    const posts: Post[] = user_posts.map((post) => ({
+      title: post.title,
+      content: {
+        message: post.content.message,
+        image: post.content.image,
+        video: post.content.video,
+      },
+      user: {
+        username: post.user.username,
+        usertag: post.user.usertag,
+        profile_pic: post.user.profile_pic,
+      },
+      comments: post.comments,
+      date: post.date,
+      likes: post.likes,
+      reposts: post.reposts,
+      comment_num: post.comment_num,
+      saves: post.saves,
+      likedby: post.likedby,
+    }));
+
+    const data = {
+      user_info: userInfo,
+      user_posts: posts,
+    };
+
+    res.json(data);
+  } catch (error) {
+    console.error("Error fetching user:", error);
+    res.status(500).send("Failed to fetch user");
+  }
+});
+
+exports.getFollowers = asyncHandler(async(req:any, res:any) => {
+  try {
+    const userId = req.query.user_id; // Expect a user_id query parameter
+    if (!userId) {
+      return res.status(400).send("User ID must be provided");
+    }
+    const database = client.db("account");
+    const id = new ObjectId(userId);
+    const collections = database.collection("user");
+    const query = { _id: id };
+    const followingIDlist = await collections.findOne(query);
+    if (!followingIDlist) {
+      res.status(404).send("User not found");
+      return;
+    }
+    const followingIDs = followingIDlist.following.map(
+      (id: string) => new ObjectId(id)
+    );
+    const query2 = { _id: { $in: followingIDs } };
+    const followingAcc = await collections.find(query2).toArray();
+    console.log(followingAcc);
+    const userInfo: Follow[] = followingAcc.map((followingAcc) => ({
+      _id: followingAcc._id,
+      username: followingAcc.username,
+      name: followingAcc.name,
+      profile_pic: followingAcc.profile_picture,
+    }));
+    res.json(userInfo);
+  } catch (error) {
+    console.error("Error fetching following list:", error);
+    res.status(500).send("Failed to fetch following list");
+  }
+});
+
+exports.unfollow = asyncHandler(async(req:any, res:any) => {
+  try {
+    const userid = new ObjectId(req.query.id2);
+    const database = client.db("account");
+    const query = { _id: userid };
+    const followingIDlist = await database
+      .collection("user")
+      .findOne(query);
+    if (!followingIDlist) {
+      res.status(404).send("User not found");
+      return;
+    }
+  } catch (error) {
+    console.error(error);
+  }
+});
 

@@ -8,6 +8,7 @@ import { ProfileInfo } from "./types";
 import { MongoClient, ServerApiVersion } from "mongodb";
 
 const postsRouter = require("./routers/posts");
+const messagesRouter = require("./routers/messages");
 
 const uri =
   "mongodb+srv://briannw2:IuH2qY69AaAKHGSs@bitlink.wfyrdwt.mongodb.net/?retryWrites=true&w=majority&appName=Bitlink";
@@ -55,6 +56,7 @@ connectToDatabase()
     app.use(express.json());
 
     app.use(postsRouter);
+    app.use(messagesRouter);
     app.use(bodyParser.urlencoded({ extended: true }));
     app.set("trust proxy", true);
     const corsOptions = {
@@ -146,7 +148,7 @@ connectToDatabase()
       }
     });*/
   
-    app.post("/api/posts/create", async (req: Request, res: Response) => {
+    /*app.post("/api/posts/create", async (req: Request, res: Response) => {
       try {
         //add a post to the database
         const database = client.db("account");
@@ -179,8 +181,8 @@ connectToDatabase()
         console.error(err);
         res.status(500).send("Failed to create post");
       }
-    });
-    app.put("/api/posts/:id/like", async (req: Request, res: Response) => {
+    });*/
+    /*app.put("/api/posts/:id/like", async (req: Request, res: Response) => {
       //add a like to the post with the specific id
       try {
         const database = client.db("account");
@@ -202,8 +204,8 @@ connectToDatabase()
         console.error(err);
         res.status(500).json({ message: "Failed to like post" });
       }
-    });
-    app.put("/api/posts/:id/dislike", async (req: Request, res: Response) => {
+    });*/
+    /*app.put("/api/posts/:id/dislike", async (req: Request, res: Response) => {
       //add a like to the post with the specific id
       try {
         const database = client.db("account");
@@ -224,9 +226,9 @@ connectToDatabase()
         console.error(err);
         res.status(500).json({ message: "Failed to dislike post" });
       }
-    });
+    });*/
 
-    app.post(
+    /*app.post(
       "/api/posts/:postId/comment",
       async (req: Request, res: Response) => {
         //make a comment
@@ -266,7 +268,7 @@ connectToDatabase()
       }
     );
 
-    app.get("/api/posts/:id", async (req: Request, res: Response) => {
+    /*app.get("/api/posts/:id", async (req: Request, res: Response) => {
       //get the post with the specific id
       try {
         const postId = req.params.id;
@@ -278,8 +280,8 @@ connectToDatabase()
         console.error(err);
         res.status(500).send("Failed to fetch post");
       }
-    });
-    app.get("/api/comments/:id", async (req: Request, res: Response) => {
+    });*/
+    /*app.get("/api/comments/:id", async (req: Request, res: Response) => {
       //get the comment with the specific id
       try {
         const commentId = req.params.id;
@@ -293,7 +295,7 @@ connectToDatabase()
         console.error(err);
         res.status(500).send("Failed to fetch comment");
       }
-    });
+    });*/
     /*app.get("/api/posts", async (req: Request, res: Response) => {
       try {
         const database = client.db("account");
@@ -328,7 +330,7 @@ connectToDatabase()
       }
     });*/
 
-    app.get("/api/user/:id", async (req: Request, res: Response) => {
+    /*app.get("/api/user/:id", async (req: Request, res: Response) => {
       try {
         const database = client.db("account");
         const user_query = { user_tag: req.params.id };
@@ -385,7 +387,7 @@ connectToDatabase()
         console.error("Error fetching user:", error);
         res.status(500).send("Failed to fetch user");
       }
-    });
+    });*/
 
     /*app.get("/api/search/", async (req: Request, res: Response) => {
       try {
@@ -425,7 +427,7 @@ connectToDatabase()
       }
     });*/
 
-    app.get("/api/account/following", async (req: any, res: any) => {
+    /*app.get("/api/account/following", async (req: any, res: any) => {
       try {
         const userId = req.query.user_id; // Expect a user_id query parameter
         if (!userId) {
@@ -457,9 +459,9 @@ connectToDatabase()
         console.error("Error fetching following list:", error);
         res.status(500).send("Failed to fetch following list");
       }
-    });
+    });*/
 
-    app.delete("/api/account/unfollow", cors(), async (req: any, res: any) => {
+    /*app.delete("/api/account/unfollow", cors(), async (req: any, res: any) => {
       try {
         const userid = new ObjectId(req.query.id2);
         const database = client.db("account");
@@ -474,7 +476,7 @@ connectToDatabase()
       } catch (error) {
         console.error(error);
       }
-    });
+    });*/
 
     /*app.post("/api/account/sendmessage", cors(), async (req: any, res: any) => {
       try {

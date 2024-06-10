@@ -10,6 +10,19 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+exports.getPost = asyncHandler(async(req:any, res:any) => {
+  try {
+    const postId = req.params.id;
+    const database = client.db("account");
+    const collection = database.collection("post");
+    const post = await collection.findOne({ _id: new ObjectId(postId) });
+    res.status(200).json(post);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Failed to fetch post");
+  }
+});
+
 exports.getPosts = asyncHandler(async(req:any, res:any) => {
   try {
     const database = client.db("account");
@@ -79,5 +92,85 @@ exports.searchPosts = asyncHandler(async(req:any, res:any) => {
   } catch (error) {
     console.error("Error searching:", error);
     res.status(500).send("Failed to search");
+  }
+});
+
+exports.addPost = asyncHandler(async(req:any, res:any) => {
+  try {
+    //add a post to the database
+    const database = client.db("account");
+    const collection = database.collection("post");
+    const newPostBody = req.body;
+    const newPost = {
+      title: newPostBody.title,
+      content: {
+        message: newPostBody.content?.message,
+        image: newPostBody.content?.image,
+        video: newPostBody.content?.video,
+      },
+      user: {
+        username: newPostBody.user?.username,
+        usertag: newPostBody.user?.usertag,
+        profile_pic: newPostBody?.user.profile_pic,
+      },
+      comments: [],
+      date: new Date(),
+      likes: 0,
+      reposts: 0,
+      comment_num: 0,
+      saves: 0,
+      likedby: [],
+    };
+
+    await collection.insertOne(newPost);
+    res.status(201).send("Post created successfully");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Failed to create post");
+  }
+});
+
+exports.likePost = asyncHandler(async(req:any, res:any) => {
+  try {
+    const database = client.db("account");
+    const collection = database.collection("post");
+    const query = { _id: new ObjectId(req.params.id) };
+    const post = await collection.findOne(query);
+    const userId = req.body.userId;
+    console.log(userId);
+    if (!post) {
+      res.status(404).send("Post not found");
+      return;
+    }
+    await collection.updateOne(query, {
+      $inc: { likes: 1 },
+      $addToSet: { likedby: userId },
+    });
+    res.status(200).json({ message: "Post liked successfully" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Failed to like post" });
+  }
+});
+
+exports.unlikePost = asyncHandler(async(req:any, res:any) => {
+  try {
+    const database = client.db("account");
+    const collection = database.collection("post");
+    const query = { _id: new ObjectId(req.params.id) };
+    const post = await collection.findOne(query);
+    const userId = req.body.userId;
+    if (!post) {
+      res.status(404).send("Post not found");
+      return;
+    }
+    await collection.updateOne(query, {
+      $inc: { likes: -1 },
+      $pull: { likedby: userId },
+    });
+    res.status(200).json({ message: "Post disliked successfully" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Failed to dislike post" });
   }
 });

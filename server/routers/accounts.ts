@@ -70,4 +70,10 @@ app.put("/:id", accountController.updateUser);
 
 app.get("/:id", accountController.getUser);
 
+app.get("/api/user/:id", accountController.getUserInfo);
+
+app.post("/api/user/following", accountController.getFollowers);
+
+app.delete("/api/user/unfollow", accountController.unfollow);
+
 module.exports = app;
