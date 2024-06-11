@@ -6,7 +6,7 @@ import { User } from '../../schemas/user';
   providedIn: 'root',
 })
 export class AccountManagementService {
-  baseUrl: string = 'http://localhost:8888/accounts';
+  baseUrl: string = 'https://bitlinkbackend.catenarymaps.org/accounts';
 
   constructor(private http: HttpClient) {}
 
