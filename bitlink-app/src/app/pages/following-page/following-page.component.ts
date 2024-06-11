@@ -71,7 +71,7 @@ export class FollowingPageComponent {
 
 
   fetchFollowingListInformation(userId: string): void {
-    this.http.get<FollowingArray[]>(`http://localhost:8888/api/account/following?user_id=${userId}`)
+    this.http.get<FollowingArray[]>(`https://bitlinkbackend.catenarymaps.org/api/account/following?user_id=${userId}`)
       .subscribe({
         next: (data) => {
           this.followinglist = data;
@@ -111,7 +111,7 @@ export class FollowingPageComponent {
     return dates;
   }
 
-  readonly APIUrl = "http://localhost:8888/api/user/unfollow";
+  readonly APIUrl = "https://bitlinkbackend.catenarymaps.org/api/user/unfollow";
   handleUnfollow(id:any){
     this.http.delete(this.APIUrl+'?id='+id+'&id2='+this.id).subscribe({
       next: (data) => {
