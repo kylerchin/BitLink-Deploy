@@ -59,7 +59,7 @@ export class ReplyComponent {
     };
     this.http
       .post(
-        `http://localhost:8888/api/posts/${this.postId}/comment`,
+        `https://bitlinkbackend.catenarymaps.org/api/posts/${this.postId}/comment`,
         commentData,
         {
           responseType: 'text',
